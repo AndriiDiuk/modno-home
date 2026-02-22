@@ -14,18 +14,32 @@
   --color-vk-mid: #4da2ca;
   --color-vk-end: #50b7e9;
 
+  --color-brand-black: #222222;
+  --color-brand-dark: #1e1e1e;
+  --color-brand-gray: #7f7f7f;
   --color-logo-gray: #2e2e2e;
   --color-button-yellow: #ffc100;
   --color-button-dark: #171717;
   --color-button-light: #ffffff;
   
+  /* Story Colors */
+  --color-story-yellow: #ffdd55;
+  --color-story-red: #ff543e;
+  --color-story-purple: #c837ab;
+  
   /* Story Border Gradient */
-  --gradient-story: radial-gradient(circle at 30% 100%, #ffdd55 0%, #ffdd55 10%, #ff543e 50%, #c837ab 100%);
+  --gradient-story: radial-gradient(circle at 30% 100%, var(--color-story-yellow) 0%, var(--color-story-yellow) 10%, var(--color-story-red) 50%, var(--color-story-purple) 100%);
 }
 
 @theme {
   --font-sans: var(--font-gilroy), ui-sans-serif, system-ui, sans-serif;
   --color-warning: var(--color-button-yellow);
+  --color-brand-black: var(--color-brand-black);
+  --color-brand-dark: var(--color-brand-dark);
+  --color-brand-gray: var(--color-brand-gray);
+  --color-story-yellow: var(--color-story-yellow);
+  --color-story-red: var(--color-story-red);
+  --color-story-purple: var(--color-story-purple);
 }
 
 .gradient-border-story {

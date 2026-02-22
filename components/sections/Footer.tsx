@@ -45,10 +45,12 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
 
         {/* Center: Copyright & Privacy Policy */}
         <div className='flex flex-col items-center text-center'>
-          <p className='text-[12px] text-[#222222] font-medium'>{copyright}</p>
+          <p className='text-[12px] text-brand-black font-medium'>
+            {copyright}
+          </p>
           <Link
             href={privacyPolicyLink}
-            className='text-[12px] text-[#222222] font-medium hover:opacity-70 transition-opacity'
+            className='text-[12px] text-brand-black font-medium hover:opacity-70 transition-opacity'
           >
             {privacyPolicyText}
           </Link>

@@ -55,7 +55,7 @@ export const Input: React.FC<InputProps> = ({
         {...props}
         value={value}
         onChange={handlePhoneChange}
-        className='w-full px-6 py-4 border border-[#222222]/20 rounded-xl focus:outline-none focus:border-[#222222] transition-colors placeholder:text-[#222222]/30 text-lg'
+        className='w-full px-6 py-4 border border-brand-black/20 rounded-[6px] focus:outline-none focus:border-brand-black transition-colors placeholder:text-brand-black/30 text-lg'
       />
     </div>
   );

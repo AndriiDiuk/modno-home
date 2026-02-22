@@ -13,7 +13,7 @@ export const ModalWrapper: React.FC<ModalWrapperProps> = ({
   isOpen,
   onClose,
   children,
-  className = "max-w-[460px]",
+  className = "max-w-[500px]",
 }) => {
   // Prevent scrolling when modal is open
   useEffect(() => {
@@ -31,17 +31,17 @@ export const ModalWrapper: React.FC<ModalWrapperProps> = ({
 
   return (
     <div
-      className='fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity animate-in fade-in duration-300'
+      className='fixed inset-0 z-100 flex items-center justify-center  p-4 bg-black/60 backdrop-blur-sm transition-opacity animate-in fade-in duration-300'
       onClick={onClose}
     >
       <div
-        className={`relative w-full bg-white rounded-[20px] p-8 md:p-12 shadow-2xl animate-in zoom-in-95 duration-300 ${className}`}
+        className={`relative w-full bg-white rounded-[20px] md:rounded-[30px]  px-8 md:px-12 md:py-14  shadow-2xl animate-in zoom-in-95 duration-300 ${className}`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className='absolute top-6 right-6 text-[#222222] hover:opacity-70 transition-opacity cursor-pointer p-2'
+          className='absolute top-5 right-5 text-brand-black hover:opacity-70 transition-opacity cursor-pointer p-2'
           aria-label='Close'
         >
           <svg

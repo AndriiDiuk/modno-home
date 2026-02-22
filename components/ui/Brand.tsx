@@ -31,7 +31,7 @@ export const Brand: React.FC<BrandProps> = ({
 
       {description && (
         <>
-          <div className='h-12 w-px bg-[#222222] hidden xl:block ml-2' />
+          <div className='h-12 w-px bg-brand-black hidden xl:block ml-2' />
           <p className='text-[13px] max-w-[250px] leading-[1.4] hidden xl:block'>
             {description}
           </p>

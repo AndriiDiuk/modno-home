@@ -16,10 +16,10 @@ export const CallbackForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit} className='flex flex-col items-center'>
-      <h2 className='text-2xl md:text-3xl font-black text-[#222222] mb-2 uppercase tracking-tight text-center'>
+      <h2 className='text-xl md:text-2xl font-bold text-brand-black mb-2 uppercase tracking-tight text-center'>
         БЫСТРО ПЕРЕЗВОНИМ
       </h2>
-      <p className='text-[#222222]/60 text-base md:text-lg mb-8 text-center'>
+      <p className='text-brand-black/60 text-base  mb-8 text-center'>
         Заполните форму ниже
       </p>
 
@@ -35,7 +35,7 @@ export const CallbackForm: React.FC = () => {
 
       <button
         type='submit'
-        className='w-full bg-[#1e1e1e] hover:bg-black text-white font-black py-5 px-6 rounded-xl transition-all shadow-lg active:scale-[0.98] text-lg uppercase mb-4 cursor-pointer'
+        className='w-full bg-brand-dark hover:bg-black text-white font-black py-5 px-6 rounded-xl transition-all shadow-lg active:scale-[0.98] text-lg uppercase mb-4 cursor-pointer'
       >
         ЖДУ ЗВОНКА
       </button>
@@ -46,7 +46,7 @@ export const CallbackForm: React.FC = () => {
             type='checkbox'
             checked={agreed}
             onChange={(e) => setAgreed(e.target.checked)}
-            className='peer appearance-none w-4 h-4 border border-[#222222]/30 rounded-sm checked:bg-[#1e1e1e] transition-all'
+            className='peer appearance-none w-4 h-4 border border-brand-black/30 rounded-sm checked:bg-brand-dark transition-all'
             required
           />
           <svg
@@ -59,7 +59,7 @@ export const CallbackForm: React.FC = () => {
             <polyline points='20 6 9 17 4 12'></polyline>
           </svg>
         </div>
-        <span className='text-[11px] md:text-xs text-[#222222]/50'>
+        <span className='text-[11px] md:text-xs text-brand-black/50'>
           Согласен на обработку персональных данных
         </span>
       </label>

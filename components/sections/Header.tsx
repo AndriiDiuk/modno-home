@@ -87,7 +87,7 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
 
       {/* Decorative Bottom Line (like in referenced image) */}
       <div className='content'>
-        <div className=' lg:block hidden h-px xl:w-[calc(100%-12rem)] w-full bg-[#7F7F7F] mx-auto mt-5' />
+        <div className=' lg:block hidden h-px xl:w-[calc(100%-12rem)] w-full bg-brand-gray mx-auto mt-5' />
       </div>
     </header>
   );
