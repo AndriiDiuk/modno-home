@@ -38,9 +38,9 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
             />
           </Link>
 
-          <div className='h-12 w-px bg-[#222222] hidden xl:block' />
+          <div className='h-12 w-px bg-[#222222] hidden xl:block ml-2' />
 
-          <p className='text-xs max-w-[250px] leading-tight hidden xl:block'>
+          <p className='text-[13px] max-w-[250px] leading-[1.4] hidden xl:block'>
             {logoDescription}
           </p>
         </div>
