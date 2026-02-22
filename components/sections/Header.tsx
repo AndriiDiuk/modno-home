@@ -1,7 +1,7 @@
 "use client";
 
-import { Logo, TelegramIcon, VkIcon } from "@/assets/icons";
-import { Button, CircleCTA } from "@/components/ui";
+import { TelegramIcon, VkIcon } from "@/assets/icons";
+import { Brand, Button, CircleCTA } from "@/components/ui";
 import Link from "next/link";
 import React from "react";
 
@@ -29,21 +29,7 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
     <header className='w-full  py-4'>
       <div className='content flex items-center justify-between gap-8'>
         {/* Left: Logo and Description */}
-        <div className='flex items-center gap-2'>
-          <Link href='/' className='flex flex-col'>
-            <Logo
-              width={150}
-              height={35}
-              className='max-w-[150px] md:max-w-[174px] w-full'
-            />
-          </Link>
-
-          <div className='h-12 w-px bg-[#222222] hidden xl:block ml-2' />
-
-          <p className='text-[13px] max-w-[250px] leading-[1.4] hidden xl:block'>
-            {logoDescription}
-          </p>
-        </div>
+        <Brand description={logoDescription} />
 
         <div className='hidden lg:flex gap-5'>
           <CircleCTA

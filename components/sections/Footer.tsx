@@ -1,7 +1,7 @@
 "use client";
 
-import { Logo, TelegramIcon, VkIcon } from "@/assets/icons";
-import { Button } from "@/components/ui";
+import { TelegramIcon, VkIcon } from "@/assets/icons";
+import { Brand, Button } from "@/components/ui";
 import Link from "next/link";
 import React from "react";
 
@@ -41,21 +41,7 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
     <footer className='w-full py-10'>
       <div className='content flex items-center justify-between gap-8'>
         {/* Left: Logo and Description */}
-        <div className='flex items-center gap-2'>
-          <Link href='/' className='flex flex-col'>
-            <Logo
-              width={150}
-              height={35}
-              className='max-w-[150px] md:max-w-[174px] w-full'
-            />
-          </Link>
-
-          <div className='h-12 w-px bg-[#222222] hidden xl:block' />
-
-          <p className='text-xs max-w-[250px] leading-tight hidden xl:block'>
-            {logoDescription}
-          </p>
-        </div>
+        <Brand description={logoDescription} />
 
         {/* Center: Copyright & Privacy Policy */}
         <div className='flex flex-col items-center text-center'>
