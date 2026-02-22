@@ -1,7 +1,7 @@
 "use client";
 
 import { TelegramIcon, VkIcon } from "@/assets/icons";
-import { Brand, Button } from "@/components/ui";
+import { Brand, ContactGroup } from "@/components/ui";
 import Link from "next/link";
 import React from "react";
 
@@ -79,21 +79,8 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
           </div>
 
           {/* Contact Info & Call to Action */}
-          <div className='hidden lg:flex flex-col items-end gap-1'>
-            <a
-              href={`tel:${phone.replace(/\D/g, "")}`}
-              className='text-lg lg:text-xl font-bold text-black'
-            >
-              {phone}
-            </a>
-
-            <Button
-              label='Заказать звонок'
-              variant='light'
-              size='sm'
-              className='text-[14px] leading-none h-auto'
-              onClick={() => {}}
-            />
+          <div className='hidden lg:block'>
+            <ContactGroup phone={phone} />
           </div>
         </div>
       </div>

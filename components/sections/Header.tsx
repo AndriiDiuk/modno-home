@@ -1,29 +1,33 @@
 "use client";
 
 import { TelegramIcon, VkIcon } from "@/assets/icons";
-import { Brand, Button, CircleCTA } from "@/components/ui";
+import { Brand, CircleCTA, ContactGroup } from "@/components/ui";
 import Link from "next/link";
 import React from "react";
 
 interface HeaderProps {
   data: {
-    logoDescription?: string;
-    workingHours?: string;
-    phone?: string;
-    socials?: {
-      telegram?: string;
-      vk?: string;
+    header?: {
+      logoDescription?: string;
+      workingHours?: string;
+      phone?: string;
+      socials?: {
+        telegram?: string;
+        vk?: string;
+      };
     };
   };
 }
 
 export const Header: React.FC<HeaderProps> = ({ data }) => {
   const {
-    logoDescription = "Производство модульных диванов в Челябинске с доставкой по РФ",
-    workingHours = "Шоурум в Челябинске с 9:00 до 18:00",
-    phone = "+7 (992) 503-54-99",
-    socials = {},
-  } = data;
+    header: {
+      logoDescription = "Производство модульных диванов в Челябинске с доставкой по РФ",
+      workingHours = "Шоурум в Челябинске с 9:00 до 18:00",
+      phone = "+7 (992) 503-54-99",
+      socials = {},
+    } = {},
+  } = data || {};
 
   return (
     <header className='w-full  py-4'>
@@ -76,21 +80,8 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
         </div>
 
         {/* Contact Info & Call to Action */}
-        <div className='hidden lg:flex  flex-col items-end gap-1'>
-          <a
-            href={`tel:${phone.replace(/\D/g, "")}`}
-            className='text-lg lg:text-xl font-bold text-black'
-          >
-            {phone}
-          </a>
-
-          <Button
-            label='Заказать звонок'
-            variant='light'
-            size='sm'
-            className='text-[14px] leading-none h-auto'
-            onClick={() => {}}
-          />
+        <div className='hidden lg:block'>
+          <ContactGroup phone={phone} />
         </div>
       </div>
 

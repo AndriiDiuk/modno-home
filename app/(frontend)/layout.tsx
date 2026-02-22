@@ -87,6 +87,9 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+import { GlobalModal } from "@/components/common/GlobalModal";
+import { ModalProvider } from "@/components/providers/ModalProvider";
+
 export default async function FrontendLayout({
   children,
 }: Readonly<{
@@ -146,27 +149,31 @@ export default async function FrontendLayout({
         className={`${gilroy.variable} font-sans antialiased flex flex-col min-h-screen`}
         suppressHydrationWarning
       >
-        {/* Custom Body Script (e.g. GTM noscript) */}
-        {scripts.body && (
-          <div dangerouslySetInnerHTML={{ __html: scripts.body }} />
-        )}
+        <ModalProvider>
+          {/* Custom Body Script (e.g. GTM noscript) */}
+          {scripts.body && (
+            <div dangerouslySetInnerHTML={{ __html: scripts.body }} />
+          )}
 
-        {/* Yandex Metrika Noscript */}
-        {scripts.yandexMetrikaId && (
-          <noscript>
-            <div>
-              <img
-                src={`https://mc.yandex.ru/watch/${scripts.yandexMetrikaId}`}
-                style={{ position: "absolute", left: "-9999px" }}
-                alt=''
-              />
-            </div>
-          </noscript>
-        )}
+          {/* Yandex Metrika Noscript */}
+          {scripts.yandexMetrikaId && (
+            <noscript>
+              <div>
+                <img
+                  src={`https://mc.yandex.ru/watch/${scripts.yandexMetrikaId}`}
+                  style={{ position: "absolute", left: "-9999px" }}
+                  alt=''
+                />
+              </div>
+            </noscript>
+          )}
 
-        <Header data={settings.header || {}} />
-        <main className='grow'>{children}</main>
-        <Footer data={settings} />
+          <Header data={settings || {}} />
+          <main className='grow'>{children}</main>
+          <Footer data={settings} />
+
+          <GlobalModal />
+        </ModalProvider>
       </body>
     </html>
   );
