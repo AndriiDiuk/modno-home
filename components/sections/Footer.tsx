@@ -38,9 +38,13 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
 
   return (
     <footer className='w-full py-10'>
-      <div className='content flex flex-col md:flex-row items-center justify-between gap-8'>
-        <div className='order-1 md:order-1 flex gap-2 '>
-          d <Brand description={logoDescription} />
+      <div className='content flex flex-col md:flex-row items-center justify-between md:gap-8 gap-4'>
+        <div className='order-1 md:order-1 flex flex-col md:flex-row justify-center md:justify-between items-center  w-full md:gap-2 gap-4 '>
+          <Brand description={logoDescription} showDescription={true} />
+          <div className='block lg:hidden'>
+            {" "}
+            <SocialLinks socials={socials} />
+          </div>
         </div>
 
         <div className='flex flex-col items-center text-center order-3 md:order-2'>
@@ -55,9 +59,11 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
           </Link>
         </div>
 
-        {/* Right Area: Socials, Phone, Button */}
         <div className='flex flex-col md:flex-row items-center gap-10 order-2 md:order-3'>
-          <SocialLinks socials={socials} />
+          <div className='hidden lg:block'>
+            {" "}
+            <SocialLinks socials={socials} />
+          </div>
 
           <ContactGroup phone={phone} />
         </div>

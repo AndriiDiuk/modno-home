@@ -7,6 +7,7 @@ interface BrandProps {
   className?: string;
   logoWidth?: number;
   logoHeight?: number;
+  showDescription?: boolean;
 }
 
 /**
@@ -18,6 +19,7 @@ export const Brand: React.FC<BrandProps> = ({
   className = "",
   logoWidth = 150,
   logoHeight = 35,
+  showDescription = false,
 }) => {
   return (
     <div className={`flex items-center gap-2 ${className}`}>
@@ -31,8 +33,12 @@ export const Brand: React.FC<BrandProps> = ({
 
       {description && (
         <>
-          <div className='h-12 w-px bg-brand-black hidden xl:block ml-2' />
-          <p className='text-[13px] max-w-[250px] leading-[1.4] hidden xl:block'>
+          <div
+            className={`md:h-12 h-8 w-px bg-brand-black ${showDescription ? "block" : "hidden"} xl:block ml-2`}
+          />
+          <p
+            className={`text-[10px] md:text-[13px] max-w-[190px] md:max-w-[250px] leading-[1.4] ${showDescription ? "block" : "hidden"} xl:block`}
+          >
             {description}
           </p>
         </>

@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useId } from "react";
 
 interface VkIconProps {
   className?: string;
@@ -11,6 +13,10 @@ export const VkIcon: React.FC<VkIconProps> = ({
   width = 50,
   height = 38,
 }) => {
+  const uid = useId();
+  const gradientId = `vk-grad-${uid}`;
+  const clipId = `vk-clip-${uid}`;
+
   return (
     <svg
       width={width}
@@ -20,14 +26,8 @@ export const VkIcon: React.FC<VkIconProps> = ({
       xmlns='http://www.w3.org/2000/svg'
       className={className}
     >
-      <g clipPath='url(#clip0_4908_10012)'>
-        <rect width='50' height='38' rx='8' fill='#D9D9D9' />
-        <rect
-          width='50'
-          height='38'
-          rx='8'
-          fill='url(#paint0_linear_4908_10012)'
-        />
+      <g clipPath={`url(#${clipId})`}>
+        <rect width='50' height='38' rx='8' fill={`url(#${gradientId})`} />
         <path
           fillRule='evenodd'
           clipRule='evenodd'
@@ -37,7 +37,7 @@ export const VkIcon: React.FC<VkIconProps> = ({
       </g>
       <defs>
         <linearGradient
-          id='paint0_linear_4908_10012'
+          id={gradientId}
           x1='22.5054'
           y1='22.5984'
           x2='54.5328'
@@ -48,7 +48,7 @@ export const VkIcon: React.FC<VkIconProps> = ({
           <stop offset='0.447375' stopColor='var(--color-vk-mid)' />
           <stop offset='0.752116' stopColor='var(--color-vk-end)' />
         </linearGradient>
-        <clipPath id='clip0_4908_10012'>
+        <clipPath id={clipId}>
           <rect width='50' height='38' fill='white' />
         </clipPath>
       </defs>
