@@ -9,6 +9,7 @@ import { s3Storage } from "@payloadcms/storage-s3";
 import { Media } from "./collections/Media";
 import { Users } from "./collections/Users";
 import { Home } from "./globals/Home";
+import { Settings } from "./globals/Settings";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -22,7 +23,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media],
-  globals: [Home],
+  globals: [Home, Settings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

@@ -89,9 +89,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     home: Home;
+    settings: Setting;
   };
   globalsSelect: {
     home: HomeSelect<false> | HomeSelect<true>;
+    settings: SettingsSelect<false> | SettingsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -330,9 +332,67 @@ export interface Home {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings".
+ */
+export interface Setting {
+  id: string;
+  header?: {
+    logoSubtext?: string | null;
+    logoDescription?: string | null;
+    workingHours?: string | null;
+    phone?: string | null;
+    socials?: {
+      telegram?: string | null;
+      vk?: string | null;
+    };
+    stories?:
+      | {
+          text?: string | null;
+          image?: (string | null) | Media;
+          link?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings_select".
+ */
+export interface SettingsSelect<T extends boolean = true> {
+  header?:
+    | T
+    | {
+        logoSubtext?: T;
+        logoDescription?: T;
+        workingHours?: T;
+        phone?: T;
+        socials?:
+          | T
+          | {
+              telegram?: T;
+              vk?: T;
+            };
+        stories?:
+          | T
+          | {
+              text?: T;
+              image?: T;
+              link?: T;
+              id?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
