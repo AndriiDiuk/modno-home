@@ -22,15 +22,18 @@ export const CircleCTA: React.FC<CircleCTAProps> = ({
     <div className={`relative flex flex-col items-center w-fit  ${className}`}>
       {/* Circle Container with Gradient Border */}
       <div className='p-[4px] rounded-full bg-[radial-gradient(circle_at_30%_100%,#FFDD55_0%,#FFDD55_10%,#FF543E_50%,#C837AB_100%)]'>
-        <div className='relative w-[66px] h-[66px] rounded-full overflow-hidden border-[4px] border-white bg-white shadow-inner'>
-          <Image
-            src={imageSrc || ""}
-            alt={text}
-            fill
-            className='object-cover hover:scale-110 transition-transform duration-500'
-            sizes='58px'
-            priority
-          />
+        <div className='relative w-[66px] h-[66px] rounded-full overflow-hidden border-[4px] border-white bg-gray-100 shadow-inner'>
+          {imageSrc ? (
+            <Image
+              src={imageSrc}
+              alt={text}
+              fill
+              className='object-cover hover:scale-110 transition-transform duration-500'
+              sizes='58px'
+            />
+          ) : (
+            <div className='w-full h-full bg-gray-200 animate-pulse' />
+          )}
         </div>
       </div>
 
