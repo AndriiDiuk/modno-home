@@ -379,6 +379,12 @@ export interface Home {
      */
     selectedSofas?: (string | Sofa)[] | null;
   };
+  catalogSection?: {
+    title?: string | null;
+    subtitle?: string | null;
+    buttonLabel?: string | null;
+    edition?: string | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -456,6 +462,14 @@ export interface HomeSelect<T extends boolean = true> {
         title?: T;
         subtitle?: T;
         selectedSofas?: T;
+      };
+  catalogSection?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        buttonLabel?: T;
+        edition?: T;
       };
   updatedAt?: T;
   createdAt?: T;

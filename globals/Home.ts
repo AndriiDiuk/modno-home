@@ -36,5 +36,36 @@ export const Home: GlobalConfig = {
         },
       ],
     },
+    {
+      name: "catalogSection",
+      type: "group",
+      label: "Секция каталога",
+      fields: [
+        {
+          name: "title",
+          type: "text",
+          label: "Заголовок",
+          defaultValue: "Скачивайте каталог!",
+        },
+        {
+          name: "subtitle",
+          type: "text",
+          label: "Подзаголовок",
+          defaultValue: "Там больше вариантов и комплектаций.",
+        },
+        {
+          name: "buttonLabel",
+          type: "text",
+          label: "Текст кнопки",
+          defaultValue: "Скачать каталог",
+        },
+        {
+          name: "edition",
+          type: "text",
+          label: "Текст издания",
+          defaultValue: "Издание 2026 г.",
+        },
+      ],
+    },
   ],
 };

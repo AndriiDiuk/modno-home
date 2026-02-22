@@ -3,7 +3,17 @@
 import React, { useState } from "react";
 import { Checkbox, FormButton, Input } from "../ui";
 
-export const CallbackForm: React.FC = () => {
+interface CallbackFormProps {
+  title?: string;
+  subtitle?: string;
+  buttonLabel?: string;
+}
+
+export const CallbackForm: React.FC<CallbackFormProps> = ({
+  title = "БЫСТРО ПЕРЕЗВОНИМ",
+  subtitle = "Заполните форму ниже",
+  buttonLabel = "ЖДУ ЗВОНКА",
+}) => {
   const [phone, setPhone] = useState("");
   const [agreed, setAgreed] = useState(true);
 
@@ -17,13 +27,13 @@ export const CallbackForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit} className='flex flex-col items-center'>
       <h2 className='text-xl md:text-2xl font-bold text-brand-black mb-2 uppercase tracking-tight text-center'>
-        БЫСТРО ПЕРЕЗВОНИМ
+        {title}
       </h2>
       <p className='text-brand-black/60 text-base  mb-8 text-center'>
-        Заполните форму ниже
+        {subtitle}
       </p>
 
-      <div className='w-full mb-4'>
+      <div className='w-fit mb-4'>
         <Input
           placeholder='Ваш телефон'
           isPhone={true}
@@ -33,7 +43,7 @@ export const CallbackForm: React.FC = () => {
         />
       </div>
 
-      <FormButton label='ЖДУ ЗВОНКА' />
+      <FormButton label={buttonLabel} />
 
       <Checkbox
         label='Согласен на обработку персональных данных'

@@ -10,10 +10,6 @@ interface ButtonProps {
   disabled?: boolean;
 }
 
-/**
- * Reusable Button component with light/dark variants and three sizes.
- * Follows the pill-shaped design with a border.
- */
 export const Button: React.FC<ButtonProps> = ({
   label,
   onClick,
@@ -23,10 +19,9 @@ export const Button: React.FC<ButtonProps> = ({
   type = "button",
   disabled = false,
 }) => {
-  // Variant styles
   const variants = {
     light:
-      "bg-transparent text-black border-black hover:bg-black hover:text-white",
+      "bg-transparent text-black border-black hover:bg-black hover:text-white ",
     dark: "bg-transparent text-white border-white hover:bg-white hover:text-black",
   };
 

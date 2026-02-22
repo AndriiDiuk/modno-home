@@ -1,4 +1,9 @@
-import { ProductSections, VideoSection } from "@/components/sections";
+import {
+  DownloadCatalog,
+  ProductSections,
+  ReviewSection,
+  VideoSection,
+} from "@/components/sections";
 import { getCachedHome } from "@/lib/payload";
 
 const MOCK_VIDEOS = [
@@ -41,12 +46,19 @@ const MOCK_VIDEOS = [
 
 export default async function HomePage() {
   const homeData = await getCachedHome();
-  const { sofasSection } = homeData || {};
+  const { sofasSection, catalogSection } = homeData || {};
   const {
     title = "Каталог диванов",
     subtitle = "Которые украсят ваш интерьер",
     selectedSofas = [],
   } = sofasSection || {};
+
+  const {
+    title: catalogTitle,
+    subtitle: catalogSubtitle,
+    buttonLabel: catalogButton,
+    edition: catalogEdition,
+  } = catalogSection || {};
 
   // Map Payload sofas to the format expected by ProductSections
   const products = (selectedSofas || []).map((sofa: any) => ({
@@ -65,6 +77,13 @@ export default async function HomePage() {
         subtitle='В интерьере, на производстве, каркас и ткани'
         videos={MOCK_VIDEOS}
       />
+      <DownloadCatalog
+        title={catalogTitle}
+        subtitle={catalogSubtitle}
+        buttonLabel={catalogButton}
+        edition={catalogEdition}
+      />
+      <ReviewSection />
       <ProductSections title={title} subtitle={subtitle} products={products} />
     </div>
   );

@@ -49,7 +49,7 @@ export const Input: React.FC<InputProps> = ({
   };
 
   return (
-    <div className='w-full flex flex-col gap-2'>
+    <div className='w-full flex flex-col gap-2 min-w-[242px] md:min-w-[320px]'>
       {label && <label className='text-sm font-medium'>{label}</label>}
       <input
         {...props}

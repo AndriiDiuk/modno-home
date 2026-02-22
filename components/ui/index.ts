@@ -5,6 +5,7 @@ export * from "./CircleCTA";
 export * from "./ContactGroup";
 export * from "./FormButton";
 export * from "./Input";
+export * from "./Modal";
 export * from "./ProductCard";
 export * from "./SectionTitle";
 export * from "./SocialLinks";
