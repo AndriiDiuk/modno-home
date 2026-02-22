@@ -15,7 +15,7 @@ export const Settings: GlobalConfig = {
         {
           name: "logoDescription",
           type: "textarea",
-          label: "Текст справа від логотипу",
+          label: "Текст справа от логотипа",
           defaultValue:
             "Производство модульных диванов в Челябинске с доставкой по РФ",
         },
