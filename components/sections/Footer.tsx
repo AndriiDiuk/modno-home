@@ -1,7 +1,6 @@
 "use client";
 
-import { TelegramIcon, VkIcon } from "@/assets/icons";
-import { Brand, ContactGroup } from "@/components/ui";
+import { Brand, ContactGroup, SocialLinks } from "@/components/ui";
 import Link from "next/link";
 import React from "react";
 
@@ -39,12 +38,12 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
 
   return (
     <footer className='w-full py-10'>
-      <div className='content flex items-center justify-between gap-8'>
-        {/* Left: Logo and Description */}
-        <Brand description={logoDescription} />
+      <div className='content flex flex-col md:flex-row items-center justify-between gap-8'>
+        <div className='order-1 md:order-1 flex gap-2 '>
+          d <Brand description={logoDescription} />
+        </div>
 
-        {/* Center: Copyright & Privacy Policy */}
-        <div className='flex flex-col items-center text-center'>
+        <div className='flex flex-col items-center text-center order-3 md:order-2'>
           <p className='text-[12px] text-brand-black font-medium'>
             {copyright}
           </p>
@@ -57,33 +56,10 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
         </div>
 
         {/* Right Area: Socials, Phone, Button */}
-        <div className='flex items-center gap-10'>
-          {/* Social Icons */}
-          <div className='hidden lg:flex items-center gap-3'>
-            {socials.telegram && (
-              <Link href={socials.telegram} target='_blank'>
-                <TelegramIcon
-                  width={50}
-                  height={38}
-                  className='hover:opacity-80 transition-opacity'
-                />
-              </Link>
-            )}
-            {socials.vk && (
-              <Link href={socials.vk} target='_blank'>
-                <VkIcon
-                  width={50}
-                  height={38}
-                  className='hover:opacity-80 transition-opacity'
-                />
-              </Link>
-            )}
-          </div>
+        <div className='flex flex-col md:flex-row items-center gap-10 order-2 md:order-3'>
+          <SocialLinks socials={socials} />
 
-          {/* Contact Info & Call to Action */}
-          <div className='hidden lg:block'>
-            <ContactGroup phone={phone} />
-          </div>
+          <ContactGroup phone={phone} />
         </div>
       </div>
     </footer>

@@ -1,9 +1,7 @@
 "use client";
 
-import { TelegramIcon, VkIcon } from "@/assets/icons";
 import { VideoModal } from "@/components/common/VideoModal";
-import { Brand, CircleCTA, ContactGroup } from "@/components/ui";
-import Link from "next/link";
+import { Brand, CircleCTA, ContactGroup, SocialLinks } from "@/components/ui";
 import React, { useState } from "react";
 
 interface HeaderProps {
@@ -64,26 +62,7 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
             </div>
           </div>
           {/* Social Icons */}
-          <div className='hidden lg:flex items-center gap-3'>
-            {socials.telegram && (
-              <Link href={socials.telegram} target='_blank'>
-                <TelegramIcon
-                  width={50}
-                  height={38}
-                  className='hover:opacity-80 transition-opacity'
-                />
-              </Link>
-            )}
-            {socials.vk && (
-              <Link href={socials.vk} target='_blank'>
-                <VkIcon
-                  width={50}
-                  height={38}
-                  className='hover:opacity-80 transition-opacity'
-                />
-              </Link>
-            )}
-          </div>
+          <SocialLinks socials={socials} className='hidden lg:flex' />
 
           {/* Contact Info & Call to Action */}
           <div className='hidden lg:block'>
