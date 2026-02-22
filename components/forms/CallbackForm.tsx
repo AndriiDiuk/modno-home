@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { FormButton, Input } from "../ui";
+import { Checkbox, FormButton, Input } from "../ui";
 
 export const CallbackForm: React.FC = () => {
   const [phone, setPhone] = useState("");
@@ -35,29 +35,12 @@ export const CallbackForm: React.FC = () => {
 
       <FormButton label='ЖДУ ЗВОНКА' />
 
-      <label className='flex items-center gap-2 cursor-pointer select-none'>
-        <div className='relative flex items-center'>
-          <input
-            type='checkbox'
-            checked={agreed}
-            onChange={(e) => setAgreed(e.target.checked)}
-            className='peer appearance-none w-4 h-4 border border-brand-black/30 rounded-sm checked:bg-brand-dark transition-all'
-            required
-          />
-          <svg
-            className='absolute left-0 top-0 w-4 h-4 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none p-[2px]'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            strokeWidth='4'
-          >
-            <polyline points='20 6 9 17 4 12'></polyline>
-          </svg>
-        </div>
-        <span className='text-[11px] md:text-xs text-brand-black/50'>
-          Согласен на обработку персональных данных
-        </span>
-      </label>
+      <Checkbox
+        label='Согласен на обработку персональных данных'
+        checked={agreed}
+        onChange={(e) => setAgreed(e.target.checked)}
+        required
+      />
     </form>
   );
 };
