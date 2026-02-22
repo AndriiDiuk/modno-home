@@ -8,3 +8,4 @@ export * from "./Input";
 export * from "./ProductCard";
 export * from "./SectionTitle";
 export * from "./SocialLinks";
+export * from "./VideoCard";
