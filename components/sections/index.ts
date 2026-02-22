@@ -1,3 +1,4 @@
+export * from "./ContactUsSection";
 export * from "./DownloadCatalog";
 export * from "./Footer";
 export * from "./Header";

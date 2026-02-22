@@ -1,10 +1,11 @@
 import {
+  ContactUsSection,
   DownloadCatalog,
   ProductSections,
   ReviewSection,
   VideoSection,
 } from "@/components/sections";
-import { getCachedHome } from "@/lib/payload";
+import { getCachedHome, getCachedSettings } from "@/lib/payload";
 
 const MOCK_VIDEOS = [
   {
@@ -46,7 +47,9 @@ const MOCK_VIDEOS = [
 
 export default async function HomePage() {
   const homeData = await getCachedHome();
+  const settingsData = await getCachedSettings();
   const { sofasSection, catalogSection } = homeData || {};
+  const socials = (settingsData as any)?.header?.socials || {};
   const {
     title = "Каталог диванов",
     subtitle = "Которые украсят ваш интерьер",
@@ -60,7 +63,6 @@ export default async function HomePage() {
     edition: catalogEdition,
   } = catalogSection || {};
 
-  // Map Payload sofas to the format expected by ProductSections
   const products = (selectedSofas || []).map((sofa: any) => ({
     id: sofa.id,
     title: sofa.title,
@@ -83,8 +85,9 @@ export default async function HomePage() {
         buttonLabel={catalogButton}
         edition={catalogEdition}
       />
-      <ReviewSection />
       <ProductSections title={title} subtitle={subtitle} products={products} />
+      <ReviewSection />
+      <ContactUsSection telegramUrl={socials.telegram} vkUrl={socials.vk} />
     </div>
   );
 }
