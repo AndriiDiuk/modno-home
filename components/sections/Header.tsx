@@ -42,11 +42,13 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
           <div className='hidden lg:flex gap-5'>
             <CircleCTA
               text='Смотреть'
+              imageSrc='/images/stories/st_1.webp'
               className='text-[14px] leading-none h-auto'
               onClick={() => setActiveVideo("/video/1.mp4")}
             />
             <CircleCTA
               text='Смотреть'
+              imageSrc='/images/stories/st_2.webp'
               className='text-[14px] leading-none h-auto'
               onClick={() => setActiveVideo("/video/2.mp4")}
               delay='1s'
