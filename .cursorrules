@@ -1,0 +1,25 @@
+# Development Rules for Modno Home
+
+## 1. Styling
+- **ONLY Tailwind CSS**: Use Tailwind classes for all styling.
+- **NO Inline Styles**: Never use the `style={{...}}` prop unless absolutely necessary for dynamic values that cannot be handled by Tailwind or CSS variables.
+- **CSS Variables**: Use CSS variables for colors, spacing, and transitions. 
+- **Extending Theme**: If a required color or variable is missing, add it to `assets/style/globals.css` under the `:root` or `@theme` block before using it.
+
+## 2. Component Architecture
+- **Logical Components**: Build small, focused, and reusable components.
+- **Strict Props**: Use TypeScript interfaces/types for component props.
+- **Folder Structure**: Each component must reside in its own directory:
+  ```
+  components/
+    MyComponent/
+      MyComponent.tsx
+      index.ts (export * from './MyComponent')
+      types.ts (optional)
+      styles.css (optional, if using @apply)
+  ```
+- **Separation of Concerns**: Keep logic and UI separated where possible.
+
+## 3. General
+- Follow the existing project structure (`app`, `components`, `collections`, `globals`, `lib`).
+- Ensure all new components are responsive and follow the design aesthetic defined in `globals.css`.
