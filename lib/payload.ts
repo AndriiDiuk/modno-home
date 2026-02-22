@@ -14,6 +14,7 @@ export const getCachedGlobal = (slug: any, revalidate = 60) =>
         return await payload.findGlobal({
           slug,
           overrideAccess: true,
+          depth: 2,
         });
       } catch (localError) {
         console.warn(
@@ -37,6 +38,10 @@ export const getCachedGlobal = (slug: any, revalidate = 60) =>
 
 export async function getCachedSettings() {
   return getCachedGlobal("settings")();
+}
+
+export async function getCachedHome() {
+  return getCachedGlobal("home")();
 }
 
 function getApiUrl(): string {

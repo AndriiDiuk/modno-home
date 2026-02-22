@@ -7,6 +7,7 @@ import { fileURLToPath } from "url";
 
 import { s3Storage } from "@payloadcms/storage-s3";
 import { Media } from "./collections/Media";
+import { Sofas } from "./collections/Sofas";
 import { Users } from "./collections/Users";
 import { Home } from "./globals/Home";
 import { Settings } from "./globals/Settings";
@@ -22,7 +23,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Sofas],
   globals: [Home, Settings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

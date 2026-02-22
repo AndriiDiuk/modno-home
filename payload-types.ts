@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    sofas: Sofa;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +79,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    sofas: SofasSelect<false> | SofasSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -168,6 +170,30 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sofas".
+ */
+export interface Sofa {
+  id: string;
+  title: string;
+  category?: string | null;
+  price: number;
+  oldPrice?: number | null;
+  imageFilename:
+    | 'bad.webp'
+    | 'bianco.webp'
+    | 'cloud.webp'
+    | 'easy.webp'
+    | 'minimalist.webp'
+    | 'monaco.webp'
+    | 'moscow.webp'
+    | 'new-york.webp'
+    | 'yard.webp';
+  isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -197,6 +223,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'sofas';
+        value: string | Sofa;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -283,6 +313,20 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sofas_select".
+ */
+export interface SofasSelect<T extends boolean = true> {
+  title?: T;
+  category?: T;
+  price?: T;
+  oldPrice?: T;
+  imageFilename?: T;
+  isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -327,6 +371,14 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Home {
   id: string;
+  sofasSection?: {
+    title?: string | null;
+    subtitle?: string | null;
+    /**
+     * Перетаскивайте для изменения порядка отображения
+     */
+    selectedSofas?: (string | Sofa)[] | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -398,6 +450,13 @@ export interface Setting {
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
+  sofasSection?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        selectedSofas?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
