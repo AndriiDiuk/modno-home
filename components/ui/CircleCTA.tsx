@@ -8,10 +8,6 @@ interface CircleCTAProps {
   className?: string;
 }
 
-/**
- * CircleCTA component displays a circular image with an Instagram-style gradient border
- * and a prominent call-to-action button overlapping at the bottom.
- */
 export const CircleCTA: React.FC<CircleCTAProps> = ({
   text,
   imageSrc,
@@ -20,9 +16,8 @@ export const CircleCTA: React.FC<CircleCTAProps> = ({
 }) => {
   return (
     <div className={`relative flex flex-col items-center w-fit  ${className}`}>
-      {/* Circle Container with Gradient Border */}
-      <div className='p-[4px] rounded-full bg-[radial-gradient(circle_at_30%_100%,#FFDD55_0%,#FFDD55_10%,#FF543E_50%,#C837AB_100%)]'>
-        <div className='relative w-[66px] h-[66px] rounded-full overflow-hidden border-[4px] border-white bg-gray-100 shadow-inner'>
+      <div className='p-[2px] rounded-full bg-[radial-gradient(circle_at_30%_100%,#FFDD55_0%,#FFDD55_10%,#FF543E_50%,#C837AB_100%)] animate-pulse-border'>
+        <div className='relative w-[66px] h-[66px] rounded-full overflow-hidden border-4 border-white bg-gray-100 shadow-inner'>
           {imageSrc ? (
             <Image
               src={imageSrc}
@@ -37,7 +32,6 @@ export const CircleCTA: React.FC<CircleCTAProps> = ({
         </div>
       </div>
 
-      {/* Overlapping Button */}
       <button
         onClick={onClick}
         className='absolute bottom-0 bg-warning hover:scale-105 active:scale-95 text-[#222222] font-bold py-[6px] px-2 rounded-full shadow-xl transition-all text-[7px] uppercase  cursor-pointer z-10'
