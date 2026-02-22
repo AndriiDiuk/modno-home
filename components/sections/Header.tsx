@@ -55,6 +55,7 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
             text='Смотреть'
             className='text-[14px] leading-none h-auto'
             onClick={() => {}}
+            delay='1s'
           />
         </div>
 

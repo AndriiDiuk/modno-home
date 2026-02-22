@@ -6,6 +6,7 @@ interface CircleCTAProps {
   imageSrc?: string;
   onClick: () => void;
   className?: string;
+  delay?: string;
 }
 
 export const CircleCTA: React.FC<CircleCTAProps> = ({
@@ -13,10 +14,14 @@ export const CircleCTA: React.FC<CircleCTAProps> = ({
   imageSrc,
   onClick,
   className = "",
+  delay = "0s",
 }) => {
   return (
     <div className={`relative flex flex-col items-center w-fit  ${className}`}>
-      <div className='p-[2px] rounded-full bg-[radial-gradient(circle_at_30%_100%,#FFDD55_0%,#FFDD55_10%,#FF543E_50%,#C837AB_100%)] animate-pulse-border'>
+      <div
+        className='p-[2px] rounded-full bg-[radial-gradient(circle_at_30%_100%,#FFDD55_0%,#FFDD55_10%,#FF543E_50%,#C837AB_100%)] animate-pulse-border'
+        style={{ animationDelay: delay }}
+      >
         <div className='relative w-[66px] h-[66px] rounded-full overflow-hidden border-4 border-white bg-gray-100 shadow-inner'>
           {imageSrc ? (
             <Image
