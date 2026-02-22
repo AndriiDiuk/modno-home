@@ -15,9 +15,8 @@
     MyComponent/
       MyComponent.tsx
       index.ts (export * from './MyComponent')
-      types.ts (optional)
-      styles.css (optional, if using @apply)
   ```
+- **Icons**: Store icon components in `assets/icons/`.
 - **Separation of Concerns**: Keep logic and UI separated where possible.
 
 ## 3. General

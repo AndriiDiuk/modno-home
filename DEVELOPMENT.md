@@ -22,5 +22,6 @@
 
 *   `app/` — сторінки та роутінг.
 *   `components/` — спільні UI-компоненти.
+*   `assets/icons/` — компоненти іконок.
+*   `assets/style/` — стилі.
 *   `collections/` — конфігурації Payload CMS.
-*   `assets/` — стилі та статичні ресурси.
