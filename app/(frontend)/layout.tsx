@@ -55,17 +55,6 @@ const gilroy = localFont({
   variable: "--font-gilroy",
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "Modno Home",
-    template: "%s | Modno Home",
-  },
-  description: "Modno Home - Luxury Interior Design",
-  openGraph: {
-    type: "website",
-  },
-};
-
 async function getSettings() {
   try {
     const settings = await fetchPayload<any>("globals/settings");
@@ -74,6 +63,23 @@ async function getSettings() {
     console.error("Error fetching settings:", error);
     return {};
   }
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSettings();
+  const seo = settings?.seo || {};
+
+  return {
+    title: {
+      default: seo.title || "Modno Home",
+      template: `%s | ${seo.title || "Modno Home"}`,
+    },
+    description: seo.description || "Modno Home - Luxury Interior Design",
+    openGraph: {
+      type: "website",
+      images: seo.ogImage?.url ? [{ url: seo.ogImage.url }] : [],
+    },
+  };
 }
 
 export default async function FrontendLayout({

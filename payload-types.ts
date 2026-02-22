@@ -348,7 +348,26 @@ export interface Setting {
   footer?: {
     copyright?: string | null;
     privacyPolicyText?: string | null;
-    privacyPolicyLink?: string | null;
+    privacyPolicyContent?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    ogImage?: (string | null) | Media;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -385,7 +404,14 @@ export interface SettingsSelect<T extends boolean = true> {
     | {
         copyright?: T;
         privacyPolicyText?: T;
-        privacyPolicyLink?: T;
+        privacyPolicyContent?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
       };
   updatedAt?: T;
   createdAt?: T;

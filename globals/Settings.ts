@@ -8,70 +8,114 @@ export const Settings: GlobalConfig = {
   },
   fields: [
     {
-      name: "header",
-      type: "group",
-      label: "Шапка сайта (Header)",
-      fields: [
+      type: "tabs",
+      tabs: [
         {
-          name: "logoDescription",
-          type: "textarea",
-          label: "Текст справа от логотипа",
-          defaultValue:
-            "Производство модульных диванов в Челябинске с доставкой по РФ",
-        },
-        {
-          name: "workingHours",
-          type: "textarea",
-          label: "Часы работы / Адрес",
-          defaultValue: "Шоурум в Челябинске с 9:00 до 18:00",
-        },
-        {
-          name: "phone",
-          type: "text",
-          label: "Номер телефона",
-          defaultValue: "+7 (992) 503-54-99",
-        },
-        {
-          name: "socials",
-          type: "group",
-          label: "Социальные сети",
+          label: "Шапка",
           fields: [
             {
-              name: "telegram",
-              type: "text",
-              label: "Ссылка на Telegram",
-            },
-            {
-              name: "vk",
-              type: "text",
-              label: "Ссылка на VK",
+              name: "header",
+              type: "group",
+              label: "Настройки шапки",
+              fields: [
+                {
+                  name: "logoDescription",
+                  type: "textarea",
+                  label: "Текст справа от логотипа",
+                  defaultValue:
+                    "Производство модульных диванов в Челябинске с доставкой по РФ",
+                },
+                {
+                  name: "workingHours",
+                  type: "textarea",
+                  label: "Часы работы / Адрес",
+                  defaultValue: "Шоурум в Челябинске с 9:00 до 18:00",
+                },
+                {
+                  name: "phone",
+                  type: "text",
+                  label: "Номер телефона",
+                  defaultValue: "+7 (992) 503-54-99",
+                },
+                {
+                  name: "socials",
+                  type: "group",
+                  label: "Социальные сети",
+                  fields: [
+                    {
+                      name: "telegram",
+                      type: "text",
+                      label: "Ссылка на Telegram",
+                    },
+                    {
+                      name: "vk",
+                      type: "text",
+                      label: "Ссылка на VK",
+                    },
+                  ],
+                },
+              ],
             },
           ],
         },
-      ],
-    },
-    {
-      name: "footer",
-      type: "group",
-      label: "Подвал сайта (Footer)",
-      fields: [
         {
-          name: "copyright",
-          type: "text",
-          label: "Текст копирайта",
-          defaultValue: "© modno-home 2026",
+          label: "Подвал",
+          fields: [
+            {
+              name: "footer",
+              type: "group",
+              label: "Настройки подвала",
+              fields: [
+                {
+                  name: "copyright",
+                  type: "text",
+                  label: "Текст копирайта",
+                  defaultValue: "© modno-home 2026",
+                },
+                {
+                  name: "privacyPolicyText",
+                  type: "text",
+                  label: "Текст ссылки на политику",
+                  defaultValue: "Политика конфиденциальности",
+                },
+                {
+                  name: "privacyPolicyContent",
+                  type: "richText",
+                  label: "Содержание политики конфиденциальности",
+                },
+              ],
+            },
+          ],
         },
         {
-          name: "privacyPolicyText",
-          type: "text",
-          label: "Текст политики конфиденциальности",
-          defaultValue: "Политика конфиденциальности",
-        },
-        {
-          name: "privacyPolicyLink",
-          type: "text",
-          label: "Ссылка на политику конфиденциальности",
-          defaultValue: "/privacy-policy",
+          label: "SEO",
+          fields: [
+            {
+              name: "seo",
+              type: "group",
+              label: "Глобальные SEO настройки",
+              fields: [
+                {
+                  name: "title",
+                  type: "text",
+                  label: "Заголовок сайта (Meta Title)",
+                  defaultValue: "Modno Home",
+                },
+                {
+                  name: "description",
+                  type: "textarea",
+                  label: "Описание сайта (Meta Description)",
+                  defaultValue: "Modno Home - Luxury Interior Design",
+                },
+                {
+                  name: "ogImage",
+                  type: "upload",
+                  relationTo: "media",
+                  label: "Изображение для соцсетей (OG Image)",
+                },
+              ],
+            },
+          ],
         },
       ],
     },
