@@ -111,8 +111,10 @@ export const Settings: GlobalConfig = {
                   name: "keywords",
                   type: "text",
                   label: "Ключевые слова (через запятую)",
-                  description:
-                    "Пример: диваны, мебель, Челябинск, производство",
+                  admin: {
+                    description:
+                      "Пример: диваны, мебель, Челябинск, производство",
+                  },
                 },
                 {
                   name: "ogImage",
@@ -129,20 +131,42 @@ export const Settings: GlobalConfig = {
                 {
                   name: "scripts",
                   type: "group",
-                  label: "Сторонние скрипты (Google Analytics / Pixel)",
+                  label: "Сторонние скрипты (Аналитика)",
                   fields: [
+                    {
+                      name: "googleAnalyticsId",
+                      type: "text",
+                      label: "Google Analytics ID (G-XXXXXXX)",
+                      admin: {
+                        description: "Только ID счетчика (например: G-1234567)",
+                      },
+                    },
+                    {
+                      name: "yandexMetrikaId",
+                      type: "text",
+                      label: "Yandex Metrika ID",
+                      admin: {
+                        description:
+                          "Только номер счетчика (например: 12345678)",
+                      },
+                    },
                     {
                       name: "head",
                       type: "textarea",
-                      label: "Код внутри <head>",
-                      description: "Сюда вставляются скрипты аналитики",
+                      label: "Произвольный код внутри <head>",
+                      admin: {
+                        description:
+                          "Сюда вставляются прочие скрипты аналитики",
+                      },
                     },
                     {
                       name: "body",
                       type: "textarea",
-                      label: "Код в начале <body>",
-                      description:
-                        "Сюда вставляються коды для GTM (noscript) и др.",
+                      label: "Произвольный код в начале <body>",
+                      admin: {
+                        description:
+                          "Сюда вставляються коды для GTM (noscript) и др.",
+                      },
                     },
                   ],
                 },

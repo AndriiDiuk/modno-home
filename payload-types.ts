@@ -367,11 +367,28 @@ export interface Setting {
   seo?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Пример: диваны, мебель, Челябинск, производство
+     */
     keywords?: string | null;
     ogImage?: (string | null) | Media;
     favicon?: (string | null) | Media;
     scripts?: {
+      /**
+       * Только ID счетчика (например: G-1234567)
+       */
+      googleAnalyticsId?: string | null;
+      /**
+       * Только номер счетчика (например: 12345678)
+       */
+      yandexMetrikaId?: string | null;
+      /**
+       * Сюда вставляются прочие скрипты аналитики
+       */
       head?: string | null;
+      /**
+       * Сюда вставляються коды для GTM (noscript) и др.
+       */
       body?: string | null;
     };
   };
@@ -423,6 +440,8 @@ export interface SettingsSelect<T extends boolean = true> {
         scripts?:
           | T
           | {
+              googleAnalyticsId?: T;
+              yandexMetrikaId?: T;
               head?: T;
               body?: T;
             };
