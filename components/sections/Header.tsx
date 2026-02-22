@@ -1,3 +1,5 @@
+"use client";
+
 import { Logo, TelegramIcon, VkIcon } from "@/assets/icons";
 import { Button, CircleCTA } from "@/components/ui";
 import Link from "next/link";
