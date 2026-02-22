@@ -1,9 +1,10 @@
 "use client";
 
 import { TelegramIcon, VkIcon } from "@/assets/icons";
+import { VideoModal } from "@/components/common/VideoModal";
 import { Brand, CircleCTA, ContactGroup } from "@/components/ui";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 interface HeaderProps {
   data: {
@@ -29,66 +30,77 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
     } = {},
   } = data || {};
 
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
+
   return (
-    <header className='w-full  py-4'>
-      <div className='content flex items-center justify-between gap-8'>
-        {/* Left: Logo and Description */}
-        <Brand description={logoDescription} />
+    <>
+      <header className='w-full  py-4'>
+        <div className='content flex items-center justify-between gap-8'>
+          {/* Left: Logo and Description */}
+          <Brand description={logoDescription} />
 
-        <div className='hidden lg:flex gap-5'>
-          <CircleCTA
-            text='Смотреть'
-            className='text-[14px] leading-none h-auto'
-            onClick={() => {}}
-          />
-          <CircleCTA
-            text='Смотреть'
-            className='text-[14px] leading-none h-auto'
-            onClick={() => {}}
-            delay='1s'
-          />
-        </div>
+          <div className='hidden lg:flex gap-5'>
+            <CircleCTA
+              text='Смотреть'
+              className='text-[14px] leading-none h-auto'
+              onClick={() => setActiveVideo("/video/1.mp4")}
+            />
+            <CircleCTA
+              text='Смотреть'
+              className='text-[14px] leading-none h-auto'
+              onClick={() => setActiveVideo("/video/2.mp4")}
+              delay='1s'
+            />
+          </div>
 
-        {/* Center: Working Hours */}
-        <div className='flex items-center gap-4 lg:gap-8'>
-          <div className='flex flex-col text-right  max-w-[150px] md:text-center text-black'>
-            <p className='text-[13px] font-medium  leading-snug whitespace-pre-line'>
-              {workingHours}
-            </p>
+          {/* Center: Working Hours */}
+          <div className='flex items-center gap-4 lg:gap-8'>
+            <div className='flex flex-col text-right  max-w-[150px] md:text-center text-black'>
+              <p className='text-[13px] font-medium  leading-snug whitespace-pre-line'>
+                {workingHours}
+              </p>
+            </div>
+          </div>
+          {/* Social Icons */}
+          <div className='hidden lg:flex items-center gap-3'>
+            {socials.telegram && (
+              <Link href={socials.telegram} target='_blank'>
+                <TelegramIcon
+                  width={50}
+                  height={38}
+                  className='hover:opacity-80 transition-opacity'
+                />
+              </Link>
+            )}
+            {socials.vk && (
+              <Link href={socials.vk} target='_blank'>
+                <VkIcon
+                  width={50}
+                  height={38}
+                  className='hover:opacity-80 transition-opacity'
+                />
+              </Link>
+            )}
+          </div>
+
+          {/* Contact Info & Call to Action */}
+          <div className='hidden lg:block'>
+            <ContactGroup phone={phone} />
           </div>
         </div>
-        {/* Social Icons */}
-        <div className='hidden lg:flex items-center gap-3'>
-          {socials.telegram && (
-            <Link href={socials.telegram} target='_blank'>
-              <TelegramIcon
-                width={50}
-                height={38}
-                className='hover:opacity-80 transition-opacity'
-              />
-            </Link>
-          )}
-          {socials.vk && (
-            <Link href={socials.vk} target='_blank'>
-              <VkIcon
-                width={50}
-                height={38}
-                className='hover:opacity-80 transition-opacity'
-              />
-            </Link>
-          )}
-        </div>
 
-        {/* Contact Info & Call to Action */}
-        <div className='hidden lg:block'>
-          <ContactGroup phone={phone} />
+        {/* Decorative Bottom Line (like in referenced image) */}
+        <div className='content'>
+          <div className=' lg:block hidden h-px xl:w-[calc(100%-12rem)] w-full bg-brand-gray mx-auto mt-5' />
         </div>
-      </div>
+      </header>
 
-      {/* Decorative Bottom Line (like in referenced image) */}
-      <div className='content'>
-        <div className=' lg:block hidden h-px xl:w-[calc(100%-12rem)] w-full bg-brand-gray mx-auto mt-5' />
-      </div>
-    </header>
+      {/* Video Modal */}
+      <VideoModal
+        isOpen={!!activeVideo}
+        onClose={() => setActiveVideo(null)}
+        videoSrc={activeVideo || ""}
+      />
+    </>
   );
 };
