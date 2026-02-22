@@ -77,13 +77,6 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description: seo.description || "Modno Home - Luxury Interior Design",
     keywords: seo.keywords || "",
-    icons: {
-      icon: seo.favicon?.url || "/favicon.ico",
-    },
-    openGraph: {
-      type: "website",
-      images: seo.ogImage?.url ? [{ url: seo.ogImage.url }] : [],
-    },
   };
 }
 

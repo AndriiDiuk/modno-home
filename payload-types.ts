@@ -371,8 +371,6 @@ export interface Setting {
      * Пример: диваны, мебель, Челябинск, производство
      */
     keywords?: string | null;
-    ogImage?: (string | null) | Media;
-    favicon?: (string | null) | Media;
     scripts?: {
       /**
        * Только ID счетчика (например: G-1234567)
@@ -435,8 +433,6 @@ export interface SettingsSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         keywords?: T;
-        ogImage?: T;
-        favicon?: T;
         scripts?:
           | T
           | {

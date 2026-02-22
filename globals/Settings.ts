@@ -117,18 +117,6 @@ export const Settings: GlobalConfig = {
                   },
                 },
                 {
-                  name: "ogImage",
-                  type: "upload",
-                  relationTo: "media",
-                  label: "Изображение для соцсетей (OG Image)",
-                },
-                {
-                  name: "favicon",
-                  type: "upload",
-                  relationTo: "media",
-                  label: "Favicon (иконка сайта)",
-                },
-                {
                   name: "scripts",
                   type: "group",
                   label: "Сторонние скрипты (Аналитика)",
