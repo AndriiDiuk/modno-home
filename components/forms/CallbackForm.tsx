@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Input } from "../ui/Input";
+import { FormButton, Input } from "../ui";
 
 export const CallbackForm: React.FC = () => {
   const [phone, setPhone] = useState("");
@@ -33,12 +33,7 @@ export const CallbackForm: React.FC = () => {
         />
       </div>
 
-      <button
-        type='submit'
-        className='w-full bg-brand-dark hover:bg-black text-white font-black py-5 px-6 rounded-xl transition-all shadow-lg active:scale-[0.98] text-lg uppercase mb-4 cursor-pointer'
-      >
-        ЖДУ ЗВОНКА
-      </button>
+      <FormButton label='ЖДУ ЗВОНКА' />
 
       <label className='flex items-center gap-2 cursor-pointer select-none'>
         <div className='relative flex items-center'>
