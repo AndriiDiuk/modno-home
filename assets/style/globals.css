@@ -4,22 +4,23 @@
   --color-background: #ffffff;
   --color-foreground: #171717;
   --color-accent: #f26db3;
+  
+  /* Brand Colors */
+  --color-telegram-start: #23a0dc;
+  --color-telegram-mid: #6acfff;
+  --color-telegram-end: #93dcff;
+}
 
-
+@theme {
+  --font-sans: var(--font-gilroy), ui-sans-serif, system-ui, sans-serif;
 }
 
 .transition-hover {
   transition: var(--transition-hover);
 }
 
-@theme inline {}
-
-@media (prefers-color-scheme: dark) {
-  :root {}
-}
-
 body {
   background: var(--color-background);
   color: var(--color-foreground);
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans);
 }
