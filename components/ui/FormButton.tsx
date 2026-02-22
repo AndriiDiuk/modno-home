@@ -17,7 +17,7 @@ export const FormButton: React.FC<FormButtonProps> = ({
   return (
     <button
       type={type}
-      className={`w-full bg-brand-dark hover:bg-black text-white font-black py-5 px-6 rounded-[6px] transition-all shadow-lg active:scale-[0.98] text-lg uppercase mb-4 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
+      className={`w-full bg-brand-dark hover:bg-black text-white font-bold py-5 px-6 rounded-[6px] transition-all shadow-lg active:scale-[0.98] text-lg uppercase mb-4 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
       {...props}
     >
       {label}

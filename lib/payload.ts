@@ -9,11 +9,27 @@ export async function fetchPayloadLocal() {
 export const getCachedGlobal = (slug: any, revalidate = 60) =>
   unstable_cache(
     async () => {
-      const payload = await fetchPayloadLocal();
-      const global = await payload.findGlobal({
-        slug,
-      });
-      return global;
+      try {
+        const payload = await fetchPayloadLocal();
+        return await payload.findGlobal({
+          slug,
+          overrideAccess: true,
+        });
+      } catch (localError) {
+        console.warn(
+          `Local API failed for global "${slug}", falling back to HTTP:`,
+          localError,
+        );
+        try {
+          return await fetchPayload<any>(`globals/${slug}`);
+        } catch (httpError) {
+          console.error(
+            `HTTP fallback also failed for global "${slug}":`,
+            httpError,
+          );
+          return null;
+        }
+      }
     },
     [slug],
     { revalidate, tags: [`global_${slug}`] },
