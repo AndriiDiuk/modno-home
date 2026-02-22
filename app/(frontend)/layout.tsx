@@ -75,6 +75,10 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${seo.title || "Modno Home"}`,
     },
     description: seo.description || "Modno Home - Luxury Interior Design",
+    keywords: seo.keywords || "",
+    icons: {
+      icon: seo.favicon?.url || "/favicon.ico",
+    },
     openGraph: {
       type: "website",
       images: seo.ogImage?.url ? [{ url: seo.ogImage.url }] : [],
@@ -88,13 +92,22 @@ export default async function FrontendLayout({
   children: React.ReactNode;
 }>) {
   const settings = await getSettings();
+  const seo = settings?.seo || {};
 
   return (
     <html lang='uk' className='h-full' suppressHydrationWarning>
+      <head>
+        {seo.scripts?.head && (
+          <script dangerouslySetInnerHTML={{ __html: seo.scripts.head }} />
+        )}
+      </head>
       <body
         className={`${gilroy.variable} font-sans antialiased flex flex-col min-h-screen`}
         suppressHydrationWarning
       >
+        {seo.scripts?.body && (
+          <div dangerouslySetInnerHTML={{ __html: seo.scripts.body }} />
+        )}
         <Header data={settings.header || {}} />
         <main className='grow'>{children}</main>
         <Footer data={settings} />

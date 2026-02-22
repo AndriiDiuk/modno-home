@@ -367,7 +367,13 @@ export interface Setting {
   seo?: {
     title?: string | null;
     description?: string | null;
+    keywords?: string | null;
     ogImage?: (string | null) | Media;
+    favicon?: (string | null) | Media;
+    scripts?: {
+      head?: string | null;
+      body?: string | null;
+    };
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -411,7 +417,15 @@ export interface SettingsSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        keywords?: T;
         ogImage?: T;
+        favicon?: T;
+        scripts?:
+          | T
+          | {
+              head?: T;
+              body?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

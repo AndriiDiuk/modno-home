@@ -108,10 +108,43 @@ export const Settings: GlobalConfig = {
                   defaultValue: "Modno Home - Luxury Interior Design",
                 },
                 {
+                  name: "keywords",
+                  type: "text",
+                  label: "Ключевые слова (через запятую)",
+                  description:
+                    "Пример: диваны, мебель, Челябинск, производство",
+                },
+                {
                   name: "ogImage",
                   type: "upload",
                   relationTo: "media",
                   label: "Изображение для соцсетей (OG Image)",
+                },
+                {
+                  name: "favicon",
+                  type: "upload",
+                  relationTo: "media",
+                  label: "Favicon (иконка сайта)",
+                },
+                {
+                  name: "scripts",
+                  type: "group",
+                  label: "Сторонние скрипты (Google Analytics / Pixel)",
+                  fields: [
+                    {
+                      name: "head",
+                      type: "textarea",
+                      label: "Код внутри <head>",
+                      description: "Сюда вставляются скрипты аналитики",
+                    },
+                    {
+                      name: "body",
+                      type: "textarea",
+                      label: "Код в начале <body>",
+                      description:
+                        "Сюда вставляються коды для GTM (noscript) и др.",
+                    },
+                  ],
                 },
               ],
             },
