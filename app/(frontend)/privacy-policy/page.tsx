@@ -15,10 +15,9 @@ export default async function PrivacyPolicyPage() {
 
   return (
     <div className='content py-16 md:py-24'>
-      <h1 className='text-3xl md:text-4xl font-bold mb-8 text-black'>
+      <h1 className='text-3xl md:text-4xl font-bold mb-8 text-black text-center'>
         {settings?.footer?.privacyPolicyText || "Политика конфиденциальности"}
       </h1>
-
       <div className='text-black'>
         {content ? (
           <RichText content={content} />
