@@ -337,7 +337,6 @@ export interface Home {
 export interface Setting {
   id: string;
   header?: {
-    logoSubtext?: string | null;
     logoDescription?: string | null;
     workingHours?: string | null;
     phone?: string | null;
@@ -345,14 +344,6 @@ export interface Setting {
       telegram?: string | null;
       vk?: string | null;
     };
-    stories?:
-      | {
-          text?: string | null;
-          image?: (string | null) | Media;
-          link?: string | null;
-          id?: string | null;
-        }[]
-      | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -374,7 +365,6 @@ export interface SettingsSelect<T extends boolean = true> {
   header?:
     | T
     | {
-        logoSubtext?: T;
         logoDescription?: T;
         workingHours?: T;
         phone?: T;
@@ -383,14 +373,6 @@ export interface SettingsSelect<T extends boolean = true> {
           | {
               telegram?: T;
               vk?: T;
-            };
-        stories?:
-          | T
-          | {
-              text?: T;
-              image?: T;
-              link?: T;
-              id?: T;
             };
       };
   updatedAt?: T;

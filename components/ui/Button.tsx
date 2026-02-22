@@ -25,19 +25,20 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   // Variant styles
   const variants = {
-    light: "bg-white text-black border-black hover:bg-black hover:text-white",
-    dark: "bg-black text-white border-white hover:bg-white hover:text-black",
+    light:
+      "bg-transparent text-black border-black hover:bg-black hover:text-white",
+    dark: "bg-transparent text-white border-white hover:bg-white hover:text-black",
   };
 
   // Size styles
   const sizes = {
-    sm: "px-4 py-2 text-xs",
-    md: "px-8 py-3 text-sm",
-    lg: "px-12 py-5 text-base",
+    sm: "px-4 py-3 text-base",
+    md: "px-8 py-3 text-[14px]",
+    lg: "px-10 py-3 text-[20px]",
   };
 
   const baseStyles =
-    "inline-flex items-center justify-center rounded-full border transition-all duration-300 font-medium uppercase tracking-widest cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed";
+    "inline-flex items-center justify-center rounded-[8px] w-full border transition-all duration-300 font-medium   cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed";
 
   return (
     <button

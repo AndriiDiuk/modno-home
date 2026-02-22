@@ -2,7 +2,7 @@ import type { GlobalConfig } from "payload";
 
 export const Settings: GlobalConfig = {
   slug: "settings",
-  label: "Налаштування сайту",
+  label: "Настройки сайта",
   access: {
     read: () => true,
   },
@@ -10,71 +10,41 @@ export const Settings: GlobalConfig = {
     {
       name: "header",
       type: "group",
-      label: "Кнопка в навігації (Header)",
+      label: "Шапка сайта (Header)",
       fields: [
-        {
-          name: "logoSubtext",
-          type: "text",
-          label: "Текст під логотипом",
-          defaultValue: "фабрика современной мебели",
-        },
         {
           name: "logoDescription",
           type: "textarea",
-          label: "Текст збоку від логотипу",
+          label: "Текст справа від логотипу",
           defaultValue:
             "Производство модульных диванов в Челябинске с доставкой по РФ",
         },
         {
           name: "workingHours",
           type: "textarea",
-          label: "Години роботи / Адреса",
+          label: "Часы работы / Адрес",
           defaultValue: "Шоурум в Челябинске с 9:00 до 18:00",
         },
         {
           name: "phone",
           type: "text",
-          label: "Номер телефону",
+          label: "Номер телефона",
           defaultValue: "+7 (992) 503-54-99",
         },
         {
           name: "socials",
           type: "group",
-          label: "Соцмережі",
+          label: "Социальные сети",
           fields: [
             {
               name: "telegram",
               type: "text",
-              label: "Посилання на Telegram",
+              label: "Ссылка на Telegram",
             },
             {
               name: "vk",
               type: "text",
-              label: "Посилання на VK",
-            },
-          ],
-        },
-        {
-          name: "stories",
-          type: "array",
-          label: "Stories (Круглі кнопки)",
-          maxRows: 3,
-          fields: [
-            {
-              name: "text",
-              type: "text",
-              label: "Текст кнопки",
-            },
-            {
-              name: "image",
-              type: "upload",
-              relationTo: "media",
-              label: "Зображення",
-            },
-            {
-              name: "link",
-              type: "text",
-              label: "Посилання",
+              label: "Ссылка на VK",
             },
           ],
         },
