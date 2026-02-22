@@ -15,10 +15,20 @@
   --color-vk-end: #50b7e9;
 
   --color-logo-gray: #2e2e2e;
+  --color-button-yellow: #ffc100;
+  
+  /* Story Border Gradient */
+  --gradient-story: radial-gradient(circle at 30% 100%, #ffdd55 0%, #ffdd55 10%, #ff543e 50%, #c837ab 100%);
 }
 
 @theme {
   --font-sans: var(--font-gilroy), ui-sans-serif, system-ui, sans-serif;
+  --color-warning: var(--color-button-yellow);
+}
+
+.gradient-border-story {
+  background: var(--gradient-story);
+  padding: 3px; /* border thickness */
 }
 
 .transition-hover {
