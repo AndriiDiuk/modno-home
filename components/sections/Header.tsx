@@ -25,7 +25,6 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ data }) => {
   const {
-    logoSubtext = "фабрика современной мебели",
     logoDescription = "Производство модульных диванов в Челябинске с доставкой по РФ",
     workingHours = "Шоурум в Челябинске с 9:00 до 18:00",
     phone = "+7 (992) 503-54-99",
@@ -34,15 +33,12 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
   } = data;
 
   return (
-    <header className='w-full bg-white border-b border-gray-200 py-4'>
+    <header className='w-full  py-4'>
       <div className='container mx-auto px-4 flex items-center justify-between gap-8'>
         {/* Left: Logo and Description */}
         <div className='flex items-center gap-6'>
           <Link href='/' className='flex flex-col'>
             <Logo width={150} height={35} />
-            <span className='text-[10px] text-gray-500 mt-1 uppercase tracking-wider font-medium'>
-              {logoSubtext}
-            </span>
           </Link>
 
           <div className='h-12 w-[1px] bg-gray-300 hidden xl:block' />
@@ -111,6 +107,7 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
             >
               {phone}
             </a>
+
             <Button
               label='Заказать звонок'
               variant='light'
