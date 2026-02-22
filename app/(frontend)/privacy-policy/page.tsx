@@ -1,16 +1,16 @@
 import { RichText } from "@/components/common/RichText";
-import { fetchPayload } from "@/lib/payload";
+import { getCachedSettings } from "@/lib/payload";
 import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const settings = await fetchPayload<any>("globals/settings");
+  const settings = await getCachedSettings();
   return {
     title: settings?.footer?.privacyPolicyText || "Политика конфиденциальности",
   };
 }
 
 export default async function PrivacyPolicyPage() {
-  const settings = await fetchPayload<any>("globals/settings");
+  const settings = await getCachedSettings();
   const content = settings?.footer?.privacyPolicyContent;
 
   return (

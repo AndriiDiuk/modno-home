@@ -1,6 +1,6 @@
 import "@/assets/style/globals.css";
 import { Footer, Header } from "@/components/sections";
-import { fetchPayload } from "@/lib/payload";
+import { getCachedSettings } from "@/lib/payload";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
@@ -58,7 +58,7 @@ const gilroy = localFont({
 
 async function getSettings() {
   try {
-    const settings = await fetchPayload<any>("globals/settings");
+    const settings = await getCachedSettings();
     return settings || {};
   } catch (error) {
     console.error("Error fetching settings:", error);

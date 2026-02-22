@@ -28,7 +28,7 @@ export const RichText: React.FC<RichTextProps> = ({ content, className }) => {
           );
         }
         if (node.type === "heading") {
-          const Tag = node.tag as keyof JSX.IntrinsicElements;
+          const Tag = (node.tag || "h2") as any;
           return (
             <Tag key={index} className='font-bold text-xl mt-6 mb-2'>
               {node.children?.map((child: any, i: number) => child.text)}

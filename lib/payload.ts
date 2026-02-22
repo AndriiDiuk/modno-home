@@ -1,3 +1,28 @@
+import configPromise from "@payload-config";
+import { unstable_cache } from "next/cache";
+import { getPayload } from "payload";
+
+export async function fetchPayloadLocal() {
+  return await getPayload({ config: configPromise });
+}
+
+export const getCachedGlobal = (slug: any, revalidate = 60) =>
+  unstable_cache(
+    async () => {
+      const payload = await fetchPayloadLocal();
+      const global = await payload.findGlobal({
+        slug,
+      });
+      return global;
+    },
+    [slug],
+    { revalidate, tags: [`global_${slug}`] },
+  );
+
+export async function getCachedSettings() {
+  return getCachedGlobal("settings")();
+}
+
 function getApiUrl(): string {
   if (process.env.NEXT_PUBLIC_PAYLOAD_URL) {
     const url = process.env.NEXT_PUBLIC_PAYLOAD_URL;
