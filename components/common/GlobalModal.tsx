@@ -9,7 +9,11 @@ export const GlobalModal: React.FC = () => {
   const { isOpen, closeModal } = useModal();
 
   return (
-    <ModalWrapper isOpen={isOpen} onClose={closeModal}>
+    <ModalWrapper
+      isOpen={isOpen}
+      onClose={closeModal}
+      className='max-w-[460px]'
+    >
       <CallbackForm />
     </ModalWrapper>
   );

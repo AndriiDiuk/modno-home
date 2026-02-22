@@ -6,12 +6,14 @@ interface ModalWrapperProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  className?: string;
 }
 
 export const ModalWrapper: React.FC<ModalWrapperProps> = ({
   isOpen,
   onClose,
   children,
+  className = "max-w-[460px]",
 }) => {
   // Prevent scrolling when modal is open
   useEffect(() => {
@@ -33,7 +35,7 @@ export const ModalWrapper: React.FC<ModalWrapperProps> = ({
       onClick={onClose}
     >
       <div
-        className='relative w-full max-w-[460px] bg-white rounded-[20px] p-8 md:p-12 shadow-2xl animate-in zoom-in-95 duration-300'
+        className={`relative w-full bg-white rounded-[20px] p-8 md:p-12 shadow-2xl animate-in zoom-in-95 duration-300 ${className}`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
