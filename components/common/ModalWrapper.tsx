@@ -15,7 +15,6 @@ export const ModalWrapper: React.FC<ModalWrapperProps> = ({
   children,
   className = "max-w-[500px]",
 }) => {
-  // Prevent scrolling when modal is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -38,7 +37,6 @@ export const ModalWrapper: React.FC<ModalWrapperProps> = ({
         className={`relative w-full bg-white rounded-[20px] md:rounded-[30px]  px-8 py-10 md:px-12 md:py-14  shadow-2xl animate-in zoom-in-95 duration-300 ${className}`}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button */}
         <button
           onClick={onClose}
           className='absolute top-5 right-5 text-brand-black hover:opacity-70 transition-opacity cursor-pointer p-2'

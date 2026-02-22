@@ -39,7 +39,7 @@ export const Footer: React.FC<FooterProps> = ({ data }) => {
   return (
     <footer className='w-full py-10'>
       <div className='content flex flex-col md:flex-row items-center justify-between md:gap-8 gap-4'>
-        <div className='order-1 md:order-1 flex flex-col md:flex-row justify-center md:justify-between items-center  w-full md:gap-2 gap-4 '>
+        <div className='order-1 md:order-1 flex flex-col md:flex-row justify-center md:justify-between items-center  w-full  md:w-auto md:gap-2 gap-4 '>
           <Brand description={logoDescription} showDescription={true} />
           <div className='block lg:hidden'>
             {" "}
