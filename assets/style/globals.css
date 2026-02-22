@@ -9,6 +9,10 @@
   --color-telegram-start: #23a0dc;
   --color-telegram-mid: #6acfff;
   --color-telegram-end: #93dcff;
+  
+  --color-vk-start: #2192c8;
+  --color-vk-mid: #4da2ca;
+  --color-vk-end: #50b7e9;
 }
 
 @theme {
