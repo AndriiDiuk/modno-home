@@ -16,6 +16,8 @@
 
   --color-logo-gray: #2e2e2e;
   --color-button-yellow: #ffc100;
+  --color-button-dark: #171717;
+  --color-button-light: #ffffff;
   
   /* Story Border Gradient */
   --gradient-story: radial-gradient(circle at 30% 100%, #ffdd55 0%, #ffdd55 10%, #ff543e 50%, #c837ab 100%);
