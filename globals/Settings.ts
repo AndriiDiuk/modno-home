@@ -50,5 +50,30 @@ export const Settings: GlobalConfig = {
         },
       ],
     },
+    {
+      name: "footer",
+      type: "group",
+      label: "Подвал сайта (Footer)",
+      fields: [
+        {
+          name: "copyright",
+          type: "text",
+          label: "Текст копирайта",
+          defaultValue: "© modno-home 2026",
+        },
+        {
+          name: "privacyPolicyText",
+          type: "text",
+          label: "Текст политики конфиденциальности",
+          defaultValue: "Политика конфиденциальности",
+        },
+        {
+          name: "privacyPolicyLink",
+          type: "text",
+          label: "Ссылка на политику конфиденциальности",
+          defaultValue: "/privacy-policy",
+        },
+      ],
+    },
   ],
 };

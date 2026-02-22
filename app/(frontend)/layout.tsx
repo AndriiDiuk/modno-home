@@ -1,5 +1,5 @@
 import "@/assets/style/globals.css";
-import { Header } from "@/components/sections";
+import { Footer, Header } from "@/components/sections";
 import { fetchPayload } from "@/lib/payload";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
 async function getSettings() {
   try {
     const settings = await fetchPayload<any>("globals/settings");
-    return settings?.header || {};
+    return settings || {};
   } catch (error) {
     console.error("Error fetching settings:", error);
     return {};
@@ -81,7 +81,7 @@ export default async function FrontendLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const headerData = await getSettings();
+  const settings = await getSettings();
 
   return (
     <html lang='uk' className='h-full' suppressHydrationWarning>
@@ -89,8 +89,9 @@ export default async function FrontendLayout({
         className={`${gilroy.variable} font-sans antialiased flex flex-col min-h-screen`}
         suppressHydrationWarning
       >
-        <Header data={headerData} />
+        <Header data={settings.header || {}} />
         <main className='grow'>{children}</main>
+        <Footer data={settings} />
       </body>
     </html>
   );

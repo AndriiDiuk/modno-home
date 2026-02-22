@@ -345,6 +345,11 @@ export interface Setting {
       vk?: string | null;
     };
   };
+  footer?: {
+    copyright?: string | null;
+    privacyPolicyText?: string | null;
+    privacyPolicyLink?: string | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -374,6 +379,13 @@ export interface SettingsSelect<T extends boolean = true> {
               telegram?: T;
               vk?: T;
             };
+      };
+  footer?:
+    | T
+    | {
+        copyright?: T;
+        privacyPolicyText?: T;
+        privacyPolicyLink?: T;
       };
   updatedAt?: T;
   createdAt?: T;

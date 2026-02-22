@@ -1,7 +1,7 @@
 "use client";
 
 import { Logo, TelegramIcon, VkIcon } from "@/assets/icons";
-import { Button } from "@/components/ui";
+import { Button, CircleCTA } from "@/components/ui";
 import Link from "next/link";
 import React from "react";
 
@@ -45,6 +45,19 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
           </p>
         </div>
 
+        <div className='hidden lg:flex gap-5'>
+          <CircleCTA
+            text='Смотреть'
+            className='text-[14px] leading-none h-auto'
+            onClick={() => {}}
+          />
+          <CircleCTA
+            text='Смотреть'
+            className='text-[14px] leading-none h-auto'
+            onClick={() => {}}
+          />
+        </div>
+
         {/* Center: Working Hours */}
         <div className='flex items-center gap-4 lg:gap-8'>
           <div className='flex flex-col text-right  max-w-[150px] md:text-center text-black'>
@@ -53,54 +66,50 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
             </p>
           </div>
         </div>
+        {/* Social Icons */}
+        <div className='hidden lg:flex items-center gap-3'>
+          {socials.telegram && (
+            <Link href={socials.telegram} target='_blank'>
+              <TelegramIcon
+                width={50}
+                height={38}
+                className='hover:opacity-80 transition-opacity'
+              />
+            </Link>
+          )}
+          {socials.vk && (
+            <Link href={socials.vk} target='_blank'>
+              <VkIcon
+                width={50}
+                height={38}
+                className='hover:opacity-80 transition-opacity'
+              />
+            </Link>
+          )}
+        </div>
 
-        {/* Right: Socials, Phone, Button */}
-        <div className='hidden lg:flex items-center gap-6'>
-          {/* Social Icons */}
-          <div className='hidden sm:flex items-center gap-3'>
-            {socials.telegram && (
-              <Link href={socials.telegram} target='_blank'>
-                <TelegramIcon
-                  width={40}
-                  height={30}
-                  className='hover:opacity-80 transition-opacity'
-                />
-              </Link>
-            )}
-            {socials.vk && (
-              <Link href={socials.vk} target='_blank'>
-                <VkIcon
-                  width={40}
-                  height={30}
-                  className='hover:opacity-80 transition-opacity'
-                />
-              </Link>
-            )}
-          </div>
+        {/* Contact Info & Call to Action */}
+        <div className='hidden lg:flex  flex-col items-end gap-1'>
+          <a
+            href={`tel:${phone.replace(/\D/g, "")}`}
+            className='text-lg lg:text-xl font-bold text-black'
+          >
+            {phone}
+          </a>
 
-          {/* Contact Info & Call to Action */}
-          <div className='flex flex-col items-end gap-1'>
-            <a
-              href={`tel:${phone.replace(/\D/g, "")}`}
-              className='text-lg lg:text-xl font-bold text-black'
-            >
-              {phone}
-            </a>
-
-            <Button
-              label='Заказать звонок'
-              variant='light'
-              size='sm'
-              className='text-[14px] leading-none h-auto'
-              onClick={() => {}}
-            />
-          </div>
+          <Button
+            label='Заказать звонок'
+            variant='light'
+            size='sm'
+            className='text-[14px] leading-none h-auto'
+            onClick={() => {}}
+          />
         </div>
       </div>
 
       {/* Decorative Bottom Line (like in referenced image) */}
       <div className='content'>
-        <div className='h-px xl:w-[calc(100%-12rem)] w-full bg-[#7F7F7F] mx-auto mt-5' />
+        <div className=' lg:block hidden h-px xl:w-[calc(100%-12rem)] w-full bg-[#7F7F7F] mx-auto mt-5' />
       </div>
     </header>
   );
