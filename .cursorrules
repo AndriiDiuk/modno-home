@@ -9,14 +9,9 @@
 ## 2. Component Architecture
 - **Logical Components**: Build small, focused, and reusable components.
 - **Strict Props**: Use TypeScript interfaces/types for component props.
-- **Folder Structure**: Each component must reside in its own directory:
-  ```
-  components/
-    MyComponent/
-      MyComponent.tsx
-      index.ts (export * from './MyComponent')
-  ```
-- **Icons**: Store icon components in `assets/icons/`.
+- **File Structure**: Each component should be a single `ComponentName.tsx` file (no separate folder).
+- **Icons**: Store all icon and logo components in `assets/icons/`.
+- **Exports**: Use an `index.ts` file in each directory to export all its components.
 - **Separation of Concerns**: Keep logic and UI separated where possible.
 
 ## 3. General
