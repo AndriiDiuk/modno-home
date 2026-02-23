@@ -18,6 +18,7 @@ const MOCK_VIDEOS = [
     overlayText: "в интерьере",
     views: 49,
     image: "/images/video-card/home/1.webp",
+    video: "/sofas/Easy/1.mp4",
   },
   {
     id: 2,
@@ -25,6 +26,7 @@ const MOCK_VIDEOS = [
     overlayText: "ткани",
     views: 37,
     image: "/images/video-card/home/2.webp",
+    video: "/sofas/2.mp4",
   },
   {
     id: 3,
@@ -32,6 +34,7 @@ const MOCK_VIDEOS = [
     overlayText: "каркас",
     views: 64,
     image: "/images/video-card/home/3.webp",
+    video: "/sofas/3.mp4",
   },
   {
     id: 4,
@@ -39,6 +42,7 @@ const MOCK_VIDEOS = [
     overlayText: "мягкость",
     views: 64,
     image: "/images/video-card/home/4.webp",
+    video: "/sofas/4.mp4",
   },
   {
     id: 5,
@@ -46,6 +50,7 @@ const MOCK_VIDEOS = [
     overlayText: "производство",
     views: 64,
     image: "/images/video-card/home/5.webp",
+    video: "/sofas/5.mp4",
   },
 ];
 

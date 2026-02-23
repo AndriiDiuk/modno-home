@@ -1,7 +1,8 @@
 "use client";
 
+import { VideoModal } from "@/components/common/VideoModal";
 import { SectionTitle, VideoCard } from "@/components/ui";
-import React from "react";
+import React, { useState } from "react";
 
 interface VideoItem {
   id: string | number;
@@ -9,6 +10,7 @@ interface VideoItem {
   overlayText: string;
   views: string | number;
   image: string;
+  video?: string;
 }
 
 interface VideoSectionProps {
@@ -28,40 +30,50 @@ export const VideoSection: React.FC<VideoSectionProps> = ({
   videos,
   className = "",
 }) => {
-  const handleVideoClick = (video: VideoItem) => {
-    console.log("Video clicked:", video.title);
-    // Add logic here (e.g., open video modal)
-  };
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   return (
-    <section className={`w-full py-10 md:py-18 ${className}`}>
-      <div className='content flex flex-col items-center'>
-        {/* Centered Title */}
-        <SectionTitle
-          title={title}
-          subtitle={subtitle}
-          className='text-center mb-[35px] md:mb-10'
-          subtitleClassName='text-[18px] md:text-[30px]'
-        />
+    <>
+      <section className={`w-full py-10 md:py-18 ${className}`}>
+        <div className='content flex flex-col items-center'>
+          {/* Centered Title */}
+          <SectionTitle
+            title={title}
+            subtitle={subtitle}
+            className='text-center mb-[35px] md:mb-10'
+            subtitleClassName='text-[18px] md:text-[30px]'
+          />
 
-        {/* Video Grid - 5 columns on desktop, 4 on mobile/tablet */}
-        <div className='grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6 w-full'>
-          {videos.map((video, index) => (
-            <div
-              key={video.id}
-              className={index >= 4 ? "hidden lg:block" : "block"}
-            >
-              <VideoCard
-                title={video.title}
-                overlayText={video.overlayText}
-                views={video.views}
-                image={video.image}
-                onClick={() => handleVideoClick(video)}
-              />
-            </div>
-          ))}
+          {/* Video Grid - 5 columns on desktop, 4 on mobile/tablet */}
+          <div className='grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6 w-full'>
+            {videos.map((video, index) => (
+              <div
+                key={video.id}
+                className={index >= 4 ? "hidden lg:block" : "block"}
+              >
+                <VideoCard
+                  title={video.title}
+                  overlayText={video.overlayText}
+                  views={video.views}
+                  image={video.image}
+                  video={video.video}
+                  onClick={() => {
+                    if (video.video) {
+                      setActiveVideo(video.video);
+                    }
+                  }}
+                />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <VideoModal
+        isOpen={!!activeVideo}
+        onClose={() => setActiveVideo(null)}
+        videoSrc={activeVideo || ""}
+      />
+    </>
   );
 };
