@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { Button } from "./Button";
 
@@ -9,7 +10,8 @@ interface ProductCardProps {
   price: string | number;
   oldPrice?: string | number;
   buttonLabel?: string;
-  onClick: () => void;
+  href?: string;
+  onClick?: () => void;
   className?: string;
 }
 
@@ -24,6 +26,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   price,
   oldPrice,
   buttonLabel = "Узнать подробнее",
+  href,
   onClick,
   className = "",
 }) => {
@@ -77,12 +80,23 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </span>
         </div>
         <div className='w-fit'>
-          <Button
-            size='sm'
-            label={buttonLabel}
-            onClick={onClick}
-            variant='light'
-          />
+          {href ? (
+            <Link href={href}>
+              <Button
+                size='sm'
+                label={buttonLabel}
+                onClick={() => {}}
+                variant='light'
+              />
+            </Link>
+          ) : (
+            <Button
+              size='sm'
+              label={buttonLabel}
+              onClick={onClick || (() => {})}
+              variant='light'
+            />
+          )}
         </div>
       </div>
     </div>

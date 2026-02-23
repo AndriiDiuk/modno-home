@@ -1,6 +1,7 @@
 "use client";
 
 import { ProductCard, SectionTitle } from "@/components/ui";
+import { toSlug } from "@/lib/toSlug";
 import React from "react";
 
 interface Product {
@@ -31,11 +32,6 @@ export const ProductSections: React.FC<ProductSectionsProps> = ({
 }) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
-  const handleProductClick = (product: Product) => {
-    console.log("Product clicked:", product.title);
-    // Add logic here (e.g., open modal or navigate)
-  };
-
   const hasMore = products.length > 3;
 
   return (
@@ -61,7 +57,7 @@ export const ProductSections: React.FC<ProductSectionsProps> = ({
                 image={product.image}
                 price={product.price}
                 oldPrice={product.oldPrice}
-                onClick={() => handleProductClick(product)}
+                href={`/sofa/${toSlug(product.title)}`}
               />
             </div>
           ))}

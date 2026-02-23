@@ -22,11 +22,13 @@ interface ReviewSectionProps {
   title?: string;
   subtitle?: string;
   className?: string;
+  hasBackground?: boolean;
 }
 
 export const ReviewSection: React.FC<ReviewSectionProps> = ({
   title = "Отзывы",
   className = "",
+  hasBackground = true,
 }) => {
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     loop: true,
@@ -46,7 +48,7 @@ export const ReviewSection: React.FC<ReviewSectionProps> = ({
 
   return (
     <section
-      className={`w-full py-10 md:py-18 overflow-hidden bg-brand-light-gray ${className}`}
+      className={`w-full py-10 md:py-18 overflow-hidden ${hasBackground ? "bg-brand-light-gray" : ""} ${className}`}
     >
       <div className='content flex flex-col items-center'>
         <SectionTitle
