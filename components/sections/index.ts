@@ -1,4 +1,5 @@
 export * from "./CalculationSection";
+export * from "./ConfigSection";
 export * from "./ContactUsSection";
 export * from "./DownloadCatalog";
 export * from "./Footer";

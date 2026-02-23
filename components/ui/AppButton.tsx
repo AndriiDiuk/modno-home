@@ -7,10 +7,6 @@ interface AppButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
 }
 
-/**
- * Flexible AppButton component with support for variants and sizes.
- * Created to supplement the existing Button component without modifying it.
- */
 export const AppButton: React.FC<AppButtonProps> = ({
   label,
   variant = "primary",
@@ -20,14 +16,15 @@ export const AppButton: React.FC<AppButtonProps> = ({
   ...props
 }) => {
   const variants = {
-    primary: "bg-[#FFDE79] hover: bg-[#FFDE79]",
+    primary:
+      "bg-[#FFDE79] text-brand-black hover:bg-black hover:text-white border-transparent",
     secondary:
-      "bg-brand-light-gray text-brand-black hover:bg-brand-border border-transparent",
+      "bg-brand-light-gray text-brand-black hover:bg-black hover:text-white border-transparent",
   };
 
   const sizes = {
     sm: "px-4 py-2 text-[12px] md:text-[14px]",
-    md: "px-8 py-3 text-[14px] md:text-[16px]",
+    md: "px-8 py-4 text-[14px] ",
     lg: "px-[22px] py-[22px] text-[14px] md:text-[18px]  ",
     xl: "px-10 py-5 text-[18px] md:text-[20px]",
   };

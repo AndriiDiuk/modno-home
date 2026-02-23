@@ -1,4 +1,9 @@
-import { CalculationSection, ReviewSection } from "@/components/sections";
+import {
+  CalculationSection,
+  ConfigSection,
+  DownloadCatalog,
+  ReviewSection,
+} from "@/components/sections";
 import { OtherCardsSection } from "@/components/sections/OtherCardsSection";
 import { fetchPayloadLocal } from "@/lib/payload";
 import { toSlug } from "@/lib/toSlug";
@@ -128,12 +133,15 @@ export default async function SofaPage({ params }: SofaPageProps) {
           </div>
         </div>
       </div>
+      <ConfigSection />
+
+      <CalculationSection />
+      <DownloadCatalog />
       <OtherCardsSection
         title='Другие модели'
         subtitle='Возможно, вам понравится что-то еще'
         products={otherSofas}
       />
-      <CalculationSection />
       <ReviewSection hasBackground={false} />
     </div>
   );
