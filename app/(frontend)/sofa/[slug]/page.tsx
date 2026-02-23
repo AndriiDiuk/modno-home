@@ -1,4 +1,5 @@
 import { ReviewSection } from "@/components/sections";
+import { OtherCardsSection } from "@/components/sections/OtherCardsSection";
 import { fetchPayloadLocal } from "@/lib/payload";
 import { toSlug } from "@/lib/toSlug";
 import Image from "next/image";
@@ -8,7 +9,7 @@ interface SofaPageProps {
   params: Promise<{ slug: string }>;
 }
 
-async function getSofaBySlug(slug: string) {
+async function getSofaData(slug: string) {
   try {
     const payload = await fetchPayloadLocal();
     const result = await payload.find({
@@ -20,19 +21,31 @@ async function getSofaBySlug(slug: string) {
       limit: 100,
     });
 
-    // Find by matching slug from title
-    const sofa = result.docs.find((doc: any) => toSlug(doc.title) === slug);
+    const currentSofa = result.docs.find(
+      (doc: any) => toSlug(doc.title) === slug,
+    );
+    const otherSofas = result.docs
+      .filter((doc: any) => toSlug(doc.title) !== slug)
+      .slice(0, 4)
+      .map((sofa: any) => ({
+        id: sofa.id,
+        title: sofa.title,
+        category: sofa.category,
+        image: `/images/cards/${sofa.imageFilename}`,
+        price: sofa.price,
+        oldPrice: sofa.oldPrice,
+      }));
 
-    return sofa || null;
+    return { currentSofa: currentSofa || null, otherSofas };
   } catch (error) {
-    console.error("Error fetching sofa:", error);
-    return null;
+    console.error("Error fetching sofa data:", error);
+    return { currentSofa: null, otherSofas: [] };
   }
 }
 
 export async function generateMetadata({ params }: SofaPageProps) {
   const { slug } = await params;
-  const sofa = await getSofaBySlug(slug);
+  const { currentSofa: sofa } = await getSofaData(slug);
 
   if (!sofa) {
     return { title: "Диван не найден" };
@@ -46,7 +59,7 @@ export async function generateMetadata({ params }: SofaPageProps) {
 
 export default async function SofaPage({ params }: SofaPageProps) {
   const { slug } = await params;
-  const sofa = await getSofaBySlug(slug);
+  const { currentSofa: sofa, otherSofas } = await getSofaData(slug);
 
   if (!sofa) {
     notFound();
@@ -115,6 +128,11 @@ export default async function SofaPage({ params }: SofaPageProps) {
           </div>
         </div>
       </div>
+      <OtherCardsSection
+        title='Другие модели'
+        subtitle='Возможно, вам понравится что-то еще'
+        products={otherSofas}
+      />
       <ReviewSection hasBackground={false} />
     </div>
   );

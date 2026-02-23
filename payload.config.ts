@@ -56,7 +56,7 @@ export default buildConfig({
         endpoint: process.env.S3_ENDPOINT || "",
         requestChecksumCalculation: "WHEN_REQUIRED",
       },
-      clientUploads: true,
+      // clientUploads: true, // TODO: re-enable when Turbopack resolves S3ClientUploadHandler
     }),
   ],
 });

@@ -13,6 +13,7 @@ interface ProductCardProps {
   href?: string;
   onClick?: () => void;
   className?: string;
+  size?: "sm" | "md";
 }
 
 /**
@@ -29,6 +30,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   href,
   onClick,
   className = "",
+  size = "md",
 }) => {
   // Format price helper
   const formatPrice = (p: string | number) => {
@@ -38,17 +40,48 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     return p;
   };
 
+  const cardSize = {
+    sm: {
+      image: "h-[154px] md:h-[208px]",
+      title: "text-[27px] md:text-[46px]",
+      category: "text-[14px]",
+      titleWrap: "top-4 md:top-8",
+      price: "text-[18px]",
+      oldPrice: "text-[10px]",
+      priceWrap:
+        "p-[10px] flex flex-col md:flex-row items-center justify-between gap-1 md:gap-4 text-center md:text-left",
+    },
+    md: {
+      image: "h-72",
+      title: "text-[36px] sm:text-[50px]",
+      category: "text-[14px] md:text-[18px]",
+      titleWrap: "top-8",
+      price: "text-[24px]",
+      oldPrice: "text-[14px]",
+      priceWrap:
+        "p-5 md:p-5 flex flex-row items-center justify-between gap-1 md:gap-4 lg:gap-7",
+    },
+  };
+
   return (
     <div
-      className={`bg-white rounded-[10px] border border-brand-border overflow-hidden flex flex-col h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer group ${className}`}
+      className={`bg-white  rounded-[10px] border border-brand-border overflow-hidden flex flex-col h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer group  ${className}`}
     >
       {/* Image and Title Section */}
-      <div className='relative h-72 w-full bg-brand-light-gray flex flex-col items-center justify-center overflow-hidden'>
-        <div className='absolute top-8 left-0 w-full text-center z-10'>
-          <span className='text-[14px] md:text-[18px] text-brand-muted  block'>
+      <div
+        className={`relative ${cardSize[size].image} w-full bg-brand-light-gray flex flex-col items-center justify-center overflow-hidden`}
+      >
+        <div
+          className={`absolute ${cardSize[size].titleWrap} left-0 w-full text-center z-10`}
+        >
+          <span
+            className={`${cardSize[size].category} text-brand-muted  block`}
+          >
             {category}
           </span>
-          <h3 className='text-[36px] sm:text-[50px] font-light leading-[1.1] text-brand-black transition-transform duration-500 group-hover:scale-105'>
+          <h3
+            className={`${cardSize[size].title} font-light leading-[1.1] text-brand-black transition-transform duration-500 group-hover:scale-105`}
+          >
             {title}
           </h3>
         </div>
@@ -65,17 +98,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       </div>
 
       {/* Footer Section */}
-      <div className='p-5 md:p-5 mt-auto flex flex-row items-center justify-between gap-1 md:gap-4 lg:gap-7 leading-[1.1]'>
+      <div className={`mt-auto  leading-[1.1] ${cardSize[size].priceWrap}`}>
         <div className='flex flex-col'>
           {oldPrice && (
-            <span className='text-[14px]  text-brand-muted line-through decoration-brand-black/30'>
+            <span
+              className={` text-brand-muted line-through decoration-brand-black/30 ${cardSize[size].oldPrice}`}
+            >
               {formatPrice(oldPrice)}
             </span>
           )}
-          <span className='text-[24px] font-bold text-brand-black whitespace-nowrap'>
-            <span className='text-[16px] md:text-[20px] font-medium mr-1'>
-              от
-            </span>
+          <span
+            className={`font-bold text-brand-black whitespace-nowrap ${cardSize[size]?.price}`}
+          >
+            <span className='font-medium mr-1'>от</span>
             {formatPrice(price)}
           </span>
         </div>
@@ -87,6 +122,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 label={buttonLabel}
                 onClick={() => {}}
                 variant='light'
+                className='w-full md:w-fit !text-[12px] whitespace-nowrap px-2 !py-1 md:!p-2'
               />
             </Link>
           ) : (
@@ -95,6 +131,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               label={buttonLabel}
               onClick={onClick || (() => {})}
               variant='light'
+              className='w-full md:w-fit !text-[12px] whitespace-nowrap px-2 !py-1 md:!p-2'
             />
           )}
         </div>
