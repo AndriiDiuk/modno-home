@@ -165,7 +165,7 @@ export default async function FrontendLayout({
           <main className='grow'>{children}</main>
           <Footer data={settings} />
 
-          <GlobalModal />
+          <GlobalModal socials={settings?.header?.socials} />
         </ModalProvider>
       </body>
     </html>

@@ -43,13 +43,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const cardSize = {
     sm: {
       image: "h-[154px] md:h-[208px]",
-      title: "text-[27px] md:text-[46px]",
+      title: "text-[27px] md:text-[40px]",
       category: "text-[14px]",
       titleWrap: "top-4 md:top-8",
       price: "text-[18px]",
       oldPrice: "text-[10px]",
       priceWrap:
         "p-[10px] flex flex-col md:flex-row items-center justify-between gap-1 md:gap-4 text-center md:text-left",
+      button: "!text-[12px] whitespace-nowrap px-2 !py-1 md:!p-2",
     },
     md: {
       image: "h-72",
@@ -60,12 +61,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       oldPrice: "text-[14px]",
       priceWrap:
         "p-5 md:p-5 flex flex-row items-center justify-between gap-1 md:gap-4 lg:gap-7",
+      button: "!text-[12px] whitespace-nowrap px-2 !py-3 md:!p-2",
     },
   };
 
   return (
     <div
-      className={`bg-white  rounded-[10px] border border-brand-border overflow-hidden flex flex-col h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer group  ${className}`}
+      onClick={onClick}
+      className={`bg-white rounded-[10px] border border-brand-border overflow-hidden flex flex-col h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer group ${className}`}
     >
       {/* Image and Title Section */}
       <div
@@ -116,22 +119,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
         <div className='w-fit'>
           {href ? (
-            <Link href={href}>
+            <Link href={href} onClick={(e) => e.stopPropagation()}>
               <Button
                 size='sm'
                 label={buttonLabel}
-                onClick={() => {}}
                 variant='light'
-                className='w-full md:w-fit !text-[12px] whitespace-nowrap px-2 !py-1 md:!p-2'
+                className={` ${cardSize[size].button}`}
               />
             </Link>
           ) : (
             <Button
               size='sm'
               label={buttonLabel}
-              onClick={onClick || (() => {})}
               variant='light'
-              className='w-full md:w-fit !text-[12px] whitespace-nowrap px-2 !py-1 md:!p-2'
+              className={` ${cardSize[size].button}`}
             />
           )}
         </div>

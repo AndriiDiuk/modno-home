@@ -31,7 +31,7 @@ export const ContactGroup: React.FC<ContactGroupProps> = ({
         variant='light'
         size='sm'
         className='text-[14px] leading-none h-auto'
-        onClick={openModal}
+        onClick={() => openModal()}
       />
     </div>
   );

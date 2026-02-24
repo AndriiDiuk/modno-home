@@ -4,7 +4,9 @@ import React, { createContext, useContext, useState } from "react";
 
 interface ModalContextType {
   isOpen: boolean;
-  openModal: () => void;
+  title?: string;
+  buttonLabel?: string;
+  openModal: (title?: string, buttonLabel?: string) => void;
   closeModal: () => void;
 }
 
@@ -14,12 +16,31 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [title, setTitle] = useState<string | undefined>(undefined);
+  const [buttonLabel, setButtonLabel] = useState<string | undefined>(undefined);
 
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
+  const openModal = (
+    modalTitle?: string | unknown,
+    modalButtonLabel?: string,
+  ) => {
+    if (typeof modalTitle === "string") {
+      setTitle(modalTitle);
+    } else {
+      setTitle(undefined);
+    }
+    setButtonLabel(modalButtonLabel);
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    setIsOpen(false);
+    setTitle(undefined);
+    setButtonLabel(undefined);
+  };
 
   return (
-    <ModalContext.Provider value={{ isOpen, openModal, closeModal }}>
+    <ModalContext.Provider
+      value={{ isOpen, title, buttonLabel, openModal, closeModal }}
+    >
       {children}
     </ModalContext.Provider>
   );

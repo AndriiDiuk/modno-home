@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useRef } from "react";
+import Image from "next/image";
+import React, { useRef, useState } from "react";
 
 interface VideoCardProps {
   image: string;
@@ -13,6 +14,7 @@ interface VideoCardProps {
 }
 
 export const VideoCard: React.FC<VideoCardProps> = ({
+  image,
   video,
   title,
   overlayText,
@@ -23,6 +25,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({
   const viewsText =
     typeof views === "number" ? `${views} тыс. просмотров` : views;
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   const handleMouseEnter = () => {
     videoRef.current?.play();
@@ -41,16 +44,26 @@ export const VideoCard: React.FC<VideoCardProps> = ({
         onMouseLeave={handleMouseLeave}
         className='relative aspect-[9/16] w-full rounded-[8px] overflow-hidden cursor-pointer shadow-sm'
       >
-        {/* Video with native poster from first frame */}
+        {/* Thumbnail image — shown until video loads */}
+        <Image
+          src={image}
+          alt={title}
+          fill
+          className={`object-cover transition-opacity duration-300 ${videoLoaded ? "opacity-0" : "opacity-100"}`}
+          sizes='(max-width: 768px) 100vw, 33vw'
+        />
+
+        {/* Video — hidden until loaded */}
         {video && (
           <video
             ref={videoRef}
             src={video}
-            className='absolute inset-0 w-full h-full object-cover'
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
             muted
             playsInline
             loop
             preload='metadata'
+            onLoadedData={() => setVideoLoaded(true)}
           />
         )}
 

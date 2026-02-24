@@ -103,9 +103,9 @@ export const DownloadCatalog: React.FC<DownloadCatalogProps> = ({
         <div className='relative flex flex-col lg:flex-row gap-6 md:gap-10 items-center overflow-hidden lg:min-h-[400px]'>
           <div className='w-full lg:w-1/2'>
             <CallbackForm
-              title='ЧТОБЫ ПОЛУЧИТЬ КАТАЛОГ ЗАПОЛНИТЕ ФОРМУ'
+              title='Чтобы получить каталог, заполните форму'
               subtitle=''
-              buttonLabel='ЖДУ КАТАЛОГ'
+              buttonLabel='Жду каталог'
             />
           </div>
 

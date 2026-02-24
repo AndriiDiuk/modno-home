@@ -1,8 +1,8 @@
 "use client";
 
 import { ProductCard, SectionTitle } from "@/components/ui";
-import { toSlug } from "@/lib/toSlug";
 import React from "react";
+import { useModal } from "../providers/ModalProvider";
 
 interface Product {
   id: string | number;
@@ -22,10 +22,12 @@ interface OtherCardsProps {
 
 export const OtherCardsSection: React.FC<OtherCardsProps> = ({
   title = "Другие модели диванов",
-  subtitle = "Выбирайте подходщий для себя",
+  subtitle = "Выбирайте подходящий для себя",
   products,
   className = "",
 }) => {
+  const { openModal } = useModal();
+
   if (!products || products.length === 0) return null;
 
   return (
@@ -46,7 +48,9 @@ export const OtherCardsSection: React.FC<OtherCardsProps> = ({
               image={product.image}
               price={product.price}
               oldPrice={product.oldPrice}
-              href={`/sofa/${toSlug(product.title)}`}
+              onClick={() =>
+                openModal(`Узнать когда будет ${product.title}`, "ЖДУ ЗВОНКА")
+              }
               buttonLabel='Узнать когда будет'
               size='sm'
             />

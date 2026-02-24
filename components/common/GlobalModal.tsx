@@ -5,8 +5,15 @@ import { ModalWrapper } from "../common/ModalWrapper";
 import { CallbackForm } from "../forms/CallbackForm";
 import { useModal } from "../providers/ModalProvider";
 
-export const GlobalModal: React.FC = () => {
-  const { isOpen, closeModal } = useModal();
+interface GlobalModalProps {
+  socials?: {
+    vk?: string;
+    youtube?: string;
+  };
+}
+
+export const GlobalModal: React.FC<GlobalModalProps> = ({ socials }) => {
+  const { isOpen, closeModal, title, buttonLabel } = useModal();
 
   return (
     <ModalWrapper
@@ -14,7 +21,7 @@ export const GlobalModal: React.FC = () => {
       onClose={closeModal}
       className='max-w-[460px]'
     >
-      <CallbackForm />
+      <CallbackForm title={title} buttonLabel={buttonLabel} socials={socials} />
     </ModalWrapper>
   );
 };
