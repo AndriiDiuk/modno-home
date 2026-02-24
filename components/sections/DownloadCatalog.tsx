@@ -27,15 +27,15 @@ export const DownloadCatalog: React.FC<DownloadCatalogProps> = ({
       className={`w-full py-16 md:py-24 bg-brand-light-gray ${className}`}
     >
       <div className='content'>
-        <div className='w-full relative rounded-[8px] overflow-hidden shadow-xl flex flex-col md:flex-row min-h-[270px]'>
+        <div className='w-full relative rounded-[8px] overflow-hidden shadow-xl flex flex-col justify-between  h-full md:flex-row min-h-[270px]'>
           {/* Background Split */}
-          <div className='absolute inset-0 flex flex-col'>
+          <div className='absolute inset-0  flex-col hidden md:flex'>
             <div className='flex-1 bg-white' />
             <div className='flex-1 bg-brand-dark' />
           </div>
 
           {/* Image - left on desktop, center on mobile */}
-          <div className='relative z-10 w-[44%] md:w-1/2 md:h-auto overflow-hidden'>
+          <div className='hidden md:block relative z-10 w-[44%] md:w-1/2 md:h-auto overflow-hidden'>
             <div
               className='absolute -left-[16%] bottom-0 translate-y-[52%]'
               style={{
@@ -54,7 +54,7 @@ export const DownloadCatalog: React.FC<DownloadCatalogProps> = ({
           </div>
 
           {/* Content */}
-          <div className='w-[66%] relative z-10 leading-[1.2] pr-12 pt-10 pb-7 flex flex-col justify-center items-center md:items-start text-center md:text-left'>
+          <div className=' h-full md:w-[66%] w-full relative z-10 leading-[1.2] md:pr-12 md:pt-10 md:pb-7 flex flex-col justify-between md:justify-center items-center md:items-start text-center md:text-left'>
             <div className='mb-6 md:mb-12 font-bold'>
               <h2 className='text-[26px] md:text-[30px] text-brand-black leading-tight mb-2'>
                 {title}
@@ -63,8 +63,22 @@ export const DownloadCatalog: React.FC<DownloadCatalogProps> = ({
                 {subtitle}
               </p>
             </div>
-
-            <div className='flex flex-col items-center w-fit gap-2'>
+            <div
+              className='-mb-[60%] left-[-10%] relative z-0 block md:hidden'
+              style={{
+                width: "clamp(500px, 130vw, 900px)",
+                height: "clamp(350px, 110vw, 600px)",
+              }}
+            >
+              <Image
+                src='/images/catalog.webp'
+                alt='Каталог мебели'
+                fill
+                className='object-contain'
+                priority
+              />
+            </div>
+            <div className='flex flex-col items-center md:w-fit gap-2 bg-brand-dark w-full md:bg-transparent py-7 md:py-0 relative z-10'>
               <Button
                 label={` ${buttonLabel}`}
                 variant='dark'

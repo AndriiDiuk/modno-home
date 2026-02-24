@@ -114,8 +114,6 @@ export default async function SofaPage({ params }: SofaPageProps) {
     notFound();
   }
 
-  const formatPrice = (p: number) => p.toLocaleString("ru-RU") + " ₽";
-
   return (
     <div className='w-full py-10 md:py-16'>
       <div className='content'></div>
