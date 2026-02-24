@@ -39,7 +39,7 @@ export const OtherCardsSection: React.FC<OtherCardsProps> = ({
           className='text-center mb-12'
         />
 
-        <div className='grid grid-cols-2  lg:grid-cols-4 gap-6 md:gap-8 w-full'>
+        <div className='grid grid-cols-2  lg:grid-cols-4 gap-2 sm:gap-6 md:gap-8 w-full'>
           {products.map((product) => (
             <ProductCard
               key={product.id}

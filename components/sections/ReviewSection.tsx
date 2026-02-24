@@ -57,13 +57,16 @@ export const ReviewSection: React.FC<ReviewSectionProps> = ({
         />
 
         <div className='relative w-full group'>
-          <div ref={sliderRef} className='keen-slider w-full !px-0'>
+          <div
+            ref={sliderRef}
+            className='keen-slider w-full overflow-visible! py-10 -my-10'
+          >
             {REVIEWS.map((review) => (
               <div
                 key={review.id}
-                className='keen-slider__slide flex justify-center'
+                className='keen-slider__slide flex justify-center py-4'
               >
-                <div className='relative w-full h-[500px] max-w-[350px]'>
+                <div className='relative w-full h-[500px] max-w-[340px]'>
                   <Image
                     src={review.image}
                     alt={`Review ${review.id}`}
