@@ -63,12 +63,15 @@ export const ReviewSection: React.FC<ReviewSectionProps> = ({
                 key={review.id}
                 className='keen-slider__slide flex justify-center'
               >
-                <div className='relative w-full h-[500px] max-w-[350px] overflow-hidden'>
+                <div className='relative w-full h-[500px] max-w-[350px]'>
                   <Image
                     src={review.image}
                     alt={`Review ${review.id}`}
                     fill
-                    className='object-contain shadow-md'
+                    className='object-contain rounded-[8px]'
+                    style={{
+                      filter: "drop-shadow(0 0 18px rgba(91, 164, 222, 0.17))",
+                    }}
                     sizes='(max-width: 768px) 100vw, 33vw'
                   />
                 </div>
