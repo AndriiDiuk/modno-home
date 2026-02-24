@@ -24,9 +24,9 @@ export const getCachedGlobal = (slug: any, revalidate = 60) =>
         try {
           return await fetchPayload<any>(`globals/${slug}`);
         } catch (httpError) {
-          console.error(
-            `HTTP fallback also failed for global "${slug}":`,
-            httpError,
+          console.warn(
+            `HTTP fallback also failed for global "${slug}" (expected during build):`,
+            (httpError as Error).message,
           );
           return null;
         }

@@ -7,4 +7,5 @@ export * from "./Header";
 export * from "./OtherCardsSection";
 export * from "./ProductSections";
 export * from "./ReviewSection";
+export * from "./SofaShowcaseSection";
 export * from "./VideoSection";
