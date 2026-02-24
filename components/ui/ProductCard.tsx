@@ -68,7 +68,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <div
       onClick={onClick}
-      className={`bg-white rounded-[10px] border border-brand-border overflow-hidden flex flex-col h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer group ${className}`}
+      className={`bg-white rounded-[10px] border border-brand-border overflow-hidden flex flex-col h-full transition-all duration-300 md:hover:shadow-lg md:hover:-translate-y-1 cursor-pointer group ${className}`}
     >
       {/* Image and Title Section */}
       <div
@@ -83,13 +83,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             {category}
           </span>
           <h3
-            className={`${cardSize[size].title} font-light leading-[1.1] text-brand-black transition-transform duration-500 group-hover:scale-105`}
+            className={`${cardSize[size].title} font-light leading-[1.1] text-brand-black transition-transform duration-500 md:group-hover:scale-105`}
           >
             {title}
           </h3>
         </div>
 
-        <div className='relative w-full h-full  transition-transform duration-500 group-hover:scale-105'>
+        <div className='relative w-full h-full  transition-transform duration-500 md:group-hover:scale-105'>
           <Image
             src={image}
             alt={`${category} ${title}`}

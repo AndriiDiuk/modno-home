@@ -2,6 +2,7 @@
 
 import { ConfigCard, SectionTitle } from "@/components/ui";
 import React from "react";
+import { useModal } from "../providers/ModalProvider";
 
 interface ConfigSectionProps {
   title?: string;
@@ -46,6 +47,8 @@ export const ConfigSection: React.FC<ConfigSectionProps> = ({
   subtitle = "Все параметры можно менять под себя",
   className = "",
 }) => {
+  const { openModal } = useModal();
+
   return (
     <section className={`w-full py-10 md:py-16 bg-[#F5F5F5] ${className}`}>
       <div className='content'>
@@ -62,7 +65,7 @@ export const ConfigSection: React.FC<ConfigSectionProps> = ({
             <ConfigCard
               key={index}
               {...config}
-              onClick={() => console.log(`Config ${index + 1} clicked`)}
+              onClick={() => openModal(`Узнать подробнее о ${config.title}`)}
             />
           ))}
         </div>
