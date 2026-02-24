@@ -53,6 +53,8 @@ export const Input: React.FC<InputProps> = ({
       {label && <label className='text-sm font-medium'>{label}</label>}
       <input
         {...props}
+        type={isPhone ? "tel" : props.type}
+        inputMode={isPhone ? "tel" : props.inputMode}
         value={value}
         onChange={handlePhoneChange}
         className={`w-full px-6 py-4 border border-brand-black/20 rounded-[6px] focus:outline-none focus:border-brand-black transition-colors placeholder:text-brand-black/30 text-[14px] md:text-lg ${props.className || ""}`}
