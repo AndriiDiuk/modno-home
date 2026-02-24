@@ -65,7 +65,9 @@ export const ConfigSection: React.FC<ConfigSectionProps> = ({
             <ConfigCard
               key={index}
               {...config}
-              onClick={() => openModal(`Узнать подробнее о ${config.title}`)}
+              onClick={() =>
+                openModal(`Узнать подробнее о модели ${config.title}`)
+              }
             />
           ))}
         </div>

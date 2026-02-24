@@ -44,7 +44,7 @@ export const ModalWrapper: React.FC<ModalWrapperProps> = ({
       >
         <button
           onClick={onClose}
-          className='absolute top-5 right-5 text-brand-black hover:opacity-70 transition-opacity cursor-pointer p-2'
+          className='absolute top-3 right-3 text-brand-black hover:opacity-70 transition-opacity cursor-pointer p-2'
           aria-label='Close'
         >
           <svg
