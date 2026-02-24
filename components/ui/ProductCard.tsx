@@ -61,7 +61,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       oldPrice: "text-[14px]",
       priceWrap:
         "p-5 md:p-5 flex flex-row items-center justify-between gap-1 md:gap-4 lg:gap-7",
-      button: "!text-[12px] whitespace-nowrap px-2 !py-3 md:!p-2",
+      button: "!text-[14px] whitespace-nowrap px-2 !py-3 md:!p-2",
     },
   };
 

@@ -55,16 +55,23 @@ export const VideoCard: React.FC<VideoCardProps> = ({
 
         {/* Video — hidden until loaded */}
         {video && (
-          <video
-            ref={videoRef}
-            src={video}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
-            muted
-            playsInline
-            loop
-            preload='metadata'
-            onLoadedData={() => setVideoLoaded(true)}
-          />
+          <>
+            <video
+              ref={videoRef}
+              src={video}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
+              muted
+              playsInline
+              loop
+              preload='metadata'
+              onLoadedData={() => setVideoLoaded(true)}
+            />
+            {!videoLoaded && (
+              <div className='absolute inset-0 flex items-center justify-center bg-black/5'>
+                <div className='w-8 h-8 border-2 border-brand-black/20 border-t-brand-black rounded-full animate-spin' />
+              </div>
+            )}
+          </>
         )}
 
         {/* Dark overlay for text readability (hidden on hover) */}
@@ -73,7 +80,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({
         {/* Centered Overlay Text (hidden on hover) */}
         <div className='absolute inset-0 flex items-center justify-center p-6 text-center transition-opacity duration-300 group-hover:opacity-0'>
           <p className='text-white text-[20px] md:text-base font-bold leading-tight drop-shadow-lg'>
-            {overlayText}
+            {videoLoaded && overlayText}
           </p>
         </div>
 
