@@ -45,20 +45,22 @@ export const ContactUsSection: React.FC<ContactUsSectionProps> = ({
                 <Link
                   href={telegramUrl}
                   target='_blank'
-                  className='flex items-center justify-center gap-3 bg-[#62B4E3] hover:bg-[#4da3d4] text-white font-bold uppercase text-[14px] md:text-[16px] tracking-wider py-4 px-8 rounded-[8px] transition-colors'
+                  className='flex items-center justify-center gap-2 text-white font-bold uppercase text-[14px] md:text-[16px] py-4 px-8 rounded-[8px] transition-all hover:opacity-90 whitespace-nowrap'
+                  style={{ background: "var(--gradient-telegram)" }}
                 >
                   НАПИСАТЬ НА TELEGRAM
-                  <TelegramIcon width={22} height={22} className='text-white' />
+                  <TelegramIcon width={28} height={20} variant='white' />
                 </Link>
               )}
               {vkUrl && (
                 <Link
                   href={vkUrl}
                   target='_blank'
-                  className='flex items-center justify-center gap-3 bg-[#62B4E3] hover:bg-[#4da3d4] text-white font-bold uppercase text-[14px] md:text-[16px] tracking-wider py-4 px-8 rounded-[8px] transition-colors'
+                  className='flex items-center justify-center gap-2 text-white font-bold uppercase text-[14px] md:text-[16px] py-4 px-8 rounded-[8px] transition-all hover:opacity-90 whitespace-nowrap'
+                  style={{ background: "var(--gradient-vk)" }}
                 >
                   НАПИСАТЬ В VK
-                  <VkIcon width={26} height={22} className='text-white' />
+                  <VkIcon width={28} height={20} variant='white' />
                 </Link>
               )}
             </div>

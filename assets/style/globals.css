@@ -33,6 +33,9 @@
   
   /* Story Border Gradient */
   --gradient-story: radial-gradient(circle at 30% 100%, var(--color-story-yellow) 0%, var(--color-story-yellow) 10%, var(--color-story-red) 50%, var(--color-story-purple) 100%);
+
+  --gradient-telegram: linear-gradient(51deg, var(--color-telegram-start) 3.8%, var(--color-telegram-mid) 44.7%, var(--color-telegram-end) 75.2%);
+  --gradient-vk: linear-gradient(51deg, var(--color-vk-start) 3.8%, var(--color-vk-mid) 44.7%, var(--color-vk-end) 75.2%);
 }
 
 @theme {
