@@ -2,6 +2,7 @@ import {
   CalculationSection,
   ConfigSection,
   DownloadCatalog,
+  RealzView,
   ReviewSection,
   SofaShowcaseSection,
   VideoSection,
@@ -116,10 +117,22 @@ export default async function SofaPage({ params }: SofaPageProps) {
   }
 
   return (
-    <div className='w-full py-10 md:py-16'>
-      <div className='content bg-[#F5F5F5] p-10'>
-        <ColorSelector />
+    <div className='w-full '>
+      <div className='bg-[#F5F5F5] pt-[120px] md:pt-[160px] pb-12'>
+        <div className='content  '>
+          <ColorSelector />
+          <RealzView
+            images={[
+              "/sofas/Easy/views/1.webp",
+              "/sofas/Easy/views/2.webp",
+              "/sofas/Easy/views/3.webp",
+              "/sofas/Easy/views/4.webp",
+              "/sofas/Easy/views/5.webp",
+            ]}
+          />
+        </div>
       </div>
+
       <SofaShowcaseSection
         title='Угловой диван Easy'
         description='Он станет амбассадором комфорта в лофт стиле, для интерьера вашего дома. Впечатляющий эстетический вид и исключительный комфорт делают его центральным элементом в декоре вашего дома. Благодаря прочности и устойчивости каркаса, этот диван обеспечит комфорта на долгие годы использования.'

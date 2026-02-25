@@ -32,7 +32,7 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
 
   return (
     <>
-      <header className='w-full  py-4'>
+      <header className='absolute top-0 left-0 w-full z-100 py-4'>
         <div className='content flex items-center justify-between gap-8'>
           {/* Left: Logo and Description */}
           <Brand description={logoDescription} />

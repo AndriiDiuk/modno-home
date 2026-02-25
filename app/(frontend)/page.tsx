@@ -84,6 +84,7 @@ export default async function HomePage() {
         title='Короткие видео'
         subtitle='В интерьере, на производстве, каркас и ткани'
         videos={MOCK_VIDEOS}
+        className='pt-[120px] md:pt-[160px]'
       />
       <DownloadCatalog
         title={catalogTitle}
