@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { SuccessMessage } from "../common/SuccessMessage";
-import { Checkbox, FormButton, Input } from "../ui";
+import { AppButton, Checkbox, Input } from "../ui";
 
 interface CallbackFormProps {
   title?: string;
@@ -53,8 +53,9 @@ export const CallbackForm: React.FC<CallbackFormProps> = ({
           required
         />
       </div>
-
-      <FormButton label={buttonLabel} />
+      <div className='mb-4'>
+        <AppButton label={buttonLabel} size='lg' variant='secondary' />
+      </div>
 
       <Checkbox
         label='Согласен на обработку персональных данных'
