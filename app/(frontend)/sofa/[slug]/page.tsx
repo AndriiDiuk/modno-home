@@ -7,6 +7,7 @@ import {
   VideoSection,
 } from "@/components/sections";
 import { OtherCardsSection } from "@/components/sections/OtherCardsSection";
+import { ColorSelector } from "@/components/ui";
 import { fetchPayloadLocal } from "@/lib/payload";
 import { toSlug } from "@/lib/toSlug";
 import { notFound } from "next/navigation";
@@ -116,7 +117,9 @@ export default async function SofaPage({ params }: SofaPageProps) {
 
   return (
     <div className='w-full py-10 md:py-16'>
-      <div className='content'></div>
+      <div className='content bg-[#F5F5F5] p-10'>
+        <ColorSelector />
+      </div>
       <SofaShowcaseSection
         title='Угловой диван Easy'
         description='Он станет амбассадором комфорта в лофт стиле, для интерьера вашего дома. Впечатляющий эстетический вид и исключительный комфорт делают его центральным элементом в декоре вашего дома. Благодаря прочности и устойчивости каркаса, этот диван обеспечит комфорта на долгие годы использования.'
