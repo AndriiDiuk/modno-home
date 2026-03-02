@@ -8,6 +8,7 @@ interface CallbackFormProps {
   title?: string;
   subtitle?: string;
   buttonLabel?: string;
+  image?: React.ReactNode;
   socials?: {
     vk?: string;
     youtube?: string;
@@ -18,6 +19,7 @@ export const CallbackForm: React.FC<CallbackFormProps> = ({
   title = "БЫСТРО ПЕРЕЗВОНИМ",
   subtitle = "Заполните форму ниже",
   buttonLabel = "ЖДУ ЗВОНКА",
+  image,
   socials,
 }) => {
   const [phone, setPhone] = useState("");
@@ -40,9 +42,12 @@ export const CallbackForm: React.FC<CallbackFormProps> = ({
       <h2 className='text-xl md:text-2xl font-bold text-brand-black mb-2 tracking-tight text-center'>
         {title}
       </h2>
-      <p className='text-brand-black/60 text-base  mb-8 text-center'>
-        {subtitle}
-      </p>
+      {subtitle && (
+        <p className='text-brand-black/60 text-base  mb-8 text-center'>
+          {subtitle}
+        </p>
+      )}
+      {image && image}
 
       <div className='w-fit mb-4'>
         <Input

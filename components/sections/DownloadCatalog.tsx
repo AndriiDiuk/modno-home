@@ -106,6 +106,23 @@ export const DownloadCatalog: React.FC<DownloadCatalogProps> = ({
               title='Чтобы получить каталог, заполните форму'
               subtitle=''
               buttonLabel='Жду каталог'
+              image={
+                <div
+                  className='-mb-[100px] -left-[8%] relative z-0 block md:hidden'
+                  style={{
+                    width: "clamp(300px, 130vw, 600px)",
+                    height: "clamp(250px, 110vw, 400px)",
+                  }}
+                >
+                  <Image
+                    src='/images/catalog.webp'
+                    alt='Каталог мебели'
+                    fill
+                    className='object-contain'
+                    priority
+                  />
+                </div>
+              }
             />
           </div>
 

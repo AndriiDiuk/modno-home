@@ -141,7 +141,7 @@ export const ColorModal: React.FC<ColorModalProps> = ({ isOpen, onClose }) => {
     <ModalWrapper
       isOpen={isOpen}
       onClose={onClose}
-      className='max-w-[1100px] p-6! md:p-10!'
+      className='max-w-[1100px] !p-6 md:!p-10'
     >
       <div className='flex flex-col items-center'>
         <div className='text-center mb-6  '>
@@ -155,7 +155,7 @@ export const ColorModal: React.FC<ColorModalProps> = ({ isOpen, onClose }) => {
         </div>
 
         <div className='w-full mb-8'>
-          <div className='max-h-[70vh] overflow-y-auto pr-2 custom-scrollbar'>
+          <div className='md:max-h-[70vh] max-h-[32dvh] overflow-y-auto pr-2 custom-scrollbar'>
             <div className='grid grid-cols-5 md:grid-cols-8 lg:grid-cols-11 lg:gap-2 md:gap-4 gap-1 w-full'>
               {COLORS_DATA.map((color, index) => (
                 <div
@@ -195,7 +195,7 @@ export const ColorModal: React.FC<ColorModalProps> = ({ isOpen, onClose }) => {
             onSubmit={handleSubmit}
             className='flex flex-col items-center gap-6'
           >
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-4 w-full items-center justify-center max-w-[740px] '>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4 w-full items-center justify-center flex max-w-[740px] '>
               <div className='w-full '>
                 <Input
                   isPhone
