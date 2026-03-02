@@ -9,9 +9,10 @@ import {
   VideoSection,
 } from "@/components/sections";
 import { OtherCardsSection } from "@/components/sections/OtherCardsSection";
-import { ColorSelector } from "@/components/ui";
+import { ColorSelector, HeroTitle } from "@/components/ui";
 import { fetchPayloadLocal, getCachedSettings } from "@/lib/payload";
 import { toSlug } from "@/lib/toSlug";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
 const MOCK_VIDEOS = [
@@ -121,16 +122,38 @@ export default async function SofaPage({ params }: SofaPageProps) {
 
   return (
     <div className='w-full '>
-      <div className='bg-[#F5F5F5] pt-[120px] md:pt-[160px] pb-12'>
-        <div className='content pt-[64px]'>
+      <div className='bg-[#E9E9E7] pt-[120px] md:pt-[160px] pb-12 relative overflow-hidden'>
+        {/* Desktop: натуральний розмір, по центру-зверху, бокові краї ховаються за overflow-hidden */}
+        <Image
+          src='/sofas/easy/bg-hero.webp'
+          alt={sofa.title}
+          fill
+          className='hidden md:block object-none object-top z-0'
+          priority
+        />
+        {/* Tablet/Mobile: пропорційно масштабується, мобільний варіант картинки */}
+        <Image
+          src='/sofas/easy/bg-hero-mob.webp'
+          alt={sofa.title}
+          fill
+          className='md:hidden object-contain  object-top z-0'
+          priority
+        />
+        <div className='content pt-[60px]'>
           <div className='flex flex-col lg:flex-row justify-between gap-10 mb-10 md:mb-[120px]'>
-            <div className=' flex flex-col justify-between w-full'>
-              <div>text</div>
-              <div className='flex justify-center w-full '>
+            <div className=' flex flex-col justify-between w-full relative z-[2]'>
+              <HeroTitle
+                topLine='Диван Easy'
+                bottomLine='амбассадор комфорта в лофт стиле'
+                description='Доступен к заказу в любом размере и конфигурации, подберем цвет, ткань и мягкость именно для Вас'
+                topBold={["Easy"]}
+                descriptionBold={["Доступен к заказу", "именно для Вас"]}
+              />
+              <div className='flex justify-center w-full relative z-[2] '>
                 <ColorSelector />
               </div>
             </div>
-            <div>
+            <div className='relative z-[2]'>
               <InfoSofa
                 socials={socials}
                 equipment='Оттоманка со спинкой и подлокотником, широкая сидушка со спинкой и подлокотником, 4 подушки.'

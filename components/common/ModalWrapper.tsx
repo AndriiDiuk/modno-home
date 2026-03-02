@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
+import { createPortal } from "react-dom";
 
 interface ModalWrapperProps {
   isOpen: boolean;
@@ -33,13 +34,13 @@ export const ModalWrapper: React.FC<ModalWrapperProps> = ({
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div
-      className='fixed inset-0 z-100 flex items-center justify-center  p-4 bg-black/60 backdrop-blur-sm transition-opacity animate-in fade-in duration-300'
+      className='fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity animate-in fade-in duration-300'
       onClick={onClose}
     >
       <div
-        className={`relative w-full bg-white rounded-[20px] md:rounded-[30px]  px-8 py-10 md:px-12 md:py-14  shadow-2xl animate-in zoom-in-95 duration-300 ${className}`}
+        className={`relative w-full bg-white rounded-[20px] md:rounded-[30px] px-8 py-10 md:px-12 md:py-14 shadow-2xl animate-in zoom-in-95 duration-300 ${className}`}
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -66,6 +67,7 @@ export const ModalWrapper: React.FC<ModalWrapperProps> = ({
 
         {children}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 };

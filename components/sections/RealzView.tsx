@@ -109,7 +109,7 @@ export const RealzView: React.FC<RealzViewProps> = ({
       {/* Lightbox / Modal - Video style (no white background) */}
       {selectedIndex !== null && (
         <div
-          className='fixed inset-0 z-100 flex items-center justify-center bg-black/80 backdrop-blur-md p-4'
+          className='fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4'
           onClick={() => setSelectedIndex(null)}
         >
           {/* Close Button */}

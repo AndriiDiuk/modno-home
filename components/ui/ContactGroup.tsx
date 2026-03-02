@@ -17,11 +17,11 @@ export const ContactGroup: React.FC<ContactGroupProps> = ({
 
   return (
     <div
-      className={`flex flex-row md:flex-col md:items-end items-center gap-2 md:gap-1 ${className}`}
+      className={`flex flex-row md:flex-col md:items-end items-center gap-2 md:gap-0 ${className}`}
     >
       <a
         href={`tel:${phone.replace(/\D/g, "")}`}
-        className='text-[14px] sm:text-lg lg:text-xl font-bold text-black hover:opacity-70 transition-opacity whitespace-nowrap'
+        className='text-[14px] sm:text-lg lg:text-xl font-bold text-black hover:opacity-70 transition-opacity whitespace-nowrap leading-[1.2]'
       >
         {phone}
       </a>
@@ -30,7 +30,7 @@ export const ContactGroup: React.FC<ContactGroupProps> = ({
         label='Заказать звонок'
         variant='light'
         size='sm'
-        className='text-[14px] leading-none h-auto'
+        className='text-[14px] leading-none h-[34px]'
         onClick={() => openModal()}
       />
     </div>

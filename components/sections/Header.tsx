@@ -44,7 +44,7 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
             <div className='hidden lg:flex'>
               <a
                 href='#calculation'
-                className='hidden md:inline-flex items-center justify-center px-6 py-3 bg-brand-green  text-white text-[14px] font-semibold rounded-[4px] whitespace-nowrap '
+                className='hidden md:inline-flex items-center justify-center px-[16px] py-[8px] bg-brand-green  text-white text-[14px] font-semibold rounded-[4px] whitespace-nowrap '
               >
                 Доступен к заказу
               </a>
@@ -86,7 +86,7 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
 
         {/* Decorative Bottom Line (like in referenced image) */}
         <div className='content'>
-          <div className=' lg:block hidden h-px xl:w-[calc(100%-12rem)] w-full bg-brand-gray mx-auto mt-5' />
+          <div className=' lg:block hidden h-px xl:w-[calc(100%-12rem)] w-full bg-brand-gray mx-auto mt-3' />
         </div>
       </header>
 

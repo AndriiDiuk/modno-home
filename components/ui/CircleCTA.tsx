@@ -17,7 +17,11 @@ export const CircleCTA: React.FC<CircleCTAProps> = ({
   delay = "0s",
 }) => {
   return (
-    <div className={`relative flex flex-col items-center w-fit  ${className}`}>
+    <button
+      type='button'
+      onClick={onClick}
+      className={`relative flex flex-col items-center w-fit cursor-pointer ${className}`}
+    >
       <div
         className='p-[2px] rounded-full bg-[radial-gradient(circle_at_30%_100%,var(--color-story-yellow)_0%,var(--color-story-yellow)_10%,var(--color-story-red)_50%,var(--color-story-purple)_100%)] animate-pulse-border'
         style={{ animationDelay: delay }}
@@ -37,13 +41,9 @@ export const CircleCTA: React.FC<CircleCTAProps> = ({
         </div>
       </div>
 
-      <button
-        type='button'
-        onClick={onClick}
-        className='absolute bottom-0 bg-warning hover:scale-105 active:scale-95 text-brand-black font-bold py-[6px] px-2 rounded-full shadow-xl transition-all text-[7px] uppercase  cursor-pointer z-10'
-      >
+      <span className='absolute bottom-0 bg-warning hover:scale-105 active:scale-95 text-brand-black font-bold py-[6px] px-2 rounded-full shadow-xl transition-all text-[7px] uppercase z-10'>
         {text}
-      </button>
-    </div>
+      </span>
+    </button>
   );
 };

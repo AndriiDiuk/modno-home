@@ -34,7 +34,7 @@ export const Modal: React.FC<ModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className='fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300'>
+    <div className='fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300'>
       <div className='absolute inset-0' onClick={onClose} />
       <div
         className={`relative bg-white rounded-[20px] w-full overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 ${className}`}

@@ -45,7 +45,7 @@ export const InfoSofa: React.FC<InfoSofaProps> = ({
 
   return (
     <div
-      className={`w-full sm:w-[410px] bg-white rounded-[20px] p-5 ${className}`}
+      className={`w-full sm:w-[410px] bg-white rounded-[20px] p-5 leading-[1.2] shadow-[0_4px_68px_0_rgba(0,0,0,0.1)] ${className}`}
     >
       {/* Комплектация */}
       <div className='mb-6'>
@@ -93,9 +93,11 @@ export const InfoSofa: React.FC<InfoSofaProps> = ({
               className='flex items-start gap-2 text-brand-black'
             >
               <CheckIcon />
-              <p className='text-[13px] md:text-[14px] leading-snug text-[#383838]'>
-                <span className='font-semibold'>{material.label}</span> —{" "}
-                {material.value}
+              <p className='text-[13px] md:text-[14px] leading-snug text-[#383838] whitespace-nowrap'>
+                <span className='font-semibold whitespace-nowrap'>
+                  {material.label}
+                </span>{" "}
+                — {material.value}
               </p>
             </div>
           ))}
@@ -118,7 +120,7 @@ export const InfoSofa: React.FC<InfoSofaProps> = ({
       <div className='mb-[10px]'>
         <Link
           href='#calculation'
-          className='animate-shine w-full bg-brand-yellow min-w-0 md:min-w-0 text-center md:text-[17px] font-bold text-brand-black flex items-center justify-center px-10 py-4 rounded-[8px]'
+          className='animate-shine w-full bg-brand-yellow min-w-0 md:min-w-0 text-center md:text-[17px] font-bold text-brand-black flex items-center justify-center px-12 py-4 rounded-[8px]'
         >
           Узнать стоимость своего размера за 5 мин.
         </Link>
