@@ -48,7 +48,7 @@ export const SofaShowcaseSection: React.FC<SofaShowcaseSectionProps> = ({
           sizes='100vw'
         />
         {/* Text overlay */}
-        <div className='absolute left-0 top-0 z-10 w-[40%] lg:w-[35%]'>
+        <div className='absoluteleft-0 md:left-[16px] top-0 z-10 w-[40%] lg:w-[35%]'>
           <h2 className='text-[16px] lg:text-[18px] font-bold text-brand-black leading-[1.2]'>
             {title}
           </h2>
