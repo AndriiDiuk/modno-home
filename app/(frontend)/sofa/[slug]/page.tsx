@@ -1,19 +1,50 @@
-import {
-  CalculationSection,
-  ConfigSection,
-  DownloadCatalog,
-  InfoSofa,
-  RealzView,
-  ReviewSection,
-  SofaShowcaseSection,
-  VideoSection,
-} from "@/components/sections";
-import { OtherCardsSection } from "@/components/sections/OtherCardsSection";
+import { InfoSofa } from "@/components/sections";
 import { ColorSelector, HeroTitle } from "@/components/ui";
 import { fetchPayloadLocal, getCachedSettings } from "@/lib/payload";
 import { toSlug } from "@/lib/toSlug";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+
+const SofaShowcaseSection = dynamic(
+  () =>
+    import("@/components/sections/SofaShowcaseSection").then(
+      (m) => m.SofaShowcaseSection,
+    ),
+);
+const VideoSection = dynamic(
+  () =>
+    import("@/components/sections/VideoSection").then((m) => m.VideoSection),
+);
+const ConfigSection = dynamic(
+  () =>
+    import("@/components/sections/ConfigSection").then((m) => m.ConfigSection),
+);
+const CalculationSection = dynamic(
+  () =>
+    import("@/components/sections/CalculationSection").then(
+      (m) => m.CalculationSection,
+    ),
+);
+const DownloadCatalog = dynamic(
+  () =>
+    import("@/components/sections/DownloadCatalog").then(
+      (m) => m.DownloadCatalog,
+    ),
+);
+const OtherCardsSection = dynamic(
+  () =>
+    import("@/components/sections/OtherCardsSection").then(
+      (m) => m.OtherCardsSection,
+    ),
+);
+const ReviewSection = dynamic(
+  () =>
+    import("@/components/sections/ReviewSection").then((m) => m.ReviewSection),
+);
+const RealzView = dynamic(
+  () => import("@/components/sections/RealzView").then((m) => m.RealzView),
+);
 
 const MOCK_VIDEOS = [
   {
@@ -112,8 +143,10 @@ export async function generateMetadata({ params }: SofaPageProps) {
 
 export default async function SofaPage({ params }: SofaPageProps) {
   const { slug } = await params;
-  const { currentSofa: sofa, otherSofas } = await getSofaData(slug);
-  const settingsData = await getCachedSettings();
+  const [{ currentSofa: sofa, otherSofas }, settingsData] = await Promise.all([
+    getSofaData(slug),
+    getCachedSettings(),
+  ]);
   const socials = (settingsData as any)?.header?.socials || {};
 
   if (!sofa) {

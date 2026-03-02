@@ -48,7 +48,6 @@ export const DownloadCatalog: React.FC<DownloadCatalogProps> = ({
                 alt='Каталог мебели'
                 fill
                 className='object-contain'
-                priority
               />
             </div>
           </div>
@@ -75,7 +74,6 @@ export const DownloadCatalog: React.FC<DownloadCatalogProps> = ({
                 alt='Каталог мебели'
                 fill
                 className='object-contain'
-                priority
               />
             </div>
             <div className='flex flex-col items-center md:w-fit gap-2 bg-brand-dark w-full md:bg-transparent py-7 md:py-0 relative z-10'>
@@ -119,7 +117,6 @@ export const DownloadCatalog: React.FC<DownloadCatalogProps> = ({
                     alt='Каталог мебели'
                     fill
                     className='object-contain'
-                    priority
                   />
                 </div>
               }

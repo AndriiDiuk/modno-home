@@ -1,12 +1,38 @@
-import {
-  CalculationSection,
-  ContactUsSection,
-  DownloadCatalog,
-  ProductSections,
-  ReviewSection,
-  VideoSection,
-} from "@/components/sections";
 import { getCachedHome, getCachedSettings } from "@/lib/payload";
+import dynamic from "next/dynamic";
+
+const VideoSection = dynamic(
+  () =>
+    import("@/components/sections/VideoSection").then((m) => m.VideoSection),
+);
+const DownloadCatalog = dynamic(
+  () =>
+    import("@/components/sections/DownloadCatalog").then(
+      (m) => m.DownloadCatalog,
+    ),
+);
+const ProductSections = dynamic(
+  () =>
+    import("@/components/sections/ProductSections").then(
+      (m) => m.ProductSections,
+    ),
+);
+const CalculationSection = dynamic(
+  () =>
+    import("@/components/sections/CalculationSection").then(
+      (m) => m.CalculationSection,
+    ),
+);
+const ReviewSection = dynamic(
+  () =>
+    import("@/components/sections/ReviewSection").then((m) => m.ReviewSection),
+);
+const ContactUsSection = dynamic(
+  () =>
+    import("@/components/sections/ContactUsSection").then(
+      (m) => m.ContactUsSection,
+    ),
+);
 
 const MOCK_VIDEOS = [
   {
@@ -52,8 +78,10 @@ const MOCK_VIDEOS = [
 ];
 
 export default async function HomePage() {
-  const homeData = await getCachedHome();
-  const settingsData = await getCachedSettings();
+  const [homeData, settingsData] = await Promise.all([
+    getCachedHome(),
+    getCachedSettings(),
+  ]);
   const { sofasSection, catalogSection } = homeData || {};
   const socials = (settingsData as any)?.header?.socials || {};
   const {
