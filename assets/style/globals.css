@@ -27,6 +27,7 @@
   --color-brand-muted: #999999;
   --color-brand-green: #4CD964;
   --color-brand-green-hover: #3bbf54;
+  --color-brand-yellow: #FFDE79;
   
   /* Story Colors */
   --color-story-yellow: #ffdd55;
@@ -51,6 +52,7 @@
   --color-brand-muted: var(--color-brand-muted);
   --color-brand-green: var(--color-brand-green);
   --color-brand-green-hover: var(--color-brand-green-hover);
+  --color-brand-yellow: var(--color-brand-yellow);
   --color-story-yellow: var(--color-story-yellow);
   --color-story-red: var(--color-story-red);
   --color-story-purple: var(--color-story-purple);
@@ -97,4 +99,35 @@ body {
 
 .animate-pulse-border {
   animation: pulse-border 2s infinite ease-in-out;
+}
+
+@keyframes slideme {
+  0% {
+    left: -30%;
+  }
+  50% {
+    left: 110%;
+  }
+  100% {
+    left: 110%;
+  }
+}
+
+.animate-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-shine::after {
+  content: '';
+  position: absolute;
+  left: -40px;
+  top: -150px;
+  width: 30px;
+  height: 300px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 100%);
+  transform: rotate(45deg);
+  animation: slideme 3s ease-in-out infinite;
+  animation-delay: 0.05s;
+  transition: all 0.1s;
 }

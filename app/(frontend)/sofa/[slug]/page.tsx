@@ -2,6 +2,7 @@ import {
   CalculationSection,
   ConfigSection,
   DownloadCatalog,
+  InfoSofa,
   RealzView,
   ReviewSection,
   SofaShowcaseSection,
@@ -119,17 +120,53 @@ export default async function SofaPage({ params }: SofaPageProps) {
   return (
     <div className='w-full '>
       <div className='bg-[#F5F5F5] pt-[120px] md:pt-[160px] pb-12'>
-        <div className='content  '>
-          <ColorSelector />
-          <RealzView
-            images={[
-              "/sofas/Easy/views/1.webp",
-              "/sofas/Easy/views/2.webp",
-              "/sofas/Easy/views/3.webp",
-              "/sofas/Easy/views/4.webp",
-              "/sofas/Easy/views/5.webp",
-            ]}
-          />
+        <div className='content pt-[64px]'>
+          <div className='flex flex-col lg:flex-row justify-between gap-10 mb-10 md:mb-[120px]'>
+            <div className=' flex flex-col justify-between w-full'>
+              <div>text</div>
+              <div className='flex justify-center w-full '>
+                <ColorSelector />
+              </div>
+            </div>
+            <div>
+              <InfoSofa
+                equipment='Оттоманка со спинкой и подлокотником, широкая сидушка со спинкой и подлокотником, 4 подушки.'
+                sizes={[
+                  { label: "Ширина дивана", value: "от 2000...3200 мм." },
+                  { label: "Глубина посадки", value: "от 600...850 мм." },
+                  { label: "Оттоманки", value: "от 1250...1750 мм." },
+                ]}
+                materials={[
+                  { label: "Каркас", value: "березовая фанера класса E1." },
+                  {
+                    label: "Ткань",
+                    value: "велюр, микровелюр, шенилл, рогожка, букле.",
+                  },
+                  {
+                    label: "Наполнитель",
+                    value: "200 мм. ППУ + премиум Elax.",
+                  },
+                ]}
+                price={102900}
+                oldPrice={144900}
+                className='shrink-0 mx-auto lg:mx-0'
+              />
+            </div>
+          </div>
+
+          <div className='flex flex-col lg:flex-row gap-6 items-start'>
+            <div className='flex-1 w-full'>
+              <RealzView
+                images={[
+                  "/sofas/Easy/views/1.webp",
+                  "/sofas/Easy/views/2.webp",
+                  "/sofas/Easy/views/3.webp",
+                  "/sofas/Easy/views/4.webp",
+                  "/sofas/Easy/views/5.webp",
+                ]}
+              />
+            </div>
+          </div>
         </div>
       </div>
 

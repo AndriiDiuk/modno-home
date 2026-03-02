@@ -4,6 +4,7 @@ export * from "./ContactUsSection";
 export * from "./DownloadCatalog";
 export * from "./Footer";
 export * from "./Header";
+export * from "./InfoSofa";
 export * from "./OtherCardsSection";
 export * from "./ProductSections";
 export * from "./RealzView";
