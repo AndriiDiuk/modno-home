@@ -2,59 +2,7 @@ import "@/assets/style/globals.css";
 import { Footer, Header } from "@/components/sections";
 import { getCachedSettings } from "@/lib/payload";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import Script from "next/script";
-
-const gilroy = localFont({
-  src: [
-    {
-      path: "../../public/fonts/Gilroy/Gilroy-Thin.woff2",
-      weight: "100",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/Gilroy/Gilroy-Light.woff2",
-      weight: "300",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/Gilroy/Gilroy-Regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/Gilroy/Gilroy-Medium.woff2",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/Gilroy/Gilroy-SemiBold.woff2",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/Gilroy/Gilroy-Bold.woff2",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/Gilroy/Gilroy-ExtraBold.woff2",
-      weight: "800",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/Gilroy/Gilroy-Heavy.woff2",
-      weight: "900",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/Gilroy/Gilroy-Black.woff2",
-      weight: "950",
-      style: "normal",
-    },
-  ],
-  variable: "--font-gilroy",
-});
 
 async function getSettings() {
   try {
@@ -139,7 +87,7 @@ export default async function FrontendLayout({
         )}
       </head>
       <body
-        className={`${gilroy.variable} font-sans antialiased flex flex-col min-h-screen`}
+        className="font-sans antialiased flex flex-col min-h-screen"
         suppressHydrationWarning
       >
         <ModalProvider>

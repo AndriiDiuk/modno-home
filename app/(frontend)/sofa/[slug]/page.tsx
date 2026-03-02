@@ -10,7 +10,7 @@ import {
 } from "@/components/sections";
 import { OtherCardsSection } from "@/components/sections/OtherCardsSection";
 import { ColorSelector } from "@/components/ui";
-import { fetchPayloadLocal } from "@/lib/payload";
+import { fetchPayloadLocal, getCachedSettings } from "@/lib/payload";
 import { toSlug } from "@/lib/toSlug";
 import { notFound } from "next/navigation";
 
@@ -112,6 +112,8 @@ export async function generateMetadata({ params }: SofaPageProps) {
 export default async function SofaPage({ params }: SofaPageProps) {
   const { slug } = await params;
   const { currentSofa: sofa, otherSofas } = await getSofaData(slug);
+  const settingsData = await getCachedSettings();
+  const socials = (settingsData as any)?.header?.socials || {};
 
   if (!sofa) {
     notFound();
@@ -130,6 +132,7 @@ export default async function SofaPage({ params }: SofaPageProps) {
             </div>
             <div>
               <InfoSofa
+                socials={socials}
                 equipment='Оттоманка со спинкой и подлокотником, широкая сидушка со спинкой и подлокотником, 4 подушки.'
                 sizes={[
                   { label: "Ширина дивана", value: "от 2000...3200 мм." },
@@ -183,7 +186,7 @@ export default async function SofaPage({ params }: SofaPageProps) {
       />
       <ConfigSection />
 
-      <CalculationSection />
+      <CalculationSection socials={socials} />
       <DownloadCatalog />
       <OtherCardsSection
         title='Другие модели'

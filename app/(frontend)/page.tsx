@@ -93,7 +93,7 @@ export default async function HomePage() {
         edition={catalogEdition}
       />
       <ProductSections title={title} subtitle={subtitle} products={products} />
-      <CalculationSection />
+      <CalculationSection socials={socials} />
       <ReviewSection />
       <ContactUsSection telegramUrl={socials.telegram} vkUrl={socials.vk} />
     </div>

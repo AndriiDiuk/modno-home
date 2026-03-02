@@ -11,5 +11,6 @@ export * from "./Input";
 export * from "./Modal";
 export * from "./ProductCard";
 export * from "./SectionTitle";
+export * from "./SocialCallout";
 export * from "./SocialLinks";
 export * from "./VideoCard";

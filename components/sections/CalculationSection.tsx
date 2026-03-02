@@ -1,13 +1,15 @@
 "use client";
 
-import { AppButton, Input } from "@/components/ui";
+import { AppButton, Input, SocialCallout } from "@/components/ui";
 import React, { useState } from "react";
 
 interface CalculationSectionProps {
+  socials?: { telegram?: string; vk?: string };
   className?: string;
 }
 
 export const CalculationSection: React.FC<CalculationSectionProps> = ({
+  socials,
   className = "",
 }) => {
   const [phone, setPhone] = useState("");
@@ -46,10 +48,7 @@ export const CalculationSection: React.FC<CalculationSectionProps> = ({
             />
           </form>
 
-          <p className='text-[12px] text-brand-black text-center leading-[1.2] max-w-[300px]'>
-            Мы знаем, что наши клиенты не любят звонки, поэтому связь в WhatsApp
-            или Telegram
-          </p>
+          <SocialCallout socials={socials} className='max-w-[300px]' />
         </div>
       </div>
     </section>

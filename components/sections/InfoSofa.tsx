@@ -1,4 +1,5 @@
 import { CheckIcon } from "@/assets/icons";
+import { SocialCallout } from "@/components/ui";
 import Link from "next/link";
 import React from "react";
 
@@ -19,6 +20,7 @@ interface InfoSofaProps {
   price: number;
   oldPrice?: number;
   ctaText?: string;
+  socials?: { telegram?: string; vk?: string };
   className?: string;
 }
 
@@ -33,6 +35,7 @@ export const InfoSofa: React.FC<InfoSofaProps> = ({
   price,
   oldPrice,
   ctaText = "Узнать стоимость своего размера за 5 мин.",
+  socials,
   className = "",
 }) => {
   const formattedPrice = Number(price).toLocaleString("ru-RU");
@@ -122,12 +125,7 @@ export const InfoSofa: React.FC<InfoSofaProps> = ({
       </div>
 
       {/* Footer text */}
-      <p className='text-[11px] md:text-[12px] text-brand-black text-center leading-snug'>
-        Мы знаем, что наши клиенты не любят звонки,
-        <br />
-        поэтому связь в <span className='font-semibold'>Vk</span> или{" "}
-        <span className='font-semibold'>Telegram</span>
-      </p>
+      <SocialCallout socials={socials} className='text-[11px] md:text-[12px]' />
     </div>
   );
 };
