@@ -2,6 +2,7 @@
 
 import { VideoModal } from "@/components/common/VideoModal";
 import { Brand, CircleCTA, ContactGroup, SocialLinks } from "@/components/ui";
+import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 
 interface HeaderProps {
@@ -29,29 +30,42 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
   } = data || {};
 
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const pathname = usePathname();
+  const isSofaPage = pathname.startsWith("/sofa/");
 
   return (
     <>
-      <header className='absolute top-0 left-0 w-full z-100 py-4'>
+      <header className='absolute top-0 left-0 w-full z-[100] py-4'>
         <div className='content flex items-center justify-between gap-8'>
           {/* Left: Logo and Description */}
           <Brand description={logoDescription} />
 
-          <div className='hidden lg:flex gap-5'>
-            <CircleCTA
-              text='Смотреть'
-              imageSrc='/images/stories/st_1.webp'
-              className='text-[14px] leading-none h-auto'
-              onClick={() => setActiveVideo("/video/1.mp4")}
-            />
-            <CircleCTA
-              text='Смотреть'
-              imageSrc='/images/stories/st_2.webp'
-              className='text-[14px] leading-none h-auto'
-              onClick={() => setActiveVideo("/video/2.mp4")}
-              delay='1s'
-            />
-          </div>
+          {isSofaPage ? (
+            <div className='hidden lg:flex'>
+              <a
+                href='#calculation'
+                className='hidden md:inline-flex items-center justify-center px-6 py-3 bg-brand-green  text-white text-[14px] font-semibold rounded-[4px] whitespace-nowrap '
+              >
+                Доступен к заказу
+              </a>
+            </div>
+          ) : (
+            <div className='hidden lg:flex gap-5'>
+              <CircleCTA
+                text='Смотреть'
+                imageSrc='/images/stories/st_1.webp'
+                className='text-[14px] leading-none h-auto'
+                onClick={() => setActiveVideo("/video/1.mp4")}
+              />
+              <CircleCTA
+                text='Смотреть'
+                imageSrc='/images/stories/st_2.webp'
+                className='text-[14px] leading-none h-auto'
+                onClick={() => setActiveVideo("/video/2.mp4")}
+                delay='1s'
+              />
+            </div>
+          )}
 
           {/* Center: Working Hours */}
           <div className='flex items-center gap-4 lg:gap-8'>
