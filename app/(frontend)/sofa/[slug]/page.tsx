@@ -145,6 +145,7 @@ export default async function SofaPage({ params }: SofaPageProps) {
               <HeroTitle
                 topLine='Диван Easy'
                 bottomLine='амбассадор комфорта в лофт стиле'
+                bottomBold={["амбассадор "]}
                 description='Доступен к заказу в любом размере и конфигурации, подберем цвет, ткань и мягкость именно для Вас'
                 topBold={["Easy"]}
                 descriptionBold={["Доступен к заказу", "именно для Вас"]}
