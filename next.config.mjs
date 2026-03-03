@@ -13,7 +13,7 @@ const nextConfig = {
       // Додай свої домени для продакшену (S3/CDN тощо)
       // { protocol: "https", hostname: "assets.example.com", pathname: "/**" },
     ],
-    unoptimized: process.env.NODE_ENV === "development",
+    unoptimized: true,
   },
 };
 

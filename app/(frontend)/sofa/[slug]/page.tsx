@@ -142,6 +142,8 @@ export default async function SofaPage({ params }: SofaPageProps) {
     getCachedSettings(),
   ]);
   const socials = (settingsData as any)?.header?.socials || {};
+  const phone = (settingsData as any)?.header?.phone || "+7 (992) 503-54-99";
+  const phoneClean = phone.replace(/[\s\-\(\)]/g, "");
 
   if (!sofa) {
     notFound();
@@ -169,13 +171,34 @@ export default async function SofaPage({ params }: SofaPageProps) {
         <div className='content pt-[60px]'>
           <div className='flex flex-col lg:flex-row justify-between  mb-10 md:mb-[120px]'>
             <div className='flex md:hidden flex-col items-center gap-4 z-[2] mb-6'>
-              <p className='text-2xl font-semibold leading-[1.2]'>
-                +7 (999) 999-99-99
-              </p>
+              <a
+                href={`tel:${phoneClean}`}
+                className='text-2xl font-semibold leading-[1.2]'
+              >
+                {phone}
+              </a>
               <div className='flex items-center gap-3'>
-                <VkSquareIcon className='w-10 h-10' />
-                <TelegramSquareIcon className='w-10 h-10' />
-                <PhoneIcon className='w-10 h-10' />
+                {socials.vk && (
+                  <a
+                    href={socials.vk}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    <VkSquareIcon className='w-10 h-10' />
+                  </a>
+                )}
+                {socials.telegram && (
+                  <a
+                    href={socials.telegram}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    <TelegramSquareIcon className='w-10 h-10' />
+                  </a>
+                )}
+                <a href={`tel:${phoneClean}`}>
+                  <PhoneIcon className='w-10 h-10' />
+                </a>
               </div>
             </div>
             <div className=' flex flex-col justify-between w-full relative z-[2]  '>
