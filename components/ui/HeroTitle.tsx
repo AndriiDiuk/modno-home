@@ -47,7 +47,7 @@ export const HeroTitle: React.FC<HeroTitleProps> = ({
       <p className='text-[16px] sm:text-[18px] lg:text-[33px] text-brand-black leading-[1.2]'>
         {highlightWords(bottomLine, bottomBold)}
       </p>
-      <p className='text-[16px] sm:text-[18px] text-brand-black leading-[1.2] mt-3 md:max-w-[565px] mx-auto block max-w-[360px]'>
+      <p className='text-[16px] sm:text-[18px] text-brand-black leading-[1.1] mt-3 sm:max-w-141.25 mx-auto block max-w-82.5'>
         {highlightWords(description, descriptionBold)}
       </p>
     </div>

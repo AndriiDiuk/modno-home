@@ -151,7 +151,7 @@ export default async function SofaPage({ params }: SofaPageProps) {
 
   return (
     <div className='w-full '>
-      <div className='bg-[#E9E9E7]  pt-7.5 md:pt-40 pb-12 relative overflow-hidden'>
+      <div className='bg-[#E9E9E7]  pt-7.5 lg:pt-40 pb-12 relative overflow-hidden'>
         <Image
           src='/sofas/Easy/bg-hero.webp'
           alt={sofa.title}
@@ -163,12 +163,12 @@ export default async function SofaPage({ params }: SofaPageProps) {
           src='/sofas/Easy/bg-hero-mob.webp'
           alt={sofa.title}
           fill
-          className='lg:hidden object-contain  object-top z-0'
+          className='lg:hidden object-cover sm:object-[center_24%]  md:object-[center_18%] object-top  z-0'
           priority
         />
         <div className='content pt-15'>
           <div className='flex flex-col lg:flex-row justify-between  mb-10 md:mb-30'>
-            <div className='flex md:hidden flex-col items-center gap-4 z-2 mb-6'>
+            <div className='flex lg:hidden flex-col items-center gap-4 z-2 mb-6'>
               <a
                 href={`tel:${phoneClean}`}
                 className='text-2xl font-semibold leading-[1.2]'
