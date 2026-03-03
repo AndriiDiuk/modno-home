@@ -154,7 +154,7 @@ export default async function SofaPage({ params }: SofaPageProps) {
       <div className='bg-[#E9E9E7]  pt-[30px] md:pt-[160px] pb-12 relative overflow-hidden'>
         {/* Desktop: натуральний розмір, по центру-зверху, бокові краї ховаються за overflow-hidden */}
         <Image
-          src='/sofas/easy/bg-hero.webp'
+          src='/sofas/Easy/bg-hero.webp'
           alt={sofa.title}
           fill
           className='hidden md:block object-none object-top z-0'
@@ -162,7 +162,7 @@ export default async function SofaPage({ params }: SofaPageProps) {
         />
         {/* Tablet/Mobile: пропорційно масштабується, мобільний варіант картинки */}
         <Image
-          src='/sofas/easy/bg-hero-mob.webp'
+          src='/sofas/Easy/bg-hero-mob.webp'
           alt={sofa.title}
           fill
           className='md:hidden object-contain  object-top z-[0]'
