@@ -151,8 +151,7 @@ export default async function SofaPage({ params }: SofaPageProps) {
 
   return (
     <div className='w-full '>
-      <div className='bg-[#E9E9E7]  pt-[30px] md:pt-[160px] pb-12 relative overflow-hidden'>
-        {/* Desktop: натуральний розмір, по центру-зверху, бокові краї ховаються за overflow-hidden */}
+      <div className='bg-[#E9E9E7]  pt-7.5 md:pt-40 pb-12 relative overflow-hidden'>
         <Image
           src='/sofas/Easy/bg-hero.webp'
           alt={sofa.title}
@@ -160,17 +159,16 @@ export default async function SofaPage({ params }: SofaPageProps) {
           className='hidden md:block object-none object-top z-0'
           priority
         />
-        {/* Tablet/Mobile: пропорційно масштабується, мобільний варіант картинки */}
         <Image
           src='/sofas/Easy/bg-hero-mob.webp'
           alt={sofa.title}
           fill
-          className='md:hidden object-contain  object-top z-[0]'
+          className='md:hidden object-contain  object-top z-0'
           priority
         />
-        <div className='content pt-[60px]'>
-          <div className='flex flex-col lg:flex-row justify-between  mb-10 md:mb-[120px]'>
-            <div className='flex md:hidden flex-col items-center gap-4 z-[2] mb-6'>
+        <div className='content pt-15'>
+          <div className='flex flex-col lg:flex-row justify-between  mb-10 md:mb-30'>
+            <div className='flex md:hidden flex-col items-center gap-4 z-2 mb-6'>
               <a
                 href={`tel:${phoneClean}`}
                 className='text-2xl font-semibold leading-[1.2]'
@@ -201,7 +199,7 @@ export default async function SofaPage({ params }: SofaPageProps) {
                 </a>
               </div>
             </div>
-            <div className=' flex flex-col justify-between w-full relative z-[2]  '>
+            <div className=' flex flex-col justify-between w-full relative z-2  '>
               <HeroTitle
                 topLine='Диван Easy'
                 bottomLine='амбассадор комфорта в лофт стиле'
@@ -209,13 +207,13 @@ export default async function SofaPage({ params }: SofaPageProps) {
                 description='Доступен к заказу в любом размере и конфигурации, подберем цвет, ткань и мягкость именно для Вас'
                 topBold={["Easy"]}
                 descriptionBold={["Доступен к заказу", "именно для Вас"]}
-                className='mb-[192px]'
+                className='mb-48'
               />
-              <div className='flex justify-center w-full relative z-[2] mb-5 '>
+              <div className='flex justify-center w-full relative z-2 mb-5 md:mb-0 '>
                 <ColorSelector />
               </div>
             </div>
-            <div className='relative z-[2]'>
+            <div className='relative z-2'>
               <InfoSofa
                 socials={socials}
                 equipment='Оттоманка со спинкой и подлокотником, широкая сидушка со спинкой и подлокотником, 4 подушки.'
@@ -242,7 +240,7 @@ export default async function SofaPage({ params }: SofaPageProps) {
             </div>
           </div>
 
-          <div className='flex flex-col lg:flex-row gap-6 items-start'>
+          <div className='relative flex flex-col lg:flex-row gap-6 items-start z-2'>
             <div className='flex-1 w-full'>
               <RealzView
                 images={[

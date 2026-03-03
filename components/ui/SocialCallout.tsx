@@ -17,9 +17,7 @@ export const SocialCallout: React.FC<SocialCalloutProps> = ({
   const telegram = socials?.telegram;
 
   return (
-    <p
-      className={`text-[12px] text-brand-black text-center leading-snug ${className}`}
-    >
+    <p className={`text-[12px] text-brand-black text-center  ${className}`}>
       Мы знаем, что наши клиенты не любят звонки,
       <br />
       поэтому связь в{" "}
