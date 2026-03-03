@@ -156,7 +156,7 @@ export default async function SofaPage({ params }: SofaPageProps) {
           src='/sofas/Easy/bg-hero.webp'
           alt={sofa.title}
           fill
-          className='hidden lg:block object-none object-top z-0 w-full'
+          className='hidden lg:block object-cover object-top z-0 w-full'
           priority
         />
         <Image
