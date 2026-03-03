@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 interface VideoCardProps {
   image: string;
@@ -25,18 +25,45 @@ export const VideoCard: React.FC<VideoCardProps> = ({
   const viewsText =
     typeof views === "number" ? `${views} тыс. просмотров` : views;
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
-  const handleMouseEnter = () => {
+  // IntersectionObserver — start preloading when card scrolls into view
+  useEffect(() => {
+    if (!video || !containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [video]);
+
+  // When visible, trigger video preload
+  useEffect(() => {
+    if (!isVisible || !videoRef.current) return;
+    videoRef.current.preload = "auto";
+    videoRef.current.load();
+  }, [isVisible]);
+
+  const handleMouseEnter = useCallback(() => {
     videoRef.current?.play();
-  };
+  }, []);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     videoRef.current?.pause();
-  };
+  }, []);
 
   return (
-    <div className={`flex flex-col group ${className}`}>
+    <div className={`flex flex-col group ${className}`} ref={containerRef}>
       {/* Video Preview Section */}
       <div
         onClick={onClick}
@@ -53,8 +80,8 @@ export const VideoCard: React.FC<VideoCardProps> = ({
           sizes='(max-width: 768px) 100vw, 33vw'
         />
 
-        {/* Video — hidden until loaded */}
-        {video && (
+        {/* Video — preloaded when visible, plays on hover */}
+        {video && isVisible && (
           <>
             <video
               ref={videoRef}
@@ -64,7 +91,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({
               playsInline
               loop
               preload='metadata'
-              onLoadedData={() => setVideoLoaded(true)}
+              onCanPlayThrough={() => setVideoLoaded(true)}
             />
             {!videoLoaded && (
               <div className='absolute inset-0 flex items-center justify-center bg-black/5'>

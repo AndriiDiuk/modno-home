@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface VideoModalProps {
   isOpen: boolean;
@@ -11,6 +11,7 @@ interface VideoModalProps {
 /**
  * Full-screen video modal overlay.
  * Plays the video automatically when opened and pauses when closed.
+ * Shows loading spinner while video buffers enough to play.
  */
 export const VideoModal: React.FC<VideoModalProps> = ({
   isOpen,
@@ -18,22 +19,30 @@ export const VideoModal: React.FC<VideoModalProps> = ({
   videoSrc,
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isBuffering, setIsBuffering] = useState(true);
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
-      videoRef.current?.play();
+      setIsBuffering(true);
+      const video = videoRef.current;
+      if (video) {
+        video.currentTime = 0;
+        video.load();
+        video.play().catch(() => {});
+      }
     } else {
       document.body.style.overflow = "unset";
-      videoRef.current?.pause();
-      if (videoRef.current) {
-        videoRef.current.currentTime = 0;
+      const video = videoRef.current;
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
       }
     }
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, [isOpen]);
+  }, [isOpen, videoSrc]);
 
   // Close on Escape key
   useEffect(() => {
@@ -81,6 +90,13 @@ export const VideoModal: React.FC<VideoModalProps> = ({
         className='relative w-full max-w-[400px] mx-4'
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Loading spinner — visible while video buffers */}
+        {isBuffering && (
+          <div className='absolute inset-0 flex items-center justify-center z-10'>
+            <div className='w-10 h-10 border-3 border-white/30 border-t-white rounded-full animate-spin' />
+          </div>
+        )}
+
         <video
           ref={videoRef}
           src={videoSrc}
@@ -88,6 +104,8 @@ export const VideoModal: React.FC<VideoModalProps> = ({
           controls
           playsInline
           autoPlay
+          preload='auto'
+          onCanPlay={() => setIsBuffering(false)}
         />
       </div>
     </div>
