@@ -41,13 +41,13 @@ export const HeroTitle: React.FC<HeroTitleProps> = ({
 }) => {
   return (
     <div className={`text-center ${className}`}>
-      <h1 className='text-[24px] md:text-[32px] lg:text-[45px] text-brand-black leading-[1.1] '>
+      <h1 className='text-[27px] md:text-[32px] lg:text-[45px] text-brand-black leading-[1.1] '>
         {highlightWords(topLine, topBold)}
       </h1>
-      <p className='text-[16px] md:text-[20px] lg:text-[33px] text-brand-black leading-[1.2]'>
+      <p className='text-[16px] sm:text-[18px] lg:text-[33px] text-brand-black leading-[1.2]'>
         {highlightWords(bottomLine, bottomBold)}
       </p>
-      <p className='text-[13px] md:text-[18px] text-brand-black leading-[1.2] mt-3 max-w-[565px] mx-auto '>
+      <p className='text-[16px] sm:text-[18px] text-brand-black leading-[1.2] mt-3 md:max-w-[565px] mx-auto block max-w-[360px]'>
         {highlightWords(description, descriptionBold)}
       </p>
     </div>

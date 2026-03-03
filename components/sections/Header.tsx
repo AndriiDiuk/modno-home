@@ -69,7 +69,7 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
 
           {/* Center: Working Hours */}
           <div className='flex items-center gap-4 lg:gap-8'>
-            <div className='flex flex-col text-right  max-w-[150px] md:text-center text-black'>
+            <div className='flex flex-col text-right  max-w-[144px] md:max-w-[150px] md:text-center text-black'>
               <p className='text-[13px] font-medium  leading-snug whitespace-pre-line'>
                 {workingHours}
               </p>

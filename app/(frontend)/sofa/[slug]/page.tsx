@@ -1,3 +1,4 @@
+import { PhoneIcon, TelegramSquareIcon, VkSquareIcon } from "@/assets/icons";
 import { InfoSofa } from "@/components/sections";
 import { ColorSelector, HeroTitle } from "@/components/ui";
 import { fetchPayloadLocal, getCachedSettings } from "@/lib/payload";
@@ -6,44 +7,37 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-const SofaShowcaseSection = dynamic(
-  () =>
-    import("@/components/sections/SofaShowcaseSection").then(
-      (m) => m.SofaShowcaseSection,
-    ),
+const SofaShowcaseSection = dynamic(() =>
+  import("@/components/sections/SofaShowcaseSection").then(
+    (m) => m.SofaShowcaseSection,
+  ),
 );
-const VideoSection = dynamic(
-  () =>
-    import("@/components/sections/VideoSection").then((m) => m.VideoSection),
+const VideoSection = dynamic(() =>
+  import("@/components/sections/VideoSection").then((m) => m.VideoSection),
 );
-const ConfigSection = dynamic(
-  () =>
-    import("@/components/sections/ConfigSection").then((m) => m.ConfigSection),
+const ConfigSection = dynamic(() =>
+  import("@/components/sections/ConfigSection").then((m) => m.ConfigSection),
 );
-const CalculationSection = dynamic(
-  () =>
-    import("@/components/sections/CalculationSection").then(
-      (m) => m.CalculationSection,
-    ),
+const CalculationSection = dynamic(() =>
+  import("@/components/sections/CalculationSection").then(
+    (m) => m.CalculationSection,
+  ),
 );
-const DownloadCatalog = dynamic(
-  () =>
-    import("@/components/sections/DownloadCatalog").then(
-      (m) => m.DownloadCatalog,
-    ),
+const DownloadCatalog = dynamic(() =>
+  import("@/components/sections/DownloadCatalog").then(
+    (m) => m.DownloadCatalog,
+  ),
 );
-const OtherCardsSection = dynamic(
-  () =>
-    import("@/components/sections/OtherCardsSection").then(
-      (m) => m.OtherCardsSection,
-    ),
+const OtherCardsSection = dynamic(() =>
+  import("@/components/sections/OtherCardsSection").then(
+    (m) => m.OtherCardsSection,
+  ),
 );
-const ReviewSection = dynamic(
-  () =>
-    import("@/components/sections/ReviewSection").then((m) => m.ReviewSection),
+const ReviewSection = dynamic(() =>
+  import("@/components/sections/ReviewSection").then((m) => m.ReviewSection),
 );
-const RealzView = dynamic(
-  () => import("@/components/sections/RealzView").then((m) => m.RealzView),
+const RealzView = dynamic(() =>
+  import("@/components/sections/RealzView").then((m) => m.RealzView),
 );
 
 const MOCK_VIDEOS = [
@@ -155,7 +149,7 @@ export default async function SofaPage({ params }: SofaPageProps) {
 
   return (
     <div className='w-full '>
-      <div className='bg-[#E9E9E7] pt-[120px] md:pt-[160px] pb-12 relative overflow-hidden'>
+      <div className='bg-[#E9E9E7]  pt-[30px] md:pt-[160px] pb-12 relative overflow-hidden'>
         {/* Desktop: натуральний розмір, по центру-зверху, бокові краї ховаються за overflow-hidden */}
         <Image
           src='/sofas/easy/bg-hero.webp'
@@ -169,12 +163,22 @@ export default async function SofaPage({ params }: SofaPageProps) {
           src='/sofas/easy/bg-hero-mob.webp'
           alt={sofa.title}
           fill
-          className='md:hidden object-contain  object-top z-0'
+          className='md:hidden object-contain  object-top z-[0]'
           priority
         />
         <div className='content pt-[60px]'>
-          <div className='flex flex-col lg:flex-row justify-between gap-10 mb-10 md:mb-[120px]'>
-            <div className=' flex flex-col justify-between w-full relative z-[2]'>
+          <div className='flex flex-col lg:flex-row justify-between  mb-10 md:mb-[120px]'>
+            <div className='flex md:hidden flex-col items-center gap-4 z-[2] mb-6'>
+              <p className='text-2xl font-semibold leading-[1.2]'>
+                +7 (999) 999-99-99
+              </p>
+              <div className='flex items-center gap-3'>
+                <VkSquareIcon className='w-10 h-10' />
+                <TelegramSquareIcon className='w-10 h-10' />
+                <PhoneIcon className='w-10 h-10' />
+              </div>
+            </div>
+            <div className=' flex flex-col justify-between w-full relative z-[2]  '>
               <HeroTitle
                 topLine='Диван Easy'
                 bottomLine='амбассадор комфорта в лофт стиле'
@@ -182,8 +186,9 @@ export default async function SofaPage({ params }: SofaPageProps) {
                 description='Доступен к заказу в любом размере и конфигурации, подберем цвет, ткань и мягкость именно для Вас'
                 topBold={["Easy"]}
                 descriptionBold={["Доступен к заказу", "именно для Вас"]}
+                className='mb-[192px]'
               />
-              <div className='flex justify-center w-full relative z-[2] '>
+              <div className='flex justify-center w-full relative z-[2] mb-5 '>
                 <ColorSelector />
               </div>
             </div>
@@ -236,20 +241,25 @@ export default async function SofaPage({ params }: SofaPageProps) {
         image='/sofas/Easy/section-2.webp'
         mobileImage='/sofas/Easy/section-2-mob.webp'
       />
+
       <VideoSection
         title='Короткие видео'
         subtitle='В интерьере, на производстве, каркас и ткани'
         videos={MOCK_VIDEOS}
       />
+
       <ConfigSection />
 
       <CalculationSection socials={socials} />
+
       <DownloadCatalog />
+
       <OtherCardsSection
         title='Другие модели'
         subtitle='Возможно, вам понравится что-то еще'
         products={otherSofas}
       />
+
       <ReviewSection hasBackground={false} />
     </div>
   );
