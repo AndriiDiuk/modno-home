@@ -156,14 +156,14 @@ export default async function SofaPage({ params }: SofaPageProps) {
           src='/sofas/Easy/bg-hero.webp'
           alt={sofa.title}
           fill
-          className='hidden md:block object-none object-top z-0'
+          className='hidden lg:block object-none object-top z-0'
           priority
         />
         <Image
           src='/sofas/Easy/bg-hero-mob.webp'
           alt={sofa.title}
           fill
-          className='md:hidden object-contain  object-top z-0'
+          className='lg:hidden object-contain  object-top z-0'
           priority
         />
         <div className='content pt-15'>
@@ -209,7 +209,7 @@ export default async function SofaPage({ params }: SofaPageProps) {
                 descriptionBold={["Доступен к заказу", "именно для Вас"]}
                 className='mb-48'
               />
-              <div className='flex justify-center w-full relative z-2 mb-5 md:mb-0 '>
+              <div className='flex justify-center w-full relative z-2 mb-5 lg:mb-0 '>
                 <ColorSelector />
               </div>
             </div>
