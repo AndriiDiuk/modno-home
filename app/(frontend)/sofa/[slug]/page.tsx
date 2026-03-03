@@ -142,7 +142,7 @@ export default async function SofaPage({ params }: SofaPageProps) {
     getCachedSettings(),
   ]);
   const socials = (settingsData as any)?.header?.socials || {};
-  const phone = (settingsData as any)?.header?.phone || "+7 (992) 503-54-99";
+  const phone = (settingsData as any)?.header?.phone || "";
   const phoneClean = phone.replace(/[\s\-\(\)]/g, "");
 
   if (!sofa) {
