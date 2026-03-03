@@ -18,7 +18,6 @@ export const SofaShowcaseSection: React.FC<SofaShowcaseSectionProps> = ({
 }) => {
   return (
     <section className={`w-full pt-10 md:pt-20 ${className}`}>
-      {/* Mobile Layout */}
       <div className='content md:hidden relative h-[clamp(300px,80vw,450px)]'>
         <Image
           src={mobileImage}
@@ -27,19 +26,17 @@ export const SofaShowcaseSection: React.FC<SofaShowcaseSectionProps> = ({
           className='object-contain object-bottom'
           sizes='100vw'
         />
-        <div className='absolute left-0 right-0 top-0 z-10 text-center'>
+        <div className='absolute left-0 right-0 top-0 z-1 text-center'>
           <h2 className='text-[18px] font-bold text-brand-black leading-[1.2]'>
             {title}
           </h2>
-          <p className='text-[14px] text-brand-black leading-[1.2] mx-auto max-w-[80%] md:max-w-[340px]'>
+          <p className='text-[14px] text-brand-black leading-[1.2] mx-auto max-w-[80%] md:max-w-85'>
             {description}
           </p>
         </div>
       </div>
 
-      {/* Desktop Layout */}
       <div className='content hidden md:block relative h-[clamp(280px,30vw,450px)]'>
-        {/* Image fills the container */}
         <Image
           src={image}
           alt={title}
@@ -47,8 +44,7 @@ export const SofaShowcaseSection: React.FC<SofaShowcaseSectionProps> = ({
           className='object-contain object-right'
           sizes='100vw'
         />
-        {/* Text overlay */}
-        <div className='absolute left-0 md:left-[16px] top-0 z-10 w-[40%] lg:w-[35%]'>
+        <div className='absolute left-0 md:left-4 top-0 z-1 w-[40%] lg:w-[35%]'>
           <h2 className='text-[16px] lg:text-[18px] font-bold text-brand-black leading-[1.2]'>
             {title}
           </h2>
