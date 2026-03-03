@@ -105,11 +105,16 @@ export const InfoSofa: React.FC<InfoSofaProps> = ({
       </div>
 
       {/* Цена */}
-      <div className='text-center mb-2.5 bg-[#F8F9FB] rounded-lg p-3 mx-4'>
+      <div className='text-center mb-2.5 bg-[#F8F9FB] rounded-lg p-3 mx-4.5'>
         {formattedOldPrice && (
-          <p className='text-[16px] text-brand-gray line-through mb-1 '>
-            Стоимость {formattedOldPrice} руб.
-          </p>
+          <>
+            <span className='text-[16px] text-brand-gray inline-block mb-1 mr-1.5'>
+              Стоимость:{" "}
+            </span>
+            <span className='text-[16px] text-brand-gray  inline-block line-through mb-1.5 '>
+              {formattedOldPrice} руб.
+            </span>
+          </>
         )}
         <p className='text-[24px] md:text-[28px] font-bold text-brand-black leading-[0.8]'>
           от {formattedPrice} руб.
@@ -117,7 +122,7 @@ export const InfoSofa: React.FC<InfoSofaProps> = ({
       </div>
 
       {/* CTA Button */}
-      <div className='mb-2.5 mx-4'>
+      <div className='mb-2.5 mx-4.5'>
         <Link
           href='#calculation'
           className='animate-shine w-full bg-brand-yellow min-w-0 md:min-w-0 text-center md:text-[17px] font-bold text-brand-black flex items-center justify-center px-12 py-3 rounded-lg'
