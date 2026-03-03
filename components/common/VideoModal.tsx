@@ -34,7 +34,12 @@ export const VideoModal: React.FC<VideoModalProps> = ({
 
   useEffect(() => {
     if (isOpen) {
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+      const header = document.querySelector("header");
+      if (header) header.style.paddingRight = `${scrollbarWidth}px`;
       setIsBuffering(true);
       const video = videoRef.current;
       if (video) {
@@ -44,6 +49,9 @@ export const VideoModal: React.FC<VideoModalProps> = ({
       }
     } else {
       document.body.style.overflow = "unset";
+      document.body.style.paddingRight = "0px";
+      const header = document.querySelector("header");
+      if (header) header.style.paddingRight = "";
       const video = videoRef.current;
       if (video) {
         video.pause();
@@ -52,6 +60,9 @@ export const VideoModal: React.FC<VideoModalProps> = ({
     }
     return () => {
       document.body.style.overflow = "unset";
+      document.body.style.paddingRight = "0px";
+      const header = document.querySelector("header");
+      if (header) header.style.paddingRight = "";
     };
   }, [isOpen, videoSrc]);
 

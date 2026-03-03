@@ -38,13 +38,19 @@ export const Modal: React.FC<ModalProps> = ({
         window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
+      const header = document.querySelector("header");
+      if (header) header.style.paddingRight = `${scrollbarWidth}px`;
     } else {
       document.body.style.overflow = "unset";
       document.body.style.paddingRight = "0px";
+      const header = document.querySelector("header");
+      if (header) header.style.paddingRight = "";
     }
     return () => {
       document.body.style.overflow = "unset";
       document.body.style.paddingRight = "0px";
+      const header = document.querySelector("header");
+      if (header) header.style.paddingRight = "";
     };
   }, [isOpen]);
 
