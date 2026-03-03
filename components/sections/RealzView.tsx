@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AppButton } from "../ui/AppButton";
 
 interface RealzViewProps {
@@ -17,6 +17,19 @@ export const RealzView: React.FC<RealzViewProps> = ({
 }) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [showAll, setShowAll] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const lightboxTimeout = useRef<ReturnType<typeof setTimeout>>(null);
+
+  const openLightbox = (index: number) => {
+    if (lightboxTimeout.current) clearTimeout(lightboxTimeout.current);
+    setSelectedIndex(index);
+    requestAnimationFrame(() => requestAnimationFrame(() => setLightboxOpen(true)));
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+    lightboxTimeout.current = setTimeout(() => setSelectedIndex(null), 200);
+  };
 
   const handleNext = (e?: React.MouseEvent) => {
     e?.stopPropagation();
@@ -35,7 +48,7 @@ export const RealzView: React.FC<RealzViewProps> = ({
   // Close on Escape key and handle Arrows
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setSelectedIndex(null);
+      if (e.key === "Escape") closeLightbox();
       if (e.key === "ArrowRight") handleNext();
       if (e.key === "ArrowLeft") handlePrev();
     };
@@ -62,7 +75,7 @@ export const RealzView: React.FC<RealzViewProps> = ({
             <div
               key={index}
               className='relative w-full aspect-230/136 max-w-[230px] rounded-[8px] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity mx-auto'
-              onClick={() => setSelectedIndex(index)}
+              onClick={() => openLightbox(index)}
             >
               <Image
                 src={src}
@@ -82,7 +95,7 @@ export const RealzView: React.FC<RealzViewProps> = ({
               <div
                 key={index}
                 className='relative w-full aspect-230/136 rounded-[8px] overflow-hidden cursor-pointer'
-                onClick={() => setSelectedIndex(index)}
+                onClick={() => openLightbox(index)}
               >
                 <Image
                   src={src}
@@ -106,15 +119,15 @@ export const RealzView: React.FC<RealzViewProps> = ({
         </div>
       </div>
 
-      {/* Lightbox / Modal - Video style (no white background) */}
+      {/* Lightbox */}
       {selectedIndex !== null && (
         <div
-          className='fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4'
-          onClick={() => setSelectedIndex(null)}
+          className={`fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 duration-200 ${lightboxOpen ? "animate-in fade-in" : "animate-out fade-out"}`}
+          onClick={closeLightbox}
         >
           {/* Close Button */}
           <button
-            onClick={() => setSelectedIndex(null)}
+            onClick={closeLightbox}
             className='absolute top-6 right-6 text-white hover:opacity-70 transition-opacity cursor-pointer p-2 z-10'
             aria-label='Close'
           >
@@ -171,7 +184,7 @@ export const RealzView: React.FC<RealzViewProps> = ({
           </button>
 
           <div
-            className='relative w-full max-w-5xl h-[80vh] flex items-center justify-center'
+            className={`relative w-full max-w-5xl h-[80vh] flex items-center justify-center duration-200 ${lightboxOpen ? "animate-in zoom-in-95 slide-in-from-bottom-4" : "animate-out zoom-out-95 slide-out-to-bottom-4"}`}
             onClick={(e) => e.stopPropagation()}
           >
             <Image

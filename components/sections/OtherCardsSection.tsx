@@ -1,7 +1,7 @@
 "use client";
 
 import { ProductCard, SectionTitle } from "@/components/ui";
-import React from "react";
+import React, { startTransition } from "react";
 import { useModal } from "../providers/ModalProvider";
 
 interface Product {
@@ -49,7 +49,9 @@ export const OtherCardsSection: React.FC<OtherCardsProps> = ({
               price={product.price}
               oldPrice={product.oldPrice}
               onClick={() =>
-                openModal(`Узнать когда будет ${product.title}`, "ЖДУ ЗВОНКА")
+                startTransition(() =>
+                  openModal(`Узнать когда будет ${product.title}`, "ЖДУ ЗВОНКА")
+                )
               }
               buttonLabel='Узнать когда будет'
               size='sm'
