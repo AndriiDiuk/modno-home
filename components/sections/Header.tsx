@@ -35,7 +35,7 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
 
   return (
     <>
-      <header className='absolute top-0 left-0 w-full z-[100] py-4'>
+      <header className='absolute top-0 left-0 w-full z-100 py-4'>
         <div className='content flex items-center justify-between gap-8'>
           {/* Left: Logo and Description */}
           <Brand description={logoDescription} />
@@ -44,7 +44,7 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
             <div className='hidden lg:flex'>
               <a
                 href='#calculation'
-                className='hidden md:inline-flex items-center justify-center px-[16px] py-[8px] bg-brand-green  text-white text-[14px] font-semibold rounded-[4px] whitespace-nowrap '
+                className='hidden md:inline-flex items-center justify-center px-4 py-2 bg-brand-green  text-white text-[14px] font-semibold rounded-[4px] whitespace-nowrap '
               >
                 Доступен к заказу
               </a>
@@ -69,7 +69,7 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
 
           {/* Center: Working Hours */}
           <div className='flex items-center gap-4 lg:gap-8'>
-            <div className='flex flex-col text-right  max-w-[144px] md:max-w-[150px] md:text-center text-black'>
+            <div className='flex flex-col text-right  max-w-36 md:max-w-37.5 md:text-center text-black'>
               <p className='text-[13px] font-medium  leading-snug whitespace-pre-line'>
                 {workingHours}
               </p>

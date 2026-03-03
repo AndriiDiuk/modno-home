@@ -1,7 +1,8 @@
+"use client";
 import { CheckIcon } from "@/assets/icons";
 import { SocialCallout } from "@/components/ui";
-import Link from "next/link";
 import React from "react";
+import { useModal } from "../providers/ModalProvider";
 
 interface SizeOption {
   label: string;
@@ -42,6 +43,8 @@ export const InfoSofa: React.FC<InfoSofaProps> = ({
   const formattedOldPrice = oldPrice
     ? Number(oldPrice).toLocaleString("ru-RU")
     : null;
+
+  const { openModal } = useModal();
 
   return (
     <div
@@ -123,12 +126,12 @@ export const InfoSofa: React.FC<InfoSofaProps> = ({
 
       {/* CTA Button */}
       <div className='mb-2.5 mx-4.5'>
-        <Link
-          href='#calculation'
-          className='animate-shine w-full bg-brand-yellow min-w-0 md:min-w-0 text-center md:text-[17px] font-bold text-brand-black flex items-center justify-center px-12 py-3 rounded-lg'
+        <button
+          onClick={() => openModal(`Узнать стоимость своего размера`)}
+          className='animate-shine w-full bg-brand-yellow min-w-0 md:min-w-0 cursor-pointer text-center md:text-[17px] font-bold text-brand-black flex items-center justify-center px-12 py-3 rounded-lg'
         >
           {ctaText}
-        </Link>
+        </button>
       </div>
 
       {/* Footer text */}
