@@ -401,6 +401,7 @@ export interface Setting {
     socials?: {
       telegram?: string | null;
       vk?: string | null;
+      youtube?: string | null;
     };
   };
   footer?: {
@@ -491,6 +492,7 @@ export interface SettingsSelect<T extends boolean = true> {
           | {
               telegram?: T;
               vk?: T;
+              youtube?: T;
             };
       };
   footer?:

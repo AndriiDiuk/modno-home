@@ -13,12 +13,29 @@ export const CalculationSection: React.FC<CalculationSectionProps> = ({
   className = "",
 }) => {
   const [phone, setPhone] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Submit calculation request:", { phone });
+    setIsLoading(true);
 
-    alert("Спасибо! Мы свяжемся с вами для расчета стоимости.");
+    try {
+      const res = await fetch("/api/form-submissions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone, formType: "calculation" }),
+      });
+
+      if (!res.ok) throw new Error("Ошибка отправки");
+      setIsSubmitted(true);
+      setPhone("");
+    } catch (error) {
+      console.error("Form submission error:", error);
+      alert("Не удалось отправить заявку. Попробуйте позже.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -42,7 +59,13 @@ export const CalculationSection: React.FC<CalculationSectionProps> = ({
             />
             <AppButton
               type='submit'
-              label='Узнать стоимость'
+              label={
+                isLoading
+                  ? "Отправка..."
+                  : isSubmitted
+                    ? "Отправлено ✓"
+                    : "Узнать стоимость"
+              }
               variant='primary'
               size='lg'
             />

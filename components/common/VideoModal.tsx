@@ -20,12 +20,17 @@ export const VideoModal: React.FC<VideoModalProps> = ({
   const [isBuffering, setIsBuffering] = useState(true);
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     if (isOpen) {
       setMounted(true);
-      requestAnimationFrame(() => requestAnimationFrame(() => setOpen(true)));
+      setHasAnimated(false);
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        setOpen(true);
+        setHasAnimated(true);
+      }));
     } else {
       setOpen(false);
       timeoutRef.current = setTimeout(() => setMounted(false), DURATION);
@@ -48,10 +53,12 @@ export const VideoModal: React.FC<VideoModalProps> = ({
         video.play().catch(() => {});
       }
     } else {
-      document.body.style.overflow = "unset";
-      document.body.style.paddingRight = "0px";
-      const header = document.querySelector("header");
-      if (header) header.style.paddingRight = "";
+      setTimeout(() => {
+        document.body.style.overflow = "unset";
+        document.body.style.paddingRight = "0px";
+        const header = document.querySelector("header");
+        if (header) header.style.paddingRight = "";
+      }, DURATION);
       const video = videoRef.current;
       if (video) {
         video.pause();
@@ -79,7 +86,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({
 
   return (
     <div
-      className={`fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md duration-200 ${open ? "animate-in fade-in" : "animate-out fade-out"}`}
+      className={`fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md duration-200 ${open ? "animate-in fade-in" : hasAnimated ? "animate-out fade-out" : "opacity-0"}`}
       onClick={onClose}
     >
       <button
@@ -93,7 +100,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({
       </button>
 
       <div
-        className={`relative w-full max-w-[400px] mx-4 duration-200 ${open ? "animate-in zoom-in-95 slide-in-from-bottom-4" : "animate-out zoom-out-95 slide-out-to-bottom-4"}`}
+        className={`relative w-full max-w-[400px] mx-4 duration-200 ${open ? "animate-in zoom-in-95 slide-in-from-bottom-4" : hasAnimated ? "animate-out zoom-out-95 slide-out-to-bottom-4" : "opacity-0 scale-95"}`}
         onClick={(e) => e.stopPropagation()}
       >
         {isBuffering && (

@@ -13,5 +13,6 @@ export * from "./Modal";
 export * from "./ProductCard";
 export * from "./SectionTitle";
 export * from "./SocialCallout";
+export * from "./SocialCard";
 export * from "./SocialLinks";
 export * from "./VideoCard";

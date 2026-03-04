@@ -21,6 +21,7 @@ export const DownloadCatalog: React.FC<DownloadCatalogProps> = ({
   className = "",
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   return (
     <section
@@ -99,39 +100,44 @@ export const DownloadCatalog: React.FC<DownloadCatalogProps> = ({
         className='max-w-[1010px]'
       >
         <div className='relative flex flex-col lg:flex-row gap-6 md:gap-10 items-center overflow-hidden lg:min-h-[400px]'>
-          <div className='w-full lg:w-1/2'>
+          <div className={isFormSubmitted ? "w-full " : "w-full lg:w-1/2"}>
             <CallbackForm
               title='Чтобы получить каталог, заполните форму'
               subtitle=''
               buttonLabel='Жду каталог'
+              onSuccess={() => setIsFormSubmitted(true)}
               image={
-                <div
-                  className='-mb-[100px] -left-[8%] relative z-0 block md:hidden'
-                  style={{
-                    width: "clamp(300px, 130vw, 600px)",
-                    height: "clamp(250px, 110vw, 400px)",
-                  }}
-                >
-                  <Image
-                    src='/images/catalog.webp'
-                    alt='Каталог мебели'
-                    fill
-                    className='object-contain'
-                  />
-                </div>
+                !isFormSubmitted ? (
+                  <div
+                    className='-mb-[100px] -left-[8%] relative z-0 block md:hidden'
+                    style={{
+                      width: "clamp(300px, 130vw, 600px)",
+                      height: "clamp(250px, 110vw, 400px)",
+                    }}
+                  >
+                    <Image
+                      src='/images/catalog.webp'
+                      alt='Каталог мебели'
+                      fill
+                      className='object-contain'
+                    />
+                  </div>
+                ) : undefined
               }
             />
           </div>
 
           {/* Right Side: Catalog Image */}
-          <div className='relative lg:absolute lg:right-[6%] lg:-bottom-[56%] w-full lg:w-1/2 lg:h-[740px]  lg:scale-[1.2] z-0'>
-            <Image
-              src='/images/catalog.webp'
-              alt='Каталог мебели'
-              fill
-              className='object-contain'
-            />
-          </div>
+          {!isFormSubmitted && (
+            <div className='relative lg:absolute lg:right-[6%] lg:-bottom-[56%] w-full lg:w-1/2 lg:h-[740px]  lg:scale-[1.2] z-0'>
+              <Image
+                src='/images/catalog.webp'
+                alt='Каталог мебели'
+                fill
+                className='object-contain'
+              />
+            </div>
+          )}
         </div>
       </Modal>
     </section>

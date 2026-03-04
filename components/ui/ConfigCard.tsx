@@ -61,7 +61,7 @@ export const ConfigCard: React.FC<ConfigCardProps> = ({
         </div>
 
         {/* Footer: Price and Button */}
-        <div className='w-full mt-auto flex flex-col md:flex-row items-center justify-between gap-4 md:max-w-[80%] mx-auto'>
+        <div className='w-full mt-auto flex flex-col lg:flex-row items-center justify-between gap-4 md:max-w-[80%] mx-auto'>
           <div className='flex  whitespace-nowrap items-end gap-2 leading-[1.2]'>
             <div className='flex items-baseline gap-1'>
               <span className='text-[14px] md:text-[16px] font-medium text-brand-black'>
@@ -83,7 +83,7 @@ export const ConfigCard: React.FC<ConfigCardProps> = ({
             variant='primary'
             size='md'
             onClick={onClick}
-            className='md:min-w-[180px]'
+            className='!sm:min-w-[290px] lg:min-w-auto !xl:min-w-[172px] font-bold'
           />
         </div>
       </div>

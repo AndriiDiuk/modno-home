@@ -52,6 +52,11 @@ export const Settings: GlobalConfig = {
                       type: "text",
                       label: "Ссылка на VK",
                     },
+                    {
+                      name: "youtube",
+                      type: "text",
+                      label: "Ссылка на YouTube",
+                    },
                   ],
                 },
               ],

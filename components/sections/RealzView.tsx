@@ -18,12 +18,17 @@ export const RealzView: React.FC<RealzViewProps> = ({
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [showAll, setShowAll] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
   const lightboxTimeout = useRef<ReturnType<typeof setTimeout>>(null);
 
   const openLightbox = (index: number) => {
     if (lightboxTimeout.current) clearTimeout(lightboxTimeout.current);
     setSelectedIndex(index);
-    requestAnimationFrame(() => requestAnimationFrame(() => setLightboxOpen(true)));
+    setHasAnimated(false);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      setLightboxOpen(true);
+      setHasAnimated(true);
+    }));
   };
 
   const closeLightbox = () => {
@@ -63,10 +68,12 @@ export const RealzView: React.FC<RealzViewProps> = ({
     }
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "unset";
-      document.body.style.paddingRight = "0px";
-      const header = document.querySelector("header");
-      if (header) header.style.paddingRight = "";
+      setTimeout(() => {
+        document.body.style.overflow = "unset";
+        document.body.style.paddingRight = "0px";
+        const header = document.querySelector("header");
+        if (header) header.style.paddingRight = "";
+      }, 200);
     };
   }, [selectedIndex]);
 
@@ -130,7 +137,7 @@ export const RealzView: React.FC<RealzViewProps> = ({
       {/* Lightbox */}
       {selectedIndex !== null && (
         <div
-          className={`fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 duration-200 ${lightboxOpen ? "animate-in fade-in" : "animate-out fade-out"}`}
+          className={`fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 duration-200 ${lightboxOpen ? "animate-in fade-in" : hasAnimated ? "animate-out fade-out" : "opacity-0"}`}
           onClick={closeLightbox}
         >
           {/* Close Button */}
@@ -192,7 +199,7 @@ export const RealzView: React.FC<RealzViewProps> = ({
           </button>
 
           <div
-            className={`relative w-full max-w-5xl h-[80vh] flex items-center justify-center duration-200 ${lightboxOpen ? "animate-in zoom-in-95 slide-in-from-bottom-4" : "animate-out zoom-out-95 slide-out-to-bottom-4"}`}
+            className={`relative w-full max-w-5xl h-[80vh] flex items-center justify-center duration-200 ${lightboxOpen ? "animate-in zoom-in-95 slide-in-from-bottom-4" : hasAnimated ? "animate-out zoom-out-95 slide-out-to-bottom-4" : "opacity-0 scale-95"}`}
             onClick={(e) => e.stopPropagation()}
           >
             <Image

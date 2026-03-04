@@ -33,8 +33,10 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({
   };
   const closeModal = () => {
     setIsOpen(false);
-    setTitle(undefined);
-    setButtonLabel(undefined);
+    setTimeout(() => {
+      setTitle(undefined);
+      setButtonLabel(undefined);
+    }, 250);
   };
 
   return (

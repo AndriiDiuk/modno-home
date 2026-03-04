@@ -9,6 +9,7 @@ interface CallbackFormProps {
   subtitle?: string;
   buttonLabel?: string;
   image?: React.ReactNode;
+  onSuccess?: () => void;
   socials?: {
     vk?: string;
     youtube?: string;
@@ -20,17 +21,37 @@ export const CallbackForm: React.FC<CallbackFormProps> = ({
   subtitle = "Заполните форму ниже",
   buttonLabel = "ЖДУ ЗВОНКА",
   image,
+  onSuccess,
   socials,
 }) => {
   const [phone, setPhone] = useState("");
   const [agreed, setAgreed] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Submit callback:", { phone, agreed });
-    // Handle submission here
-    setIsSubmitted(true);
+    setIsLoading(true);
+
+    try {
+      const res = await fetch("/api/form-submissions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          phone,
+          formType: buttonLabel?.includes("каталог") ? "catalog" : "callback",
+        }),
+      });
+
+      if (!res.ok) throw new Error("Ошибка отправки");
+      setIsSubmitted(true);
+      onSuccess?.();
+    } catch (error) {
+      console.error("Form submission error:", error);
+      alert("Не удалось отправить заявку. Попробуйте позже.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (isSubmitted) {
@@ -39,7 +60,9 @@ export const CallbackForm: React.FC<CallbackFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit} className='flex flex-col items-center'>
-      <h2 className='text-xl md:text-2xl font-bold text-brand-black mb-2 tracking-tight text-center'>
+      <h2
+        className={`text-xl md:text-2xl font-bold text-brand-black ${subtitle ? "mb-2" : "mb-8"}  text-center max-w-[90%]`}
+      >
         {title}
       </h2>
       {subtitle && (
@@ -59,7 +82,12 @@ export const CallbackForm: React.FC<CallbackFormProps> = ({
         />
       </div>
       <div className='mb-4'>
-        <AppButton label={buttonLabel} size='lg' variant='secondary' />
+        <AppButton
+          type='submit'
+          label={isLoading ? "Отправка..." : buttonLabel}
+          size='lg'
+          variant='secondary'
+        />
       </div>
 
       <Checkbox
