@@ -21,7 +21,7 @@ export const ContactGroup: React.FC<ContactGroupProps> = ({
     >
       <a
         href={`tel:${phone.replace(/\D/g, "")}`}
-        className='text-[14px] sm:text-lg lg:text-xl font-bold text-black hover:opacity-70 transition-opacity whitespace-nowrap leading-[1.2]'
+        className='text-[14px] sm:text-lg lg:text-xl font-nordeco font-bold text-black hover:opacity-70 transition-opacity whitespace-nowrap leading-[1.2]'
       >
         {phone}
       </a>

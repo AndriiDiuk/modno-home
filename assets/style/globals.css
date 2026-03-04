@@ -73,6 +73,38 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Nordeco';
+  src: url('../fonts/Nordeco/NordecoCyrillic-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nordeco';
+  src: url('../fonts/Nordeco/NordecoCyrillic-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nordeco';
+  src: url('../fonts/Nordeco/NordecoCyrillic-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nordeco';
+  src: url('../fonts/Nordeco/NordecoCyrillic-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --color-background: #ffffff;
   --color-foreground: #000000;
@@ -116,6 +148,7 @@
 
 @theme {
   --font-sans: 'Gilroy', ui-sans-serif, system-ui, sans-serif;
+  --font-nordeco: 'Nordeco', ui-sans-serif, system-ui, sans-serif;
   --color-warning: var(--color-button-yellow);
   --color-brand-black: var(--color-brand-black);
   --color-brand-dark: var(--color-brand-dark);

@@ -1,10 +1,19 @@
 import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: NextRequest) {
   try {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      console.error("RESEND_API_KEY is not set");
+      return NextResponse.json(
+        { error: "Сервер не настроен для отправки писем" },
+        { status: 500 },
+      );
+    }
+
+    const resend = new Resend(apiKey);
+
     const body = await request.json();
     const { phone, formType } = body;
 
