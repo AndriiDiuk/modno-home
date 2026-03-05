@@ -34,49 +34,6 @@ const ContactUsSection = dynamic(
     ),
 );
 
-const MOCK_VIDEOS = [
-  {
-    id: 1,
-    title: "Обзор этой модели",
-    overlayText: "в интерьере",
-    views: 49,
-    image: "/images/video-card/home/1.webp",
-    video: "/sofas/Easy/1.mp4",
-  },
-  {
-    id: 2,
-    title: "Про ткани",
-    overlayText: "ткани",
-    views: 37,
-    image: "/images/video-card/home/2.webp",
-    video: "/sofas/2.mp4",
-  },
-  {
-    id: 3,
-    title: "Каркас из фанеры E1",
-    overlayText: "каркас",
-    views: 64,
-    image: "/images/video-card/home/3.webp",
-    video: "/sofas/3.mp4",
-  },
-  {
-    id: 4,
-    title: "Про мягкость",
-    overlayText: "мягкость",
-    views: 64,
-    image: "/images/video-card/home/4.webp",
-    video: "/sofas/4.mp4",
-  },
-  {
-    id: 5,
-    title: "Обзор производства",
-    overlayText: "производство",
-    views: 64,
-    image: "/images/video-card/home/5.webp",
-    video: "/sofas/5.mp4",
-  },
-];
-
 export default async function HomePage() {
   const [homeData, settingsData] = await Promise.all([
     getCachedHome(),
@@ -97,6 +54,22 @@ export default async function HomePage() {
     edition: catalogEdition,
   } = catalogSection || {};
 
+  const { videoSection } = homeData || {};
+  const {
+    title: videoTitle = "Короткие видео",
+    subtitle: videoSubtitle = "В интерьере, на производстве, каркас и ткани",
+    videos: rawVideos = [],
+  } = videoSection || {};
+
+  const videos = (rawVideos as any[]).map((v: any, i: number) => ({
+    id: i + 1,
+    title: v.title,
+    overlayText: v.overlayText || "",
+    views: v.views || 0,
+    image: "",
+    video: v.videoUrl,
+  }));
+
   const products = (selectedSofas || []).map((sofa: any) => ({
     id: sofa.id,
     title: sofa.title,
@@ -108,12 +81,14 @@ export default async function HomePage() {
 
   return (
     <div>
-      <VideoSection
-        title='Короткие видео'
-        subtitle='В интерьере, на производстве, каркас и ткани'
-        videos={MOCK_VIDEOS}
-        className='pt-[120px] md:pt-[160px]'
-      />
+      {videos.length > 0 && (
+        <VideoSection
+          title={videoTitle}
+          subtitle={videoSubtitle}
+          videos={videos}
+          className='pt-[120px] md:pt-[160px]'
+        />
+      )}
       <DownloadCatalog
         title={catalogTitle}
         subtitle={catalogSubtitle}

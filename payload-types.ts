@@ -524,6 +524,25 @@ export interface Home {
      */
     selectedSofas?: (string | Sofa)[] | null;
   };
+  videoSection?: {
+    title?: string | null;
+    subtitle?: string | null;
+    /**
+     * До 5 видео для главной страницы
+     */
+    videos?:
+      | {
+          title: string;
+          overlayText?: string | null;
+          views?: number | null;
+          /**
+           * URL видео (например, с Supabase)
+           */
+          videoUrl: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
   catalogSection?: {
     title?: string | null;
     subtitle?: string | null;
@@ -618,6 +637,21 @@ export interface HomeSelect<T extends boolean = true> {
         title?: T;
         subtitle?: T;
         selectedSofas?: T;
+      };
+  videoSection?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        videos?:
+          | T
+          | {
+              title?: T;
+              overlayText?: T;
+              views?: T;
+              videoUrl?: T;
+              id?: T;
+            };
       };
   catalogSection?:
     | T

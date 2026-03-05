@@ -37,6 +37,62 @@ export const Home: GlobalConfig = {
       ],
     },
     {
+      name: "videoSection",
+      type: "group",
+      label: "Секция видео",
+      fields: [
+        {
+          name: "title",
+          type: "text",
+          label: "Заголовок",
+          defaultValue: "Короткие видео",
+        },
+        {
+          name: "subtitle",
+          type: "text",
+          label: "Подзаголовок",
+          defaultValue: "В интерьере, на производстве, каркас и ткани",
+        },
+        {
+          name: "videos",
+          type: "array",
+          label: "Видео",
+          maxRows: 5,
+          admin: {
+            description: "До 5 видео для главной страницы",
+          },
+          fields: [
+            {
+              name: "title",
+              type: "text",
+              label: "Название",
+              required: true,
+            },
+            {
+              name: "overlayText",
+              type: "text",
+              label: "Текст на превью",
+            },
+            {
+              name: "views",
+              type: "number",
+              label: "Количество просмотров",
+              defaultValue: 0,
+            },
+            {
+              name: "videoUrl",
+              type: "text",
+              label: "Ссылка на видео",
+              required: true,
+              admin: {
+                description: "URL видео (например, с Supabase)",
+              },
+            },
+          ],
+        },
+      ],
+    },
+    {
       name: "catalogSection",
       type: "group",
       label: "Секция каталога",
