@@ -72,13 +72,15 @@ export const VideoCard: React.FC<VideoCardProps> = ({
         className='relative aspect-[9/16] w-full rounded-[8px] overflow-hidden cursor-pointer shadow-sm'
       >
         {/* Thumbnail image — shown until video loads */}
-        <Image
-          src={image}
-          alt={title}
-          fill
-          className={`object-cover transition-opacity duration-300 ${videoLoaded ? "opacity-0" : "opacity-100"}`}
-          sizes='(max-width: 768px) 100vw, 33vw'
-        />
+        {image && (
+          <Image
+            src={image}
+            alt={title}
+            fill
+            className={`object-cover transition-opacity duration-300 ${videoLoaded ? "opacity-0" : "opacity-100"}`}
+            sizes='(max-width: 768px) 100vw, 33vw'
+          />
+        )}
 
         {/* Video — preloaded when visible, plays on hover */}
         {video && isVisible && (

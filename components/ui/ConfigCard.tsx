@@ -6,7 +6,7 @@ interface ConfigCardProps {
   image: string;
   title: string;
   subtitle?: string;
-  dimensions: string;
+  dimensions?: string;
   price: number | string;
   oldPrice?: number | string;
   onClick?: () => void;
@@ -50,7 +50,7 @@ export const ConfigCard: React.FC<ConfigCardProps> = ({
           от {dimensions}
         </span>
 
-        <div className='relative w-[80%] aspect-[4/3]'>
+        <div className='relative w-[80%] aspect-4/3'>
           <Image
             src={image}
             alt={title}

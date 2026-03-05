@@ -174,10 +174,15 @@ export interface Media {
  */
 export interface Sofa {
   id: string;
+  /**
+   * Например: Easy, Monaco, Cloud
+   */
   title: string;
   category?: string | null;
-  price: number;
-  oldPrice?: number | null;
+  /**
+   * Название папки в public/sofas/ (например: easy, monaco). Фото берутся автоматически из этой папки.
+   */
+  folderName?: string | null;
   imageFilename:
     | 'bad.webp'
     | 'bianco.webp'
@@ -188,7 +193,91 @@ export interface Sofa {
     | 'moscow.webp'
     | 'new-york.webp'
     | 'yard.webp';
+  price: number;
+  oldPrice?: number | null;
   isActive?: boolean | null;
+  hero?: {
+    /**
+     * Например: "Диван Easy"
+     */
+    topLine?: string | null;
+    /**
+     * Например: "Easy"
+     */
+    topBold?: string | null;
+    /**
+     * Например: "амбассадор комфорта в лофт стиле"
+     */
+    bottomLine?: string | null;
+    /**
+     * Например: "амбассадор"
+     */
+    bottomBold?: string | null;
+    description?: string | null;
+    /**
+     * Например: "Доступен к заказу, именно для Вас"
+     */
+    descriptionBold?: string | null;
+    bgColor?: string | null;
+  };
+  showcase?: {
+    /**
+     * Например: "Угловой диван Easy"
+     */
+    title?: string | null;
+    description?: string | null;
+  };
+  info?: {
+    /**
+     * Например: "Оттоманка со спинкой и подлокотником, широкая сидушка..."
+     */
+    equipment?: string | null;
+    sizes?:
+      | {
+          label: string;
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+    materials?:
+      | {
+          label: string;
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Варианты конфигураций с ценами
+   */
+  configs?:
+    | {
+        title: string;
+        description?: string | null;
+        price: number;
+        oldPrice?: number | null;
+        /**
+         * Например: "2000x1550x700"
+         */
+        dimensions?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Видео для секции коротких видео
+   */
+  videos?:
+    | {
+        title: string;
+        overlayText?: string | null;
+        views?: number | null;
+        /**
+         * URL видео (например, с Supabase)
+         */
+        videoUrl: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -318,10 +407,66 @@ export interface MediaSelect<T extends boolean = true> {
 export interface SofasSelect<T extends boolean = true> {
   title?: T;
   category?: T;
+  folderName?: T;
+  imageFilename?: T;
   price?: T;
   oldPrice?: T;
-  imageFilename?: T;
   isActive?: T;
+  hero?:
+    | T
+    | {
+        topLine?: T;
+        topBold?: T;
+        bottomLine?: T;
+        bottomBold?: T;
+        description?: T;
+        descriptionBold?: T;
+        bgColor?: T;
+      };
+  showcase?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  info?:
+    | T
+    | {
+        equipment?: T;
+        sizes?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+              id?: T;
+            };
+        materials?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+              id?: T;
+            };
+      };
+  configs?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        price?: T;
+        oldPrice?: T;
+        dimensions?: T;
+        id?: T;
+      };
+  videos?:
+    | T
+    | {
+        title?: T;
+        overlayText?: T;
+        views?: T;
+        videoUrl?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

@@ -3,6 +3,8 @@ import { InfoSofa } from "@/components/sections";
 import { ColorSelector, HeroTitle } from "@/components/ui";
 import { fetchPayloadLocal, getCachedSettings } from "@/lib/payload";
 import { toSlug } from "@/lib/toSlug";
+import fs from "fs";
+import path from "path";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -39,49 +41,6 @@ const ReviewSection = dynamic(() =>
 const RealzView = dynamic(() =>
   import("@/components/sections/RealzView").then((m) => m.RealzView),
 );
-
-const MOCK_VIDEOS = [
-  {
-    id: 1,
-    title: "Обзор этой модели",
-    overlayText: "в интерьере",
-    views: 49,
-    image: "/images/video-card/home/1.webp",
-    video: "/sofas/Easy/1.mp4",
-  },
-  {
-    id: 2,
-    title: "Про ткани",
-    overlayText: "ткани",
-    views: 37,
-    image: "/images/video-card/home/2.webp",
-    video: "/sofas/2.mp4",
-  },
-  {
-    id: 3,
-    title: "Каркас из фанеры E1",
-    overlayText: "каркас",
-    views: 64,
-    image: "/images/video-card/home/3.webp",
-    video: "/sofas/3.mp4",
-  },
-  {
-    id: 4,
-    title: "Про мягкость",
-    overlayText: "мягкость",
-    views: 64,
-    image: "/images/video-card/home/4.webp",
-    video: "/sofas/4.mp4",
-  },
-  {
-    id: 5,
-    title: "Обзор производства",
-    overlayText: "производство",
-    views: 64,
-    image: "/images/video-card/home/5.webp",
-    video: "/sofas/5.mp4",
-  },
-];
 
 interface SofaPageProps {
   params: Promise<{ slug: string }>;
@@ -149,18 +108,78 @@ export default async function SofaPage({ params }: SofaPageProps) {
     notFound();
   }
 
+  // Folder for images
+  const folder = (sofa as any).folderName || toSlug(sofa.title);
+  const basePath = `/sofas/${folder}`;
+
+  // Hero data
+  const hero = (sofa as any).hero || {};
+  const topBold = hero.topBold
+    ? hero.topBold.split(",").map((s: string) => s.trim())
+    : [];
+  const bottomBold = hero.bottomBold
+    ? hero.bottomBold.split(",").map((s: string) => s.trim())
+    : [];
+  const descriptionBold = hero.descriptionBold
+    ? hero.descriptionBold.split(",").map((s: string) => s.trim())
+    : [];
+  // Scan views/ folder for images
+  const viewsDir = path.join(process.cwd(), "public", "sofas", folder, "views");
+  let viewImages: string[] = [];
+  try {
+    const files = fs.readdirSync(viewsDir)
+      .filter((f: string) => /\.(webp|jpg|jpeg|png)$/i.test(f))
+      .sort((a: string, b: string) => {
+        const numA = parseInt(a) || 0;
+        const numB = parseInt(b) || 0;
+        return numA - numB;
+      });
+    viewImages = files.map((f: string) => `${basePath}/views/${f}`);
+  } catch {
+    viewImages = [];
+  }
+
+  // Showcase data
+  const showcase = (sofa as any).showcase || {};
+
+  // Info data
+  const info = (sofa as any).info || {};
+
+  // Configs data
+  const configs = ((sofa as any).configs || []).map((c: any, i: number) => ({
+    image: `${basePath}/config-${i + 1}.webp`,
+    title: c.title,
+    subtitle: c.description,
+    dimensions: c.dimensions || "",
+    price: c.price,
+    oldPrice: c.oldPrice,
+  }));
+
+  // Videos data
+  const videos = ((sofa as any).videos || []).map((v: any, i: number) => ({
+    id: i + 1,
+    title: v.title,
+    overlayText: v.overlayText || "",
+    views: v.views || 0,
+    image: "",
+    video: v.videoUrl,
+  }));
+
   return (
     <div className='w-full '>
-      <div className='bg-[#E9E9E7]  pt-7.5 lg:pt-40 pb-12 relative overflow-hidden'>
+      <div
+        className='pt-7.5 lg:pt-40 pb-12 relative overflow-hidden'
+        style={{ backgroundColor: hero.bgColor || "#E9E9E7" }}
+      >
         <Image
-          src='/sofas/Easy/bg-hero.webp'
+          src={`${basePath}/bg-hero.webp`}
           alt={sofa.title}
           fill
           className='hidden lg:block object-cover object-top z-0 w-full'
           priority
         />
         <Image
-          src='/sofas/Easy/bg-hero-mob.webp'
+          src={`${basePath}/bg-hero-mob.webp`}
           alt={sofa.title}
           fill
           className='lg:hidden object-cover sm:object-[center_24%]  md:object-[center_18%] object-top  z-0'
@@ -201,12 +220,12 @@ export default async function SofaPage({ params }: SofaPageProps) {
             </div>
             <div className=' flex flex-col justify-between w-full relative z-2  '>
               <HeroTitle
-                topLine='Диван Easy'
-                bottomLine='амбассадор комфорта в лофт стиле'
-                bottomBold={["амбассадор "]}
-                description='Доступен к заказу в любом размере и конфигурации, подберем цвет, ткань и мягкость именно для Вас'
-                topBold={["Easy"]}
-                descriptionBold={["Доступен к заказу", "именно для Вас"]}
+                topLine={hero.topLine || `${sofa.category || "Диван"} ${sofa.title}`}
+                bottomLine={hero.bottomLine || ""}
+                bottomBold={bottomBold}
+                description={hero.description || ""}
+                topBold={topBold}
+                descriptionBold={descriptionBold}
                 className='mb-48'
               />
               <div className='flex justify-center w-full relative z-2 mb-5 lg:mb-0 '>
@@ -216,25 +235,11 @@ export default async function SofaPage({ params }: SofaPageProps) {
             <div className='relative z-2'>
               <InfoSofa
                 socials={socials}
-                equipment='Оттоманка со спинкой и подлокотником, широкая сидушка со спинкой и подлокотником, 4 подушки.'
-                sizes={[
-                  { label: "Ширина дивана", value: "от 2000...3200 мм." },
-                  { label: "Глубина посадки", value: "от 600...850 мм." },
-                  { label: "Оттоманки", value: "от 1250...1750 мм." },
-                ]}
-                materials={[
-                  { label: "Каркас", value: "березовая фанера класса E1." },
-                  {
-                    label: "Ткань",
-                    value: "велюр, микровелюр, шенилл, рогожка, букле.",
-                  },
-                  {
-                    label: "Наполнитель",
-                    value: "200 мм. ППУ + премиум Elax.",
-                  },
-                ]}
-                price={102900}
-                oldPrice={144900}
+                equipment={info.equipment || ""}
+                sizes={info.sizes || []}
+                materials={info.materials || []}
+                price={sofa.price}
+                oldPrice={sofa.oldPrice ?? undefined}
                 className='shrink-0 mx-auto lg:mx-0'
               />
             </div>
@@ -242,34 +247,30 @@ export default async function SofaPage({ params }: SofaPageProps) {
 
           <div className='relative flex flex-col lg:flex-row gap-6 items-start z-2'>
             <div className='flex-1 w-full'>
-              <RealzView
-                images={[
-                  "/sofas/Easy/views/1.webp",
-                  "/sofas/Easy/views/2.webp",
-                  "/sofas/Easy/views/3.webp",
-                  "/sofas/Easy/views/4.webp",
-                  "/sofas/Easy/views/5.webp",
-                ]}
-              />
+              <RealzView images={viewImages} />
             </div>
           </div>
         </div>
       </div>
 
-      <SofaShowcaseSection
-        title='Угловой диван Easy'
-        description='Он станет амбассадором комфорта в лофт стиле, для интерьера вашего дома. Впечатляющий эстетический вид и исключительный комфорт делают его центральным элементом в декоре вашего дома. Благодаря прочности и устойчивости каркаса, этот диван обеспечит комфорта на долгие годы использования.'
-        image='/sofas/Easy/section-2.webp'
-        mobileImage='/sofas/Easy/section-2-mob.webp'
-      />
+      {showcase.title && (
+        <SofaShowcaseSection
+          title={showcase.title}
+          description={showcase.description || ""}
+          image={`${basePath}/section-2.webp`}
+          mobileImage={`${basePath}/section-2-mob.webp`}
+        />
+      )}
 
-      <VideoSection
-        title='Короткие видео'
-        subtitle='В интерьере, на производстве, каркас и ткани'
-        videos={MOCK_VIDEOS}
-      />
+      {videos.length > 0 && (
+        <VideoSection
+          title='Короткие видео'
+          subtitle='В интерьере, на производстве, каркас и ткани'
+          videos={videos}
+        />
+      )}
 
-      <ConfigSection />
+      <ConfigSection configs={configs} />
 
       <CalculationSection socials={socials} />
 
