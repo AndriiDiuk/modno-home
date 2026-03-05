@@ -39,6 +39,16 @@ export const Sofas: CollectionConfig = {
       },
     },
     {
+      name: "viewsCount",
+      type: "number",
+      label: "Количество фото в галерее (views/)",
+      defaultValue: 0,
+      admin: {
+        description:
+          'Сколько фото в папке views/ (файлы: 1.webp, 2.webp, ...)',
+      },
+    },
+    {
       name: "imageFilename",
       type: "select",
       label: "Изображение карточки (из папки images/cards/)",

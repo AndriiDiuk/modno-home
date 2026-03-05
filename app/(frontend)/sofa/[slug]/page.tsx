@@ -3,8 +3,6 @@ import { InfoSofa } from "@/components/sections";
 import { ColorSelector, HeroTitle } from "@/components/ui";
 import { fetchPayloadLocal, getCachedSettings } from "@/lib/payload";
 import { toSlug } from "@/lib/toSlug";
-import fs from "fs";
-import path from "path";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -138,21 +136,9 @@ export default async function SofaPage({ params }: SofaPageProps) {
   const descriptionBold = hero.descriptionBold
     ? hero.descriptionBold.split(",").map((s: string) => s.trim())
     : [];
-  // Scan views/ folder for images
-  const viewsDir = path.join(process.cwd(), "public", "sofas", folder, "views");
-  let viewImages: string[] = [];
-  try {
-    const files = fs.readdirSync(viewsDir)
-      .filter((f: string) => /\.(webp|jpg|jpeg|png)$/i.test(f))
-      .sort((a: string, b: string) => {
-        const numA = parseInt(a) || 0;
-        const numB = parseInt(b) || 0;
-        return numA - numB;
-      });
-    viewImages = files.map((f: string) => `${basePath}/views/${f}`);
-  } catch {
-    viewImages = [];
-  }
+  // Generate views image paths from viewsCount (files: 1.webp, 2.webp, ...)
+  const viewsCount = (sofa as any).viewsCount || 0;
+  const viewImages = Array.from({ length: viewsCount }, (_, i) => `${basePath}/views/${i + 1}.webp`);
 
   // Showcase data
   const showcase = (sofa as any).showcase || {};

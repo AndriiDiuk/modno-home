@@ -183,6 +183,10 @@ export interface Sofa {
    * Название папки в public/sofas/ (например: easy, monaco). Фото берутся автоматически из этой папки.
    */
   folderName?: string | null;
+  /**
+   * Сколько фото в папке views/ (файлы: 1.webp, 2.webp, ...)
+   */
+  viewsCount?: number | null;
   imageFilename:
     | 'bad.webp'
     | 'bianco.webp'
@@ -408,6 +412,7 @@ export interface SofasSelect<T extends boolean = true> {
   title?: T;
   category?: T;
   folderName?: T;
+  viewsCount?: T;
   imageFilename?: T;
   price?: T;
   oldPrice?: T;
