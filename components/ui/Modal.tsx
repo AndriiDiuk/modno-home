@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -37,31 +38,14 @@ export const Modal: React.FC<ModalProps> = ({
     }
   }, [isOpen]);
 
-  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
-
   useEffect(() => {
-    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     if (isOpen) {
-      const scrollbarWidth =
-        window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
-      const header = document.querySelector("header");
-      if (header) header.style.paddingRight = `${scrollbarWidth}px`;
     } else {
-      scrollTimeoutRef.current = setTimeout(() => {
-        document.body.style.overflow = "unset";
-        document.body.style.paddingRight = "0px";
-        const header = document.querySelector("header");
-        if (header) header.style.paddingRight = "";
-      }, DURATION);
+      document.body.style.overflow = "";
     }
     return () => {
-      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
-      document.body.style.overflow = "unset";
-      document.body.style.paddingRight = "0px";
-      const header = document.querySelector("header");
-      if (header) header.style.paddingRight = "";
+      document.body.style.overflow = "";
     };
   }, [isOpen]);
 

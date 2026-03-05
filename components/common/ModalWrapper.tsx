@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 
 interface ModalWrapperProps {
@@ -38,38 +38,16 @@ export const ModalWrapper: React.FC<ModalWrapperProps> = ({
     }
   }, [isOpen]);
 
-  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
-
   useEffect(() => {
-    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     if (isOpen) {
-      const scrollbarWidth =
-        window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
-      const header = document.querySelector("header");
-      if (header) header.style.paddingRight = `${scrollbarWidth}px`;
     } else {
-      scrollTimeoutRef.current = setTimeout(() => {
-        document.body.style.overflow = "unset";
-        document.body.style.paddingRight = "0px";
-        const header = document.querySelector("header");
-        if (header) header.style.paddingRight = "";
-      }, DURATION + 150);
+      document.body.style.overflow = "";
     }
     return () => {
-      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+      document.body.style.overflow = "";
     };
   }, [isOpen]);
-
-  useEffect(() => {
-    return () => {
-      document.body.style.overflow = "unset";
-      document.body.style.paddingRight = "0px";
-      const header = document.querySelector("header");
-      if (header) header.style.paddingRight = "";
-    };
-  }, []);
 
   if (!mounted) return null;
 

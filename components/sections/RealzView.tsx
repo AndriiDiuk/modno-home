@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 import { AppButton } from "../ui/AppButton";
 
 interface RealzViewProps {
@@ -15,70 +17,20 @@ export const RealzView: React.FC<RealzViewProps> = ({
   title = "Как он выглядит?",
   className = "",
 }) => {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   const [showAll, setShowAll] = useState(false);
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const lightboxTimeout = useRef<ReturnType<typeof setTimeout>>(null);
 
-  const openLightbox = (index: number) => {
-    if (lightboxTimeout.current) clearTimeout(lightboxTimeout.current);
-    setSelectedIndex(index);
-    setHasAnimated(false);
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      setLightboxOpen(true);
-      setHasAnimated(true);
-    }));
-  };
+  const slides = images.map((src) => ({ src }));
 
-  const closeLightbox = () => {
-    setLightboxOpen(false);
-    lightboxTimeout.current = setTimeout(() => setSelectedIndex(null), 200);
-  };
-
-  const handleNext = (e?: React.MouseEvent) => {
-    e?.stopPropagation();
-    if (selectedIndex !== null) {
-      setSelectedIndex((selectedIndex + 1) % images.length);
-    }
-  };
-
-  const handlePrev = (e?: React.MouseEvent) => {
-    e?.stopPropagation();
-    if (selectedIndex !== null) {
-      setSelectedIndex((selectedIndex - 1 + images.length) % images.length);
-    }
-  };
-
-  // Close on Escape key and handle Arrows
+  // Reset padding-right that lightbox adds (scrollbar-gutter handles it)
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowRight") handleNext();
-      if (e.key === "ArrowLeft") handlePrev();
-    };
-    if (selectedIndex !== null) {
-      const scrollbarWidth =
-        window.innerWidth - document.documentElement.clientWidth;
-      window.addEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "hidden";
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
-      const header = document.querySelector("header");
-      if (header) header.style.paddingRight = `${scrollbarWidth}px`;
+    if (selectedIndex >= 0) {
+      document.body.style.paddingRight = "0px";
     }
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      setTimeout(() => {
-        document.body.style.overflow = "unset";
-        document.body.style.paddingRight = "0px";
-        const header = document.querySelector("header");
-        if (header) header.style.paddingRight = "";
-      }, 200);
-    };
   }, [selectedIndex]);
 
   return (
-    <section className={`w-full  ${className}`}>
+    <section className={`w-full ${className}`}>
       <div className='content flex flex-col items-center'>
         <h2 className='text-[24px] md:text-[32px] font-bold text-center mb-8 md:mb-12 block md:hidden'>
           {title}
@@ -90,7 +42,7 @@ export const RealzView: React.FC<RealzViewProps> = ({
             <div
               key={index}
               className='relative w-full aspect-230/136 max-w-[230px] rounded-[8px] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity mx-auto'
-              onClick={() => openLightbox(index)}
+              onClick={() => setSelectedIndex(index)}
             >
               <Image
                 src={src}
@@ -110,7 +62,7 @@ export const RealzView: React.FC<RealzViewProps> = ({
               <div
                 key={index}
                 className='relative w-full aspect-230/136 rounded-[8px] overflow-hidden cursor-pointer'
-                onClick={() => openLightbox(index)}
+                onClick={() => setSelectedIndex(index)}
               >
                 <Image
                   src={src}
@@ -134,84 +86,28 @@ export const RealzView: React.FC<RealzViewProps> = ({
         </div>
       </div>
 
-      {/* Lightbox */}
-      {selectedIndex !== null && (
-        <div
-          className={`fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 duration-200 ${lightboxOpen ? "animate-in fade-in" : hasAnimated ? "animate-out fade-out" : "opacity-0"}`}
-          onClick={closeLightbox}
-        >
-          {/* Close Button */}
-          <button
-            onClick={closeLightbox}
-            className='absolute top-6 right-6 text-white hover:opacity-70 transition-opacity cursor-pointer p-2 z-10'
-            aria-label='Close'
-          >
-            <svg
-              width='32'
-              height='32'
-              viewBox='0 0 24 24'
-              fill='none'
-              stroke='currentColor'
-              strokeWidth='2'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-            >
-              <line x1='18' y1='6' x2='6' y2='18'></line>
-              <line x1='6' y1='6' x2='18' y2='18'></line>
-            </svg>
-          </button>
-
-          {/* Navigation Arrows */}
-          <button
-            onClick={handlePrev}
-            className='absolute left-4 md:left-10 top-1/2 -translate-y-1/2 text-white hover:opacity-70 transition-opacity cursor-pointer p-4 z-10'
-          >
-            <svg
-              width='40'
-              height='40'
-              viewBox='0 0 24 24'
-              fill='none'
-              stroke='currentColor'
-              strokeWidth='2'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-            >
-              <polyline points='15 18 9 12 15 6'></polyline>
-            </svg>
-          </button>
-
-          <button
-            onClick={handleNext}
-            className='absolute right-4 md:right-10 top-1/2 -translate-y-1/2 text-white hover:opacity-70 transition-opacity cursor-pointer p-4 z-10'
-          >
-            <svg
-              width='40'
-              height='40'
-              viewBox='0 0 24 24'
-              fill='none'
-              stroke='currentColor'
-              strokeWidth='2'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-            >
-              <polyline points='9 18 15 12 9 6'></polyline>
-            </svg>
-          </button>
-
-          <div
-            className={`relative w-full max-w-5xl h-[80vh] flex items-center justify-center duration-200 ${lightboxOpen ? "animate-in zoom-in-95 slide-in-from-bottom-4" : hasAnimated ? "animate-out zoom-out-95 slide-out-to-bottom-4" : "opacity-0 scale-95"}`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Image
-              src={images[selectedIndex]}
-              alt='Full view'
-              fill
-              className='object-contain'
-              priority
-            />
-          </div>
-        </div>
-      )}
+      <Lightbox
+        open={selectedIndex >= 0}
+        index={selectedIndex}
+        close={() => setSelectedIndex(-1)}
+        slides={slides}
+        styles={{
+          container: { backgroundColor: "rgba(0, 0, 0, 0.6)", backdropFilter: "blur(12px)" },
+        }}
+        render={{
+          slide: ({ slide }) => (
+            <div className="relative w-full h-full max-w-[90vw] max-h-[80vh] md:max-w-[50vw] md:max-h-[66vh] m-auto">
+              <Image
+                src={slide.src}
+                alt='Full view'
+                fill
+                className='object-contain'
+                sizes='50vw'
+              />
+            </div>
+          ),
+        }}
+      />
     </section>
   );
 };
