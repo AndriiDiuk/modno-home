@@ -80,6 +80,21 @@ async function getSofaData(slug: string) {
   }
 }
 
+export async function generateStaticParams() {
+  try {
+    const payload = await fetchPayloadLocal();
+    const result = await payload.find({
+      collection: "sofas",
+      where: { isActive: { equals: true } },
+      overrideAccess: true,
+      limit: 100,
+    });
+    return result.docs.map((doc: any) => ({ slug: toSlug(doc.title) }));
+  } catch {
+    return [];
+  }
+}
+
 export async function generateMetadata({ params }: SofaPageProps) {
   const { slug } = await params;
   const { currentSofa: sofa } = await getSofaData(slug);
@@ -108,8 +123,8 @@ export default async function SofaPage({ params }: SofaPageProps) {
     notFound();
   }
 
-  // Folder for images
-  const folder = (sofa as any).folderName || toSlug(sofa.title);
+  // Folder for images (always lowercase for case-sensitive Linux/Vercel)
+  const folder = ((sofa as any).folderName || toSlug(sofa.title)).toLowerCase();
   const basePath = `/sofas/${folder}`;
 
   // Hero data
