@@ -398,6 +398,16 @@ export interface Setting {
     logoDescription?: string | null;
     workingHours?: string | null;
     phone?: string | null;
+    videos?: {
+      /**
+       * URL видео (например, с Supabase)
+       */
+      video1?: string | null;
+      /**
+       * URL видео (например, с Supabase)
+       */
+      video2?: string | null;
+    };
     socials?: {
       telegram?: string | null;
       vk?: string | null;
@@ -487,6 +497,12 @@ export interface SettingsSelect<T extends boolean = true> {
         logoDescription?: T;
         workingHours?: T;
         phone?: T;
+        videos?:
+          | T
+          | {
+              video1?: T;
+              video2?: T;
+            };
         socials?:
           | T
           | {

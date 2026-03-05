@@ -11,6 +11,10 @@ interface HeaderProps {
       logoDescription?: string;
       workingHours?: string;
       phone?: string;
+      videos?: {
+        video1?: string;
+        video2?: string;
+      };
       socials?: {
         telegram?: string;
         vk?: string;
@@ -25,6 +29,7 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
       logoDescription = "Производство модульных диванов в Челябинске с доставкой по РФ",
       workingHours = "Шоурум в Челябинске с 9:00 до 18:00",
       phone = "+7 (992) 503-54-99",
+      videos = {},
       socials = {},
     } = {},
   } = data || {};
@@ -55,13 +60,13 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
                 text='Смотреть'
                 imageSrc='/images/stories/st_1.webp'
                 className='text-[14px] leading-none h-auto'
-                onClick={() => setActiveVideo("/video/1.mp4")}
+                onClick={() => videos.video1 && setActiveVideo(videos.video1)}
               />
               <CircleCTA
                 text='Смотреть'
                 imageSrc='/images/stories/st_2.webp'
                 className='text-[14px] leading-none h-auto'
-                onClick={() => setActiveVideo("/video/2.mp4")}
+                onClick={() => videos.video2 && setActiveVideo(videos.video2)}
                 delay='1s'
               />
             </div>

@@ -38,6 +38,29 @@ export const Settings: GlobalConfig = {
                   defaultValue: "+7 (992) 503-54-99",
                 },
                 {
+                  name: "videos",
+                  type: "group",
+                  label: "Видео в шапке",
+                  fields: [
+                    {
+                      name: "video1",
+                      type: "text",
+                      label: "Ссылка на видео 1",
+                      admin: {
+                        description: "URL видео (например, с Supabase)",
+                      },
+                    },
+                    {
+                      name: "video2",
+                      type: "text",
+                      label: "Ссылка на видео 2",
+                      admin: {
+                        description: "URL видео (например, с Supabase)",
+                      },
+                    },
+                  ],
+                },
+                {
                   name: "socials",
                   type: "group",
                   label: "Социальные сети",
