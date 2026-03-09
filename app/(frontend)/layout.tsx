@@ -87,7 +87,7 @@ export default async function FrontendLayout({
         )}
       </head>
       <body
-        className="font-sans antialiased flex flex-col min-h-screen"
+        className='font-sans antialiased flex flex-col min-h-screen '
         suppressHydrationWarning
       >
         <ModalProvider>

@@ -163,7 +163,10 @@ export default async function SofaPage({ params }: SofaPageProps) {
     : [];
   // Generate views image paths from viewsCount (files: 1.webp, 2.webp, ...)
   const viewsCount = (sofa as any).viewsCount || 0;
-  const viewImages = Array.from({ length: viewsCount }, (_, i) => `${basePath}/views/${i + 1}.webp`);
+  const viewImages = Array.from(
+    { length: viewsCount },
+    (_, i) => `${basePath}/views/${i + 1}.webp`,
+  );
 
   // Showcase data
   const showcase = (sofa as any).showcase || {};
@@ -192,7 +195,7 @@ export default async function SofaPage({ params }: SofaPageProps) {
   }));
 
   return (
-    <div className='w-full '>
+    <div className='w-full show-slow'>
       <div
         className='pt-7.5 lg:pt-40 pb-12 relative overflow-hidden'
         style={{ backgroundColor: hero.bgColor || "#E9E9E7" }}
@@ -246,7 +249,9 @@ export default async function SofaPage({ params }: SofaPageProps) {
             </div>
             <div className=' flex flex-col justify-between w-full relative z-2  '>
               <HeroTitle
-                topLine={hero.topLine || `${sofa.category || "Диван"} ${sofa.title}`}
+                topLine={
+                  hero.topLine || `${sofa.category || "Диван"} ${sofa.title}`
+                }
                 bottomLine={hero.bottomLine || ""}
                 bottomBold={bottomBold}
                 description={hero.description || ""}
