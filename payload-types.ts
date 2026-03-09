@@ -268,6 +268,10 @@ export interface Sofa {
       }[]
     | null;
   /**
+   * Выберите до 4 диванов для секции «Другие модели». Если не выбрано — покажутся первые 4 активных.
+   */
+  relatedSofas?: (string | Sofa)[] | null;
+  /**
    * Видео для секции коротких видео
    */
   videos?:
@@ -463,6 +467,7 @@ export interface SofasSelect<T extends boolean = true> {
         dimensions?: T;
         id?: T;
       };
+  relatedSofas?: T;
   videos?:
     | T
     | {

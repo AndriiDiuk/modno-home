@@ -59,10 +59,21 @@ async function getSofaData(slug: string) {
     const currentSofa = result.docs.find(
       (doc: any) => toSlug(doc.title) === slug,
     );
-    const otherSofas = result.docs
-      .filter((doc: any) => toSlug(doc.title) !== slug)
-      .slice(0, 4)
-      .map((sofa: any) => ({
+
+    let otherSofas: any[];
+
+    // Use manually selected related sofas if configured
+    const related = (currentSofa as any)?.relatedSofas;
+    if (Array.isArray(related) && related.length > 0) {
+      // relatedSofas can be IDs or populated objects depending on depth
+      const relatedDocs = related
+        .map((ref: any) => {
+          if (typeof ref === "object" && ref !== null) return ref;
+          return result.docs.find((d: any) => d.id === ref);
+        })
+        .filter((d: any) => d && d.isActive !== false);
+
+      otherSofas = relatedDocs.slice(0, 4).map((sofa: any) => ({
         id: sofa.id,
         title: sofa.title,
         category: sofa.category,
@@ -70,6 +81,20 @@ async function getSofaData(slug: string) {
         price: sofa.price,
         oldPrice: sofa.oldPrice,
       }));
+    } else {
+      // Fallback: first 4 active sofas excluding current
+      otherSofas = result.docs
+        .filter((doc: any) => toSlug(doc.title) !== slug)
+        .slice(0, 4)
+        .map((sofa: any) => ({
+          id: sofa.id,
+          title: sofa.title,
+          category: sofa.category,
+          image: `/images/cards/${sofa.imageFilename}`,
+          price: sofa.price,
+          oldPrice: sofa.oldPrice,
+        }));
+    }
 
     return { currentSofa: currentSofa || null, otherSofas };
   } catch (error) {

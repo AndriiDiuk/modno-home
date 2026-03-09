@@ -280,6 +280,23 @@ export const Sofas: CollectionConfig = {
           ],
         },
         {
+          label: "Другие модели",
+          fields: [
+            {
+              name: "relatedSofas",
+              type: "relationship",
+              relationTo: "sofas",
+              hasMany: true,
+              maxRows: 4,
+              label: "Похожие диваны",
+              admin: {
+                description:
+                  "Выберите до 4 диванов для секции «Другие модели». Если не выбрано — покажутся первые 4 активных.",
+              },
+            },
+          ],
+        },
+        {
           label: "Видео",
           fields: [
             {
