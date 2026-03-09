@@ -238,6 +238,26 @@ export const Sofas: CollectionConfig = {
           label: "Конфигурации",
           fields: [
             {
+              name: "configsTitle",
+              type: "text",
+              label: "Заголовок секции",
+              defaultValue: "ПОПУЛЯРНЫЕ КОНФИГУРАЦИИ",
+              admin: {
+                description:
+                  'Заголовок секции конфигураций. По умолчанию: "ПОПУЛЯРНЫЕ КОНФИГУРАЦИИ"',
+              },
+            },
+            {
+              name: "configsSubtitle",
+              type: "text",
+              label: "Подзаголовок секции",
+              defaultValue: "Все параметры можно менять под себя",
+              admin: {
+                description:
+                  'Подзаголовок секции конфигураций. По умолчанию: "Все параметры можно менять под себя"',
+              },
+            },
+            {
               name: "configs",
               type: "array",
               label: "Конфигурации дивана",
@@ -282,6 +302,26 @@ export const Sofas: CollectionConfig = {
         {
           label: "Другие модели",
           fields: [
+            {
+              name: "relatedSofasTitle",
+              type: "text",
+              label: "Заголовок секции",
+              defaultValue: "Другие модели диванов",
+              admin: {
+                description:
+                  'Заголовок секции "Другие модели". По умолчанию: "Другие модели диванов"',
+              },
+            },
+            {
+              name: "relatedSofasSubtitle",
+              type: "text",
+              label: "Подзаголовок секции",
+              defaultValue: "Выбирайте подходящий для себя",
+              admin: {
+                description:
+                  'Подзаголовок секции "Другие модели". По умолчанию: "Выбирайте подходящий для себя"',
+              },
+            },
             {
               name: "relatedSofas",
               type: "relationship",

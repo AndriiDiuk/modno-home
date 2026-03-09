@@ -80,7 +80,7 @@ export default async function HomePage() {
           title={videoTitle}
           subtitle={videoSubtitle}
           videos={videos}
-          className='pt-[120px] md:pt-[160px]'
+          className='pt-30 md:pt-40'
         />
       )}
       <DownloadCatalog

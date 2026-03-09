@@ -252,6 +252,14 @@ export interface Sofa {
       | null;
   };
   /**
+   * Заголовок секции конфигураций. По умолчанию: "ПОПУЛЯРНЫЕ КОНФИГУРАЦИИ"
+   */
+  configsTitle?: string | null;
+  /**
+   * Подзаголовок секции конфигураций. По умолчанию: "Все параметры можно менять под себя"
+   */
+  configsSubtitle?: string | null;
+  /**
    * Варианты конфигураций с ценами
    */
   configs?:
@@ -267,6 +275,14 @@ export interface Sofa {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Заголовок секции "Другие модели". По умолчанию: "Другие модели диванов"
+   */
+  relatedSofasTitle?: string | null;
+  /**
+   * Подзаголовок секции "Другие модели". По умолчанию: "Выбирайте подходящий для себя"
+   */
+  relatedSofasSubtitle?: string | null;
   /**
    * Выберите до 4 диванов для секции «Другие модели». Если не выбрано — покажутся первые 4 активных.
    */
@@ -457,6 +473,8 @@ export interface SofasSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  configsTitle?: T;
+  configsSubtitle?: T;
   configs?:
     | T
     | {
@@ -467,6 +485,8 @@ export interface SofasSelect<T extends boolean = true> {
         dimensions?: T;
         id?: T;
       };
+  relatedSofasTitle?: T;
+  relatedSofasSubtitle?: T;
   relatedSofas?: T;
   videos?:
     | T

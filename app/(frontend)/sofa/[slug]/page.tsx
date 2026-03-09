@@ -96,10 +96,15 @@ async function getSofaData(slug: string) {
         }));
     }
 
-    return { currentSofa: currentSofa || null, otherSofas };
+    return {
+      currentSofa: currentSofa || null,
+      otherSofas,
+      relatedSofasTitle: currentSofa?.relatedSofasTitle || "Другие модели диванов",
+      relatedSofasSubtitle: currentSofa?.relatedSofasSubtitle || "Выбирайте подходящий для себя",
+    };
   } catch (error) {
     console.error("Error fetching sofa data:", error);
-    return { currentSofa: null, otherSofas: [] };
+    return { currentSofa: null, otherSofas: [], relatedSofasTitle: "", relatedSofasSubtitle: "" };
   }
 }
 
@@ -134,7 +139,7 @@ export async function generateMetadata({ params }: SofaPageProps) {
 
 export default async function SofaPage({ params }: SofaPageProps) {
   const { slug } = await params;
-  const [{ currentSofa: sofa, otherSofas }, settingsData] = await Promise.all([
+  const [{ currentSofa: sofa, otherSofas, relatedSofasTitle, relatedSofasSubtitle }, settingsData] = await Promise.all([
     getSofaData(slug),
     getCachedSettings(),
   ]);
@@ -301,15 +306,19 @@ export default async function SofaPage({ params }: SofaPageProps) {
         />
       )}
 
-      <ConfigSection configs={configs} />
+      <ConfigSection
+        title={sofa.configsTitle || undefined}
+        subtitle={sofa.configsSubtitle || undefined}
+        configs={configs}
+      />
 
       <CalculationSection socials={socials} />
 
       <DownloadCatalog />
 
       <OtherCardsSection
-        title='Другие модели'
-        subtitle='Возможно, вам понравится что-то еще'
+        title={relatedSofasTitle}
+        subtitle={relatedSofasSubtitle}
         products={otherSofas}
       />
 
