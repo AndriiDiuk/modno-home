@@ -2,7 +2,15 @@
   "permissions": {
     "allow": [
       "Bash(timeout 20 npx next dev --port 3099)",
-      "Bash(pnpm generate:types)"
+      "Bash(pnpm generate:types)",
+      "Bash(node -e \":*)",
+      "Bash(npx tsx -e \":*)",
+      "Bash(npx ts-node --esm -e \":*)",
+      "Bash(npx next exec ./scripts/copy-videos.ts)",
+      "Bash(pnpm add -D tsx)",
+      "Bash(pnpm tsx ./scripts/copy-videos.ts)",
+      "Bash(dotenv -- pnpm tsx ./scripts/copy-videos.ts)",
+      "Bash(node --env-file=.env --import tsx ./scripts/copy-videos.ts)"
     ]
   }
 }
