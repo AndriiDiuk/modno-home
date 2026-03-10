@@ -9,12 +9,16 @@ import { AppButton } from "../ui/AppButton";
 interface RealzViewProps {
   images: string[];
   title?: string;
+  subtitle?: string;
+  showTitle?: boolean;
   className?: string;
 }
 
 export const RealzView: React.FC<RealzViewProps> = ({
   images,
   title = "Как он выглядит?",
+  subtitle,
+  showTitle = false,
   className = "",
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -32,9 +36,18 @@ export const RealzView: React.FC<RealzViewProps> = ({
   return (
     <section className={`w-full ${className}`}>
       <div className='content flex flex-col items-center'>
-        <h2 className='text-[24px] md:text-[32px] font-bold text-center mb-8 md:mb-12 block md:hidden'>
-          {title}
-        </h2>
+        {showTitle && (
+          <div className='text-center mb-8 md:mb-[30px] leading-[1.1]'>
+            <h2 className='text-[24px] md:text-[36px] font-bold text-brand-black'>
+              {title}
+            </h2>
+            {subtitle && (
+              <p className='text-[14px] md:text-[23px] text-brand-black mt-1'>
+                {subtitle}
+              </p>
+            )}
+          </div>
+        )}
 
         {/* Desktop Layout */}
         <div className='hidden md:grid grid-cols-5 gap-5 w-full'>

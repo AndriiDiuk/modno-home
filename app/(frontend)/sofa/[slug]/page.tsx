@@ -99,12 +99,19 @@ async function getSofaData(slug: string) {
     return {
       currentSofa: currentSofa || null,
       otherSofas,
-      relatedSofasTitle: currentSofa?.relatedSofasTitle || "Другие модели диванов",
-      relatedSofasSubtitle: currentSofa?.relatedSofasSubtitle || "Выбирайте подходящий для себя",
+      relatedSofasTitle:
+        currentSofa?.relatedSofasTitle || "Другие модели диванов",
+      relatedSofasSubtitle:
+        currentSofa?.relatedSofasSubtitle || "Выбирайте подходящий для себя",
     };
   } catch (error) {
     console.error("Error fetching sofa data:", error);
-    return { currentSofa: null, otherSofas: [], relatedSofasTitle: "", relatedSofasSubtitle: "" };
+    return {
+      currentSofa: null,
+      otherSofas: [],
+      relatedSofasTitle: "",
+      relatedSofasSubtitle: "",
+    };
   }
 }
 
@@ -139,10 +146,10 @@ export async function generateMetadata({ params }: SofaPageProps) {
 
 export default async function SofaPage({ params }: SofaPageProps) {
   const { slug } = await params;
-  const [{ currentSofa: sofa, otherSofas, relatedSofasTitle, relatedSofasSubtitle }, settingsData] = await Promise.all([
-    getSofaData(slug),
-    getCachedSettings(),
-  ]);
+  const [
+    { currentSofa: sofa, otherSofas, relatedSofasTitle, relatedSofasSubtitle },
+    settingsData,
+  ] = await Promise.all([getSofaData(slug), getCachedSettings()]);
   const socials = (settingsData as any)?.header?.socials || {};
   const phone = (settingsData as any)?.header?.phone || "";
   const phoneClean = phone.replace(/[\s\-\(\)]/g, "");
@@ -263,6 +270,9 @@ export default async function SofaPage({ params }: SofaPageProps) {
                 topBold={topBold}
                 descriptionBold={descriptionBold}
                 className='mb-48'
+                {...(sofa.title === "Cloud" && {
+                  bottomLineClassName: "lg:text-[23px] md:max-w-[450px]",
+                })}
               />
               <div className='flex justify-center w-full relative z-2 mb-5 lg:mb-0 '>
                 <ColorSelector />

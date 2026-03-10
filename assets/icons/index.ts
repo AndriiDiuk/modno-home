@@ -1,4 +1,5 @@
 export * from "./CheckIcon";
+export * from "./DoubleChevronIcon";
 export * from "./Logo";
 export * from "./PhoneIcon";
 export * from "./TelegramIcon";

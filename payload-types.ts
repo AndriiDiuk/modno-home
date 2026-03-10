@@ -546,6 +546,20 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Home {
   id: string;
+  heroSection?: {
+    title?: string | null;
+    titleBold?: string | null;
+    title2?: string | null;
+    title2Bold?: string | null;
+    description?: string | null;
+    descriptionBold?: string | null;
+    catalogButtonLabel?: string | null;
+    catalogButtonSublabel?: string | null;
+    showroomButtonLabel?: string | null;
+    showroomButtonSublabel?: string | null;
+    popularTitle?: string | null;
+    popularSubtitle?: string | null;
+  };
   sofasSection?: {
     title?: string | null;
     subtitle?: string | null;
@@ -661,6 +675,22 @@ export interface Setting {
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
+  heroSection?:
+    | T
+    | {
+        title?: T;
+        titleBold?: T;
+        title2?: T;
+        title2Bold?: T;
+        description?: T;
+        descriptionBold?: T;
+        catalogButtonLabel?: T;
+        catalogButtonSublabel?: T;
+        showroomButtonLabel?: T;
+        showroomButtonSublabel?: T;
+        popularTitle?: T;
+        popularSubtitle?: T;
+      };
   sofasSection?:
     | T
     | {

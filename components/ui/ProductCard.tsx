@@ -43,7 +43,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const cardSize = {
     sm: {
       image: "h-[154px] md:h-[208px]",
-      title: "text-[27px] md:text-[40px]",
+      title:
+        title == "Интерьерные кровати"
+          ? "text-[22px] md:text-[28px]"
+          : "text-[27px] md:text-[40px]",
       category: "text-[14px]",
       titleWrap: "top-4 md:top-8",
       price: "text-[18px]",
@@ -54,7 +57,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     },
     md: {
       image: "h-72",
-      title: "text-[36px] sm:text-[50px]",
+      title:
+        title == "Интерьерные кровати"
+          ? "text-[26px] md:text-[32px]"
+          : "text-[36px] sm:text-[50px]",
       category: "text-[14px] md:text-[18px]",
       titleWrap: "top-8",
       price: "text-[24px]",

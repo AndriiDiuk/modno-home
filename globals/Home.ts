@@ -8,6 +8,85 @@ export const Home: GlobalConfig = {
   },
   fields: [
     {
+      name: "heroSection",
+      type: "group",
+      label: "Hero Секция",
+      fields: [
+        {
+          name: "title",
+          type: "text",
+          label: "Заголовок 1",
+          defaultValue: "Модульные диваны",
+        },
+        {
+          name: "titleBold",
+          type: "text",
+          label: "Жирные слова в Заголовке 1 (через запятую)",
+          defaultValue: "Модульные диваны",
+        },
+        {
+          name: "title2",
+          type: "text",
+          label: "Заголовок 2",
+          defaultValue: "которые украсят ваш интерьер",
+        },
+        {
+          name: "title2Bold",
+          type: "text",
+          label: "Жирные слова в Заголовке 2 (через запятую)",
+        },
+        {
+          name: "description",
+          type: "textarea",
+          label: "Описание (выделение жирным через отдельное поле)",
+          defaultValue:
+            "Изготовим за 30 дней, любой размер и конфигурацию, подберем цвет, ткань и мягкость именно для Вас",
+        },
+        {
+          name: "descriptionBold",
+          type: "text",
+          label: "Жирные фразы в описании (через запятую)",
+          defaultValue: "Изготовим за 30 дней, именно для Вас",
+        },
+        {
+          name: "catalogButtonLabel",
+          type: "text",
+          label: "Текст кнопки каталога (верхний)",
+          defaultValue: "Скачивайте каталог диванов",
+        },
+        {
+          name: "catalogButtonSublabel",
+          type: "text",
+          label: "Текст кнопки каталога (нижний)",
+          defaultValue: "с ценами и размерами",
+        },
+        {
+          name: "showroomButtonLabel",
+          type: "text",
+          label: "Текст кнопки шоурума (верхний)",
+          defaultValue: "Запишитесь в шоурум",
+        },
+        {
+          name: "showroomButtonSublabel",
+          type: "text",
+          label: "Текст кнопки шоурума (нижний)",
+          defaultValue: "выбрать ткань, мягкость, модель",
+        },
+        {
+          name: "popularTitle",
+          type: "text",
+          label: "Заголовок популярных конфигураций",
+          defaultValue: "Популярные конфигурации",
+        },
+        {
+          name: "popularSubtitle",
+          type: "text",
+          label: "Подзаголовок популярных конфигураций",
+          defaultValue: "Прямые, угловые, большие, малые и т.д",
+        },
+      ],
+    },
+    {
       name: "sofasSection",
       type: "group",
       label: "Секция диванов",

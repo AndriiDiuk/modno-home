@@ -1,6 +1,9 @@
 import { getCachedHome, getCachedSettings } from "@/lib/payload";
 import dynamic from "next/dynamic";
 
+const HomeHero = dynamic(() =>
+  import("@/components/sections/HomeHero").then((m) => m.HomeHero),
+);
 const VideoSection = dynamic(() =>
   import("@/components/sections/VideoSection").then((m) => m.VideoSection),
 );
@@ -33,8 +36,20 @@ export default async function HomePage() {
     getCachedHome(),
     getCachedSettings(),
   ]);
-  const { sofasSection, catalogSection } = homeData || {};
+  const { heroSection, sofasSection, catalogSection } = homeData || {};
+  const hero = heroSection || {};
+  const titleBold = hero.titleBold
+    ? hero.titleBold.split(",").map((s: string) => s.trim())
+    : undefined;
+  const title2Bold = hero.title2Bold
+    ? hero.title2Bold.split(",").map((s: string) => s.trim())
+    : undefined;
+  const descriptionBold = hero.descriptionBold
+    ? hero.descriptionBold.split(",").map((s: string) => s.trim())
+    : undefined;
+
   const socials = (settingsData as any)?.header?.socials || {};
+  const phone = (settingsData as any)?.header?.phone || "";
   const {
     title = "Каталог диванов",
     subtitle = "Которые украсят ваш интерьер",
@@ -75,12 +90,20 @@ export default async function HomePage() {
 
   return (
     <div className='show-slow'>
+      <HomeHero
+        phone={phone}
+        socials={socials}
+        {...(heroSection || {})}
+        titleBold={titleBold}
+        title2Bold={title2Bold}
+        descriptionBold={descriptionBold}
+      />
+
       {videos.length > 0 && (
         <VideoSection
           title={videoTitle}
           subtitle={videoSubtitle}
           videos={videos}
-          className='pt-30 md:pt-40'
         />
       )}
       <DownloadCatalog

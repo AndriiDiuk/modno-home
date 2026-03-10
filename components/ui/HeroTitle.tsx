@@ -8,6 +8,7 @@ interface HeroTitleProps {
   bottomBold?: string[];
   descriptionBold?: string[];
   className?: string;
+  bottomLineClassName?: string;
 }
 
 function highlightWords(text: string, bold: string[] = []) {
@@ -38,16 +39,19 @@ export const HeroTitle: React.FC<HeroTitleProps> = ({
   bottomBold = [],
   descriptionBold = [],
   className = "",
+  bottomLineClassName,
 }) => {
   return (
     <div className={`text-center ${className}`}>
       <h1 className='text-[27px] md:text-[32px] lg:text-[45px] text-brand-black leading-[1.1] '>
         {highlightWords(topLine, topBold)}
       </h1>
-      <p className='text-[16px] sm:text-[18px] lg:text-[33px] text-brand-black leading-[1.2]'>
+      <p
+        className={`text-[16px] sm:text-[18px] ${bottomLineClassName || "lg:text-[33px]"} text-brand-black leading-[1.2] max-w-full md:max-w-[80%] mx-auto`}
+      >
         {highlightWords(bottomLine, bottomBold)}
       </p>
-      <p className='text-[16px] sm:text-[18px] text-brand-black leading-[1.1] mt-3 sm:max-w-141.25 mx-auto block max-w-82.5'>
+      <p className='text-[16px] sm:text-[18px] text-brand-black leading-[1.1] mt-3 sm:max-w-141.25 mx-auto block max-w-82.5 '>
         {highlightWords(description, descriptionBold)}
       </p>
     </div>
