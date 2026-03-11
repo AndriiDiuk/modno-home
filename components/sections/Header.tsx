@@ -40,7 +40,7 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
 
   return (
     <>
-      <header className='absolute top-0 md:top-5 left-0 w-full z-100 py-4'>
+      <header className='absolute top-0 md:top-4 left-0 w-full z-100 py-4'>
         <div className='content flex items-center justify-between gap-8'>
           {/* Left: Logo and Description */}
           <Brand description={logoDescription} />
@@ -49,7 +49,7 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
             <div className='hidden lg:flex'>
               <a
                 href='#calculation'
-                className='hidden md:inline-flex items-center font-medium justify-center px-4 py-[6px] bg-brand-green  text-white text-[14px] font-semibold rounded-[4px] whitespace-nowrap '
+                className='hidden md:inline-flex items-center font-medium justify-center px-4 py-[6px] bg-brand-green  text-white text-[14px]  rounded-[4px] whitespace-nowrap '
               >
                 Доступен к заказу
               </a>

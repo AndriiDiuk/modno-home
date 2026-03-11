@@ -79,7 +79,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
 
   return (
     <>
-      <section className='relative overflow-hidden pt-[94px] lg:pt-40 pb-[90px] bg-[#E9E9E7] '>
+      <section className='relative overflow-hidden pt-[94px] lg:pt-[174px] pb-[90px] bg-[#E9E9E7] '>
         {/* Background Images */}
         <Image
           src='/images/bg-hero.png'
@@ -158,7 +158,9 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
 
               {/* White Showroom Button */}
               <button
-                onClick={() => openModal(showroomButtonLabel, undefined, "Главная")}
+                onClick={() =>
+                  openModal(showroomButtonLabel, undefined, "Главная")
+                }
                 className='w-full bg-white text-brand-black text-[14px] md:text-[17px] rounded-[8px] py-[10px] px-1 md:px-6 text-center border border-brand-border transition-all duration-300 hover:scale-[1.02] cursor-pointer'
               >
                 <span className='font-bold block'>{showroomButtonLabel}</span>

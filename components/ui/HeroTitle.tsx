@@ -47,7 +47,7 @@ export const HeroTitle: React.FC<HeroTitleProps> = ({
         {highlightWords(topLine, topBold)}
       </h1>
       <p
-        className={`text-[clamp(14px,1.25vw+10px,18px)] ${bottomLineClassName || "lg:text-[33px] md:whitespace-nowrap"} text-brand-black leading-[1.1] max-w-full  mx-auto `}
+        className={`text-[clamp(14px,1.25vw+10px,18px)] ${bottomLineClassName || "lg:text-[27px]"} text-brand-black leading-[1.1] max-w-full  mx-auto `}
       >
         {highlightWords(bottomLine, bottomBold)}
       </p>
