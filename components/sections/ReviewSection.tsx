@@ -38,10 +38,10 @@ export const ReviewSection: React.FC<ReviewSectionProps> = ({
     },
     breakpoints: {
       "(min-width: 640px)": {
-        slides: { perView: 2, spacing: 0 },
+        slides: { perView: 2, spacing: 20, origin: "center" },
       },
       "(min-width: 1024px)": {
-        slides: { perView: 3, spacing: 0 },
+        slides: { perView: 4, spacing: 30, origin: "center" },
       },
     },
   });
