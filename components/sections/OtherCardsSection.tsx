@@ -50,7 +50,7 @@ export const OtherCardsSection: React.FC<OtherCardsProps> = ({
               oldPrice={product.oldPrice}
               onClick={() =>
                 startTransition(() =>
-                  openModal(`Узнать когда будет ${product.title}`, "ЖДУ ЗВОНКА")
+                  openModal(`Узнать когда будет ${product.title}`, "ЖДУ ЗВОНКА", `Диван ${product.title}`)
                 )
               }
               buttonLabel='Узнать когда будет'

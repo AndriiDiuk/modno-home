@@ -11,6 +11,7 @@ import { SuccessMessage } from "./SuccessMessage";
 interface ColorModalProps {
   isOpen: boolean;
   onClose: () => void;
+  sofaName?: string;
 }
 
 const COLORS_DATA = [
@@ -102,16 +103,34 @@ const COLORS_DATA = [
   { src: "/images/colors/ic.png", name: "Dark Shadow", pantone: "19-3906 TCX" },
 ];
 
-export const ColorModal: React.FC<ColorModalProps> = ({ isOpen, onClose }) => {
+export const ColorModal: React.FC<ColorModalProps> = ({ isOpen, onClose, sofaName }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isAgreed, setIsAgreed] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (phoneNumber.length === 15 && isAgreed) {
+    if (phoneNumber.length < 10 || !isAgreed) return;
+    setIsLoading(true);
+    try {
+      const res = await fetch("/api/form-submissions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          phone: phoneNumber,
+          formType: "colors",
+          sourcePage: sofaName ? `Диван ${sofaName}` : undefined,
+        }),
+      });
+      if (!res.ok) throw new Error("Ошибка отправки");
       setIsSubmitted(true);
+    } catch (error) {
+      console.error("Form submission error:", error);
+      alert("Не удалось отправить заявку. Попробуйте позже.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -209,7 +228,7 @@ export const ColorModal: React.FC<ColorModalProps> = ({ isOpen, onClose }) => {
                 <AppButton
                   variant='secondary'
                   size='lg'
-                  label='УЗНАТЬ ПОДРОБНЕЕ ПРО ТКАНИ И ЦВЕТА'
+                  label={isLoading ? 'Отправка...' : 'УЗНАТЬ ПОДРОБНЕЕ ПРО ТКАНИ И ЦВЕТА'}
                   type='submit'
                   className='text-[14px] md:!text-[16px] !whitespace-normal !leading-[1.2]'
                 />

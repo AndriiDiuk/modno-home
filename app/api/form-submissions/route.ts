@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     const resend = new Resend(apiKey);
 
     const body = await request.json();
-    const { phone, formType } = body;
+    const { phone, formType, sourcePage, formTitle } = body;
 
     if (!phone) {
       return NextResponse.json(
@@ -37,18 +37,22 @@ export async function POST(request: NextRequest) {
       callback: "Заявка на обратный звонок",
       catalog: "Запрос каталога",
       calculation: "Запрос расчёта стоимости",
+      colors: "Запрос о тканях и цветах",
     };
 
-    const subject = subjectMap[formType] || "Новая заявка с сайта";
+    const baseSubject = subjectMap[formType] || "Новая заявка с сайта";
+    const subjectParts = [baseSubject, sourcePage].filter(Boolean);
+    const subject = subjectParts.join(" — ");
 
     await resend.emails.send({
       from: "Modno Home <onboarding@resend.dev>",
       to: recipientEmail,
       subject,
       html: `
-        <h2>${subject}</h2>
+        <h2>${baseSubject}</h2>
         <p><strong>Телефон:</strong> ${phone}</p>
-        <p><strong>Тип заявки:</strong> ${formType || "не указан"}</p>
+        ${formTitle ? `<p><strong>Запрос:</strong> ${formTitle}</p>` : ""}
+        ${sourcePage ? `<p><strong>Страница:</strong> ${sourcePage}</p>` : ""}
         <p><strong>Дата:</strong> ${new Date().toLocaleString("ru-RU", { timeZone: "Europe/Moscow" })}</p>
       `,
     });

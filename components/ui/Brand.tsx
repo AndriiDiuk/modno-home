@@ -27,7 +27,7 @@ export const Brand: React.FC<BrandProps> = ({
         <Logo
           width={logoWidth}
           height={logoHeight}
-          className='max-w-[150px] md:max-w-[174px] w-full'
+          className='w-[150px] md:w-[175px] md:h-[46px] h-[35px]'
         />
       </Link>
 
@@ -37,7 +37,7 @@ export const Brand: React.FC<BrandProps> = ({
             className={`md:h-12 h-8 w-px bg-brand-black ${showDescription ? "block" : "hidden"} xl:block ml-2`}
           />
           <p
-            className={`text-[10px] md:text-[13px] max-w-[190px] md:max-w-[250px] leading-[1.4] ${showDescription ? "block" : "hidden"} xl:block`}
+            className={`text-[10px] md:text-[13px] max-w-[190px] md:max-w-[218px] leading-[1.4] ${showDescription ? "block" : "hidden"} xl:block`}
           >
             {description}
           </p>

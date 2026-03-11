@@ -21,6 +21,7 @@ interface InfoSofaProps {
   price: number;
   oldPrice?: number;
   ctaText?: string;
+  sofaName?: string;
   socials?: { telegram?: string; vk?: string };
   className?: string;
 }
@@ -36,6 +37,7 @@ export const InfoSofa: React.FC<InfoSofaProps> = ({
   price,
   oldPrice,
   ctaText = "Узнать стоимость своего размера за 5 мин.",
+  sofaName,
   socials,
   className = "",
 }) => {
@@ -72,7 +74,7 @@ export const InfoSofa: React.FC<InfoSofaProps> = ({
           {sizes.map((size, index) => (
             <div key={index} className='flex items-end gap-2'>
               <CheckIcon />
-              <span className='text-[13px] md:text-[14px] font-semibold whitespace-nowrap md:whitespace-normal  text-brand-black'>
+              <span className='text-[13px] md:text-[14px] font-semibold  whitespace-nowrap  text-brand-black'>
                 {size.label}:
               </span>
               <DottedLine />
@@ -127,7 +129,13 @@ export const InfoSofa: React.FC<InfoSofaProps> = ({
       {/* CTA Button */}
       <div className='mb-2.5 mx-4.5'>
         <button
-          onClick={() => openModal(`Узнать стоимость своего размера`)}
+          onClick={() =>
+            openModal(
+              `Узнать стоимость своего размера`,
+              undefined,
+              sofaName ? `Диван ${sofaName}` : undefined,
+            )
+          }
           className='animate-shine w-full bg-brand-yellow min-w-0 md:min-w-0 cursor-pointer text-center md:text-[17px] font-bold text-brand-black flex items-center justify-center px-12 py-3 rounded-lg'
         >
           {ctaText}

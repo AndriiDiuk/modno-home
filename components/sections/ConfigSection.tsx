@@ -17,6 +17,7 @@ interface ConfigSectionProps {
   title?: string;
   subtitle?: string;
   configs?: ConfigItem[];
+  sofaName?: string;
   className?: string;
 }
 
@@ -24,6 +25,7 @@ export const ConfigSection: React.FC<ConfigSectionProps> = ({
   title = "ПОПУЛЯРНЫЕ КОНФИГУРАЦИИ",
   subtitle = "Все параметры можно менять под себя",
   configs = [],
+  sofaName,
   className = "",
 }) => {
   const { openModal } = useModal();
@@ -47,7 +49,7 @@ export const ConfigSection: React.FC<ConfigSectionProps> = ({
               key={index}
               {...config}
               onClick={() =>
-                openModal(`Узнать подробнее о модели ${config.title}`)
+                openModal(`Узнать подробнее о модели ${config.title}`, undefined, sofaName ? `Диван ${sofaName}` : undefined)
               }
             />
           ))}

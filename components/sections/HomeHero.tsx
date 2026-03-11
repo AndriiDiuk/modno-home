@@ -158,7 +158,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
 
               {/* White Showroom Button */}
               <button
-                onClick={() => openModal(showroomButtonLabel)}
+                onClick={() => openModal(showroomButtonLabel, undefined, "Главная")}
                 className='w-full bg-white text-brand-black text-[14px] md:text-[17px] rounded-[8px] py-[10px] px-1 md:px-6 text-center border border-brand-border transition-all duration-300 hover:scale-[1.02] cursor-pointer'
               >
                 <span className='font-bold block'>{showroomButtonLabel}</span>

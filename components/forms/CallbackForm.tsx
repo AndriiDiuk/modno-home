@@ -10,6 +10,7 @@ interface CallbackFormProps {
   buttonLabel?: string;
   image?: React.ReactNode;
   onSuccess?: () => void;
+  sourcePage?: string;
   socials?: {
     vk?: string;
     youtube?: string;
@@ -22,6 +23,7 @@ export const CallbackForm: React.FC<CallbackFormProps> = ({
   buttonLabel = "ЖДУ ЗВОНКА",
   image,
   onSuccess,
+  sourcePage,
   socials,
 }) => {
   const [phone, setPhone] = useState("");
@@ -40,6 +42,8 @@ export const CallbackForm: React.FC<CallbackFormProps> = ({
         body: JSON.stringify({
           phone,
           formType: buttonLabel?.includes("каталог") ? "catalog" : "callback",
+          sourcePage,
+          formTitle: title,
         }),
       });
 

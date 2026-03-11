@@ -7,6 +7,7 @@ import React, { useState } from "react";
 interface ColorSelectorProps {
   colors?: string[];
   onSeeMore?: () => void;
+  sofaName?: string;
   className?: string;
 }
 
@@ -21,6 +22,7 @@ const DEFAULT_COLORS = [
 export const ColorSelector: React.FC<ColorSelectorProps> = ({
   colors = DEFAULT_COLORS,
   onSeeMore,
+  sofaName,
   className = "",
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,7 +35,8 @@ export const ColorSelector: React.FC<ColorSelectorProps> = ({
   return (
     <>
       <div
-        className={`flex flex-col md:flex-row items-center gap-2 md:gap-6 md:pl-[6px] px-[22px]  pt-[22px] pb-[8px] md:pr-[20px] md:py-[6px] rounded-full bg-white w-fit ${className}`}
+        onClick={handleOpenModal}
+        className={`flex flex-col cursor-pointer md:flex-row items-center gap-2 md:gap-6 md:pl-[6px] px-[22px]  pt-[22px] pb-[8px] md:pr-[20px] md:py-[6px] rounded-full bg-white w-fit ${className}`}
       >
         <div className='flex items-center gap-[6px] '>
           {colors.map((src, index) => (
@@ -51,15 +54,16 @@ export const ColorSelector: React.FC<ColorSelectorProps> = ({
             </div>
           ))}
         </div>
-        <button
-          onClick={handleOpenModal}
-          className='text-[14px] cursor-pointer md:text-[16px] text-brand-black hover:text-brand-black/70 transition-colors underline underline-offset-2 decoration-black/30'
-        >
+        <button className='text-[14px] cursor-pointer md:text-[16px] text-brand-black hover:text-brand-black/70 transition-colors underline underline-offset-2 decoration-black/30'>
           смотреть ещё
         </button>
       </div>
 
-      <ColorModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <ColorModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        sofaName={sofaName}
+      />
     </>
   );
 };

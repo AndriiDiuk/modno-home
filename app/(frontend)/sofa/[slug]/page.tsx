@@ -275,7 +275,7 @@ export default async function SofaPage({ params }: SofaPageProps) {
                 })}
               />
               <div className='flex justify-center w-full relative z-2 mb-5 lg:mb-0 '>
-                <ColorSelector />
+                <ColorSelector sofaName={sofa.title} />
               </div>
             </div>
             <div className='relative z-2'>
@@ -286,6 +286,7 @@ export default async function SofaPage({ params }: SofaPageProps) {
                 materials={info.materials || []}
                 price={sofa.price}
                 oldPrice={sofa.oldPrice ?? undefined}
+                sofaName={sofa.title}
                 className='shrink-0 mx-auto lg:mx-0'
               />
             </div>
@@ -320,6 +321,7 @@ export default async function SofaPage({ params }: SofaPageProps) {
         title={sofa.configsTitle || undefined}
         subtitle={sofa.configsSubtitle || undefined}
         configs={configs}
+        sofaName={sofa.title}
       />
 
       <CalculationSection socials={socials} />

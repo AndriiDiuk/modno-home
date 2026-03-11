@@ -1,5 +1,6 @@
 "use client";
 
+import { useModal } from "@/components/providers/ModalProvider";
 import { ProductCard, SectionTitle } from "@/components/ui";
 import { toSlug } from "@/lib/toSlug";
 import React from "react";
@@ -31,6 +32,7 @@ export const ProductSections: React.FC<ProductSectionsProps> = ({
   className = "",
 }) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
+  const { openModal } = useModal();
 
   const hasMore = products.length > 3;
 
@@ -57,7 +59,21 @@ export const ProductSections: React.FC<ProductSectionsProps> = ({
                 image={product.image}
                 price={product.price}
                 oldPrice={product.oldPrice}
-                href={`/sofa/${toSlug(product.title)}`}
+                href={
+                  product.title === "Интерьерные кровати"
+                    ? undefined
+                    : `/sofa/${toSlug(product.title)}`
+                }
+                onClick={
+                  product.title === "Интерьерные кровати"
+                    ? () =>
+                        openModal(
+                          "Раздел в разработке, уточняйте у менеджера",
+                          "ЖДУ ЗВОНКА",
+                          "Интерьерные кровати",
+                        )
+                    : undefined
+                }
               />
             </div>
           ))}

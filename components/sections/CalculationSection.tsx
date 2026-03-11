@@ -24,7 +24,7 @@ export const CalculationSection: React.FC<CalculationSectionProps> = ({
       const res = await fetch("/api/form-submissions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, formType: "calculation" }),
+        body: JSON.stringify({ phone, formType: "calculation", sourcePage: "Главная" }),
       });
 
       if (!res.ok) throw new Error("Ошибка отправки");

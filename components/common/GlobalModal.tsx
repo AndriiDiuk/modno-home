@@ -13,7 +13,7 @@ interface GlobalModalProps {
 }
 
 export const GlobalModal: React.FC<GlobalModalProps> = ({ socials }) => {
-  const { isOpen, closeModal, title, buttonLabel } = useModal();
+  const { isOpen, closeModal, title, buttonLabel, sourcePage } = useModal();
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleClose = () => {
@@ -31,6 +31,7 @@ export const GlobalModal: React.FC<GlobalModalProps> = ({ socials }) => {
         title={title}
         buttonLabel={buttonLabel}
         socials={socials}
+        sourcePage={sourcePage}
         onSuccess={() => setIsSubmitted(true)}
       />
     </ModalWrapper>
