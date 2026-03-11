@@ -593,6 +593,13 @@ export interface Home {
     buttonLabel?: string | null;
     edition?: string | null;
   };
+  fabricSection?: {
+    title?: string | null;
+    subtitle?: string | null;
+  };
+  reviewSection?: {
+    title?: string | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -720,6 +727,17 @@ export interface HomeSelect<T extends boolean = true> {
         subtitle?: T;
         buttonLabel?: T;
         edition?: T;
+      };
+  fabricSection?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+      };
+  reviewSection?:
+    | T
+    | {
+        title?: T;
       };
   updatedAt?: T;
   createdAt?: T;

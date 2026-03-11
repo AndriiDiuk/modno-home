@@ -49,16 +49,24 @@ const FABRIC_DATA = [
   },
 ];
 
-export const FabricSelection: React.FC = () => {
+interface FabricSelectionProps {
+  title?: string;
+  subtitle?: string;
+}
+
+export const FabricSelection: React.FC<FabricSelectionProps> = ({
+  title = "Большой выбор тканей",
+  subtitle = "Больше 100 конфигураций и цветов",
+}) => {
   return (
     <section className='w-full py-10 md:py-24 overflow-hidden bg-[#FCFCFC] '>
       <div className='content '>
         <div className='text-center mb-5 md:mb-10 lg:mb-0 '>
           <h2 className='text-[30px] md:text-[50px] font-bold text-brand-black leading-[1.1] uppercase mb-1 md:mb-3'>
-            Большой выбор тканей
+            {title}
           </h2>
           <p className='text-[18px] md:text-[34px] text-brand-black font-light leading-[1.1]'>
-            Больше 100 конфигураций и цветов
+            {subtitle}
           </p>
         </div>
       </div>

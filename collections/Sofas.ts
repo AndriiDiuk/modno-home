@@ -15,76 +15,81 @@ export const Sofas: CollectionConfig = {
   },
   fields: [
     {
-      name: "title",
-      type: "text",
-      label: "Название дивана",
-      required: true,
-      admin: {
-        description: "Например: Easy, Monaco, Cloud",
-      },
-    },
-    {
-      name: "category",
-      type: "text",
-      label: "Категория",
-      defaultValue: "Диван",
-    },
-    {
-      name: "folderName",
-      type: "text",
-      label: "Название папки с фото",
-      admin: {
-        description:
-          "Название папки в public/sofas/ (например: easy, monaco). Фото берутся автоматически из этой папки.",
-      },
-    },
-    {
-      name: "viewsCount",
-      type: "number",
-      label: "Количество фото в галерее (views/)",
-      defaultValue: 0,
-      admin: {
-        description:
-          'Сколько фото в папке views/ (файлы: 1.webp, 2.webp, ...)',
-      },
-    },
-    {
-      name: "imageFilename",
-      type: "select",
-      label: "Изображение карточки (из папки images/cards/)",
-      required: true,
-      options: [
-        { label: "bad.webp", value: "bad.webp" },
-        { label: "bianco.webp", value: "bianco.webp" },
-        { label: "cloud.webp", value: "cloud.webp" },
-        { label: "easy.webp", value: "easy.webp" },
-        { label: "minimalist.webp", value: "minimalist.webp" },
-        { label: "monaco.webp", value: "monaco.webp" },
-        { label: "moscow.webp", value: "moscow.webp" },
-        { label: "new-york.webp", value: "new-york.webp" },
-        { label: "yard.webp", value: "yard.webp" },
-      ],
-    },
-    {
-      name: "price",
-      type: "number",
-      label: "Цена (от)",
-      required: true,
-    },
-    {
-      name: "oldPrice",
-      type: "number",
-      label: "Старая цена",
-    },
-    {
-      name: "isActive",
-      type: "checkbox",
-      label: "Активен (показывать на сайте)",
-      defaultValue: true,
-    },
-    {
       type: "tabs",
       tabs: [
+        {
+          label: "Основная информация",
+          fields: [
+            {
+              name: "title",
+              type: "text",
+              label: "Название дивана",
+              required: true,
+              admin: {
+                description: "Например: Easy, Monaco, Cloud",
+              },
+            },
+            {
+              name: "category",
+              type: "text",
+              label: "Категория",
+              defaultValue: "Диван",
+            },
+            {
+              name: "folderName",
+              type: "text",
+              label: "Название папки с фото",
+              admin: {
+                description:
+                  "Название папки в public/sofas/ (например: easy, monaco). Фото берутся автоматически из этой папки.",
+              },
+            },
+            {
+              name: "viewsCount",
+              type: "number",
+              label: "Количество фото в галерее (views/)",
+              defaultValue: 0,
+              admin: {
+                description:
+                  'Сколько фото в папке views/ (файлы: 1.webp, 2.webp, ...)',
+              },
+            },
+            {
+              name: "imageFilename",
+              type: "select",
+              label: "Изображение карточки (из папки images/cards/)",
+              required: true,
+              options: [
+                { label: "bad.webp", value: "bad.webp" },
+                { label: "bianco.webp", value: "bianco.webp" },
+                { label: "cloud.webp", value: "cloud.webp" },
+                { label: "easy.webp", value: "easy.webp" },
+                { label: "minimalist.webp", value: "minimalist.webp" },
+                { label: "monaco.webp", value: "monaco.webp" },
+                { label: "moscow.webp", value: "moscow.webp" },
+                { label: "new-york.webp", value: "new-york.webp" },
+                { label: "yard.webp", value: "yard.webp" },
+              ],
+            },
+            {
+              name: "price",
+              type: "number",
+              label: "Цена (от)",
+              required: true,
+            },
+            {
+              name: "oldPrice",
+              type: "number",
+              label: "Старая цена",
+            },
+            {
+              name: "isActive",
+              type: "checkbox",
+              label: "Активен (показывать на сайте)",
+              defaultValue: true,
+            },
+          ],
+        },
         {
           label: "Hero секция",
           fields: [

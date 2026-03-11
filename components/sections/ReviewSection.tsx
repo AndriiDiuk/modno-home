@@ -38,10 +38,10 @@ export const ReviewSection: React.FC<ReviewSectionProps> = ({
     },
     breakpoints: {
       "(min-width: 640px)": {
-        slides: { perView: 2, spacing: 20, origin: "center" },
+        slides: { perView: 2, spacing: 0, origin: "center" },
       },
       "(min-width: 1024px)": {
-        slides: { perView: 4, spacing: 30, origin: "center" },
+        slides: { perView: 4, spacing: 0, origin: "center" },
       },
     },
   });
@@ -57,10 +57,10 @@ export const ReviewSection: React.FC<ReviewSectionProps> = ({
       <div className='relative w-full group'>
         <div
           ref={sliderRef}
-          className='keen-slider w-full overflow-visible! py-10 -my-10'
+          className='keen-slider w-full overflow-visible! py-14 -my-14'
         >
           {REVIEWS.map((review) => (
-            <div key={review.id} className='keen-slider__slide'>
+            <div key={review.id} className='keen-slider__slide p-2 md:p-[15px]'>
               <div className='relative w-full h-[344px] md:h-[500px]'>
                 <Image
                   src={review.image}

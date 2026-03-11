@@ -91,6 +91,10 @@ export default async function HomePage() {
     oldPrice: sofa.oldPrice,
   }));
 
+  const { fabricSection, reviewSection } = homeData || {};
+  const { title: fabricTitle, subtitle: fabricSubtitle } = fabricSection || {};
+  const { title: reviewTitle } = reviewSection || {};
+
   return (
     <div className='show-slow'>
       <HomeHero
@@ -117,8 +121,8 @@ export default async function HomePage() {
       />
       <ProductSections title={title} subtitle={subtitle} products={products} />
       <CalculationSection socials={socials} />
-      <FabricSelection />
-      <ReviewSection />
+      <FabricSelection title={fabricTitle} subtitle={fabricSubtitle} />
+      <ReviewSection title={reviewTitle} />
       <ContactUsSection telegramUrl={socials.telegram} vkUrl={socials.vk} />
     </div>
   );
