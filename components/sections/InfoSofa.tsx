@@ -72,11 +72,11 @@ export const InfoSofa: React.FC<InfoSofaProps> = ({
           {sizes.map((size, index) => (
             <div key={index} className='flex items-end gap-2'>
               <CheckIcon />
-              <span className='text-[13px] md:text-[14px] font-semibold whitespace-nowrap  text-brand-black'>
+              <span className='text-[13px] md:text-[14px] font-semibold whitespace-nowrap md:whitespace-normal  text-brand-black'>
                 {size.label}:
               </span>
               <DottedLine />
-              <span className='text-[13px] md:text-[14px] whitespace-nowrap text-[#383838]'>
+              <span className='text-[13px] md:text-[14px] md:whitespace-nowrap text-[#383838]'>
                 {size.value}
               </span>
             </div>
@@ -96,8 +96,8 @@ export const InfoSofa: React.FC<InfoSofaProps> = ({
               className='flex items-start gap-2 text-brand-black'
             >
               <CheckIcon />
-              <p className='text-[13px] md:text-[14px] leading-[1.2] text-[#383838] whitespace-nowrap'>
-                <span className='font-semibold whitespace-nowrap'>
+              <p className='text-[13px] md:text-[14px] leading-[1.2] text-[#383838] md:whitespace-nowrap'>
+                <span className='font-semibold md:whitespace-nowrap'>
                   {material.label}
                 </span>{" "}
                 — {material.value}
