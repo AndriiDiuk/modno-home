@@ -163,6 +163,7 @@
 }
 
 @theme {
+  --breakpoint-xsm: 440px;
   --font-sans: "Gilroy", ui-sans-serif, system-ui, sans-serif;
   --font-nordeco: "Nordeco", ui-sans-serif, system-ui, sans-serif;
   --color-warning: var(--color-button-yellow);

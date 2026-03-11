@@ -135,7 +135,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
               <p className='text-[26px] md:text-[32px] lg:text-[45px] text-brand-black leading-[1.1]'>
                 {highlightWords(title2, title2Bold)}
               </p>
-              <p className='text-[18px] sm:text-[22px] text-brand-black leading-[1.1] mt-3 max-w-[600px] mx-auto'>
+              <p className='text-base sxm:text-[18px] sm:text-[22px] text-brand-black leading-[1.1] mt-3 max-w-[600px] mx-auto'>
                 {highlightWords(description, descriptionBold)}
               </p>
             </div>
