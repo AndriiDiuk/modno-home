@@ -34,14 +34,14 @@ export const ReviewSection: React.FC<ReviewSectionProps> = ({
     loop: true,
     slides: {
       perView: 1.3,
-      spacing: 15,
+      spacing: 0,
     },
     breakpoints: {
       "(min-width: 640px)": {
-        slides: { perView: 2, spacing: 20 },
+        slides: { perView: 2, spacing: 0 },
       },
       "(min-width: 1024px)": {
-        slides: { perView: 3, spacing: 20 },
+        slides: { perView: 3, spacing: 0 },
       },
     },
   });
@@ -52,83 +52,80 @@ export const ReviewSection: React.FC<ReviewSectionProps> = ({
     >
       <div className='content flex flex-col items-center'>
         <SectionTitle title={title} className='text-center mb-5 md:mb-10' />
+      </div>
 
-        <div className='relative w-full group'>
-          <div
-            ref={sliderRef}
-            className='keen-slider w-full overflow-visible! py-10 -my-10'
-          >
-            {REVIEWS.map((review) => (
-              <div
-                key={review.id}
-                className='keen-slider__slide flex justify-center py-4'
-              >
-                <div className='relative w-full h-[324px] md:h-[500px] max-w-[340px]'>
-                  <Image
-                    src={review.image}
-                    alt={`Review ${review.id}`}
-                    fill
-                    className='object-contain rounded-[8px]'
-                    style={{
-                      filter: "drop-shadow(0 0 18px rgba(91, 164, 222, 0.17))",
-                    }}
-                    sizes='(max-width: 768px) 100vw, 33vw'
-                  />
-                </div>
+      <div className='relative w-full group'>
+        <div
+          ref={sliderRef}
+          className='keen-slider w-full overflow-visible! py-10 -my-10'
+        >
+          {REVIEWS.map((review) => (
+            <div key={review.id} className='keen-slider__slide'>
+              <div className='relative w-full h-[344px] md:h-[500px]'>
+                <Image
+                  src={review.image}
+                  alt={`Review ${review.id}`}
+                  fill
+                  className='object-contain rounded-[8px]'
+                  style={{
+                    filter: "drop-shadow(0 0 10px rgba(91, 164, 222, 0.14))",
+                  }}
+                  sizes='(max-width: 768px) 100vw, 33vw'
+                />
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
 
-          {/* Navigation Arrows */}
-          <div className='hidden md:flex justify-center gap-4 mt-8'>
-            <button
-              onClick={(e: any) =>
-                e.stopPropagation() || instanceRef.current?.prev()
-              }
-              className='w-12 h-12 rounded-full border border-brand-black/20 flex items-center justify-center hover:bg-brand-black hover:text-white transition-all cursor-pointer group/btn'
-              aria-label='Previous slide'
+        {/* Navigation Arrows */}
+        <div className='hidden md:flex justify-center gap-4 mt-8'>
+          <button
+            onClick={(e: any) =>
+              e.stopPropagation() || instanceRef.current?.prev()
+            }
+            className='w-12 h-12 rounded-full border border-brand-black/20 flex items-center justify-center hover:bg-brand-black hover:text-white transition-all cursor-pointer group/btn'
+            aria-label='Previous slide'
+          >
+            <svg
+              width='24'
+              height='24'
+              viewBox='0 0 24 24'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+              className='rotate-180'
             >
-              <svg
-                width='24'
-                height='24'
-                viewBox='0 0 24 24'
-                fill='none'
-                xmlns='http://www.w3.org/2000/svg'
-                className='rotate-180'
-              >
-                <path
-                  d='M9 5L16 12L9 19'
-                  stroke='currentColor'
-                  strokeWidth='2'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                />
-              </svg>
-            </button>
-            <button
-              onClick={(e: any) =>
-                e.stopPropagation() || instanceRef.current?.next()
-              }
-              className='w-12 h-12 rounded-full border border-brand-black/20 flex items-center justify-center hover:bg-brand-black hover:text-white transition-all cursor-pointer group/btn'
-              aria-label='Next slide'
+              <path
+                d='M9 5L16 12L9 19'
+                stroke='currentColor'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              />
+            </svg>
+          </button>
+          <button
+            onClick={(e: any) =>
+              e.stopPropagation() || instanceRef.current?.next()
+            }
+            className='w-12 h-12 rounded-full border border-brand-black/20 flex items-center justify-center hover:bg-brand-black hover:text-white transition-all cursor-pointer group/btn'
+            aria-label='Next slide'
+          >
+            <svg
+              width='24'
+              height='24'
+              viewBox='0 0 24 24'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
             >
-              <svg
-                width='24'
-                height='24'
-                viewBox='0 0 24 24'
-                fill='none'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path
-                  d='M9 5L16 12L9 19'
-                  stroke='currentColor'
-                  strokeWidth='2'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                />
-              </svg>
-            </button>
-          </div>
+              <path
+                d='M9 5L16 12L9 19'
+                stroke='currentColor'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              />
+            </svg>
+          </button>
         </div>
       </div>
     </section>
