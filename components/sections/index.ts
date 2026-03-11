@@ -2,6 +2,7 @@ export * from "./CalculationSection";
 export * from "./ConfigSection";
 export * from "./ContactUsSection";
 export * from "./DownloadCatalog";
+export * from "./FabricSelection";
 export * from "./Footer";
 export * from "./Header";
 export * from "./HomeHero";

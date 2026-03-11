@@ -51,10 +51,7 @@ export const ReviewSection: React.FC<ReviewSectionProps> = ({
       className={`w-full py-10 md:py-18 overflow-hidden ${hasBackground ? "bg-brand-light-gray" : ""} ${className}`}
     >
       <div className='content flex flex-col items-center'>
-        <SectionTitle
-          title={title}
-          className='text-center mb-[35px] md:mb-10'
-        />
+        <SectionTitle title={title} className='text-center mb-5 md:mb-10' />
 
         <div className='relative w-full group'>
           <div
@@ -66,7 +63,7 @@ export const ReviewSection: React.FC<ReviewSectionProps> = ({
                 key={review.id}
                 className='keen-slider__slide flex justify-center py-4'
               >
-                <div className='relative w-full h-[500px] max-w-[340px]'>
+                <div className='relative w-full h-[324px] md:h-[500px] max-w-[340px]'>
                   <Image
                     src={review.image}
                     alt={`Review ${review.id}`}
@@ -83,7 +80,7 @@ export const ReviewSection: React.FC<ReviewSectionProps> = ({
           </div>
 
           {/* Navigation Arrows */}
-          <div className='flex justify-center gap-4 mt-8'>
+          <div className='hidden md:flex justify-center gap-4 mt-8'>
             <button
               onClick={(e: any) =>
                 e.stopPropagation() || instanceRef.current?.prev()

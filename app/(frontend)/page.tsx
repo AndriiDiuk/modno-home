@@ -25,6 +25,9 @@ const CalculationSection = dynamic(() =>
 const ReviewSection = dynamic(() =>
   import("@/components/sections/ReviewSection").then((m) => m.ReviewSection),
 );
+const FabricSelection = dynamic(() =>
+  import("@/components/sections/FabricSelection").then((m) => m.FabricSelection),
+);
 const ContactUsSection = dynamic(() =>
   import("@/components/sections/ContactUsSection").then(
     (m) => m.ContactUsSection,
@@ -114,6 +117,7 @@ export default async function HomePage() {
       />
       <ProductSections title={title} subtitle={subtitle} products={products} />
       <CalculationSection socials={socials} />
+      <FabricSelection />
       <ReviewSection />
       <ContactUsSection telegramUrl={socials.telegram} vkUrl={socials.vk} />
     </div>
