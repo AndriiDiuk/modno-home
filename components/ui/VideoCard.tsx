@@ -47,15 +47,21 @@ export const VideoCard: React.FC<VideoCardProps> = ({
     return () => observer.disconnect();
   }, [video]);
 
-  // When visible, trigger video preload
+  // When visible, trigger video preload and set start time
   useEffect(() => {
     if (!isVisible || !videoRef.current) return;
     videoRef.current.preload = "auto";
     videoRef.current.load();
+    videoRef.current.currentTime = 3;
   }, [isVisible]);
 
   const handleMouseEnter = useCallback(() => {
-    videoRef.current?.play().catch(() => {});
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused && video.currentTime < 3) {
+      video.currentTime = 3;
+    }
+    video.play().catch(() => {});
   }, []);
 
   const handleMouseLeave = useCallback(() => {
