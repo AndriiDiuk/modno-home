@@ -3,6 +3,7 @@
 import { useModal } from "@/components/providers/ModalProvider";
 import { ProductCard, SectionTitle } from "@/components/ui";
 import { toSlug } from "@/lib/toSlug";
+import Link from "next/link";
 import React from "react";
 
 interface Product {
@@ -49,7 +50,12 @@ export const ProductSections: React.FC<ProductSectionsProps> = ({
         {/* Responsive Grid */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full'>
           {products.map((product, index) => (
-            <div
+            <Link
+              href={
+                product.title === "Интерьерные кровати"
+                  ? "#"
+                  : `/sofa/${toSlug(product.title)}`
+              }
               key={product.id}
               className={`${!isExpanded && index >= 3 ? "hidden md:block" : "block"}`}
             >
@@ -59,11 +65,6 @@ export const ProductSections: React.FC<ProductSectionsProps> = ({
                 image={product.image}
                 price={product.price}
                 oldPrice={product.oldPrice}
-                href={
-                  product.title === "Интерьерные кровати"
-                    ? undefined
-                    : `/sofa/${toSlug(product.title)}`
-                }
                 onClick={
                   product.title === "Интерьерные кровати"
                     ? () =>
@@ -75,7 +76,7 @@ export const ProductSections: React.FC<ProductSectionsProps> = ({
                     : undefined
                 }
               />
-            </div>
+            </Link>
           ))}
         </div>
 

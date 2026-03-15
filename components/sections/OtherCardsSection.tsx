@@ -1,8 +1,6 @@
-"use client";
-
 import { ProductCard, SectionTitle } from "@/components/ui";
-import React, { startTransition } from "react";
-import { useModal } from "../providers/ModalProvider";
+import { toSlug } from "@/lib/toSlug";
+import React from "react";
 
 interface Product {
   id: string | number;
@@ -26,8 +24,6 @@ export const OtherCardsSection: React.FC<OtherCardsProps> = ({
   products,
   className = "",
 }) => {
-  const { openModal } = useModal();
-
   if (!products || products.length === 0) return null;
 
   return (
@@ -48,12 +44,7 @@ export const OtherCardsSection: React.FC<OtherCardsProps> = ({
               image={product.image}
               price={product.price}
               oldPrice={product.oldPrice}
-              onClick={() =>
-                startTransition(() =>
-                  openModal(`Узнать когда будет ${product.title}`, "ЖДУ ЗВОНКА", `Диван ${product.title}`)
-                )
-              }
-              buttonLabel='Узнать когда будет'
+              href={`/sofa/${toSlug(product.title)}`}
               size='sm'
             />
           ))}
