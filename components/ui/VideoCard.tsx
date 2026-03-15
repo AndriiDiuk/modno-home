@@ -55,7 +55,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({
   }, [isVisible]);
 
   const handleMouseEnter = useCallback(() => {
-    videoRef.current?.play();
+    videoRef.current?.play().catch(() => {});
   }, []);
 
   const handleMouseLeave = useCallback(() => {
