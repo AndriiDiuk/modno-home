@@ -1,8 +1,9 @@
 import { PhoneIcon, TelegramSquareIcon, VkSquareIcon } from "@/assets/icons";
 import { InfoSofa } from "@/components/sections";
 import { ColorSelector, HeroTitle } from "@/components/ui";
-import { fetchPayloadLocal, getCachedSettings } from "@/lib/payload";
+import { fetchPayloadLocal, getBaseUrl, getCachedSettings } from "@/lib/payload";
 import { toSlug } from "@/lib/toSlug";
+import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -130,7 +131,9 @@ export async function generateStaticParams() {
   }
 }
 
-export async function generateMetadata({ params }: SofaPageProps) {
+export async function generateMetadata({
+  params,
+}: SofaPageProps): Promise<Metadata> {
   const { slug } = await params;
   const { currentSofa: sofa } = await getSofaData(slug);
 
@@ -138,9 +141,32 @@ export async function generateMetadata({ params }: SofaPageProps) {
     return { title: "Диван не найден" };
   }
 
+  const baseUrl = getBaseUrl();
+  const title = `${sofa.category || "Диван"} ${sofa.title}`;
+  const description = `${sofa.category || "Диван"} ${sofa.title} — от ${Number(sofa.price).toLocaleString("ru-RU")} ₽. Производство модульных диванов.`;
+  const folder = (
+    (sofa as any).folderName || toSlug(sofa.title)
+  ).toLowerCase();
+  const url = `${baseUrl}/sofa/${slug}`;
+  const imageUrl = `${baseUrl}/sofas/${folder}/bg-hero.webp`;
+
   return {
-    title: `${sofa.category || "Диван"} ${sofa.title}`,
-    description: `${sofa.category || "Диван"} ${sofa.title} — от ${Number(sofa.price).toLocaleString("ru-RU")} ₽. Производство модульных диванов.`,
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "website",
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [imageUrl],
+    },
   };
 }
 

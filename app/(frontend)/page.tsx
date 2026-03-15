@@ -1,5 +1,31 @@
-import { getCachedHome, getCachedSettings } from "@/lib/payload";
+import { getBaseUrl, getCachedHome, getCachedSettings } from "@/lib/payload";
+import type { Metadata } from "next";
 import dynamic from "next/dynamic";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const baseUrl = getBaseUrl();
+  const title = "Модульные диваны — производство на заказ";
+  const description =
+    "Modno Home — производство модульных диванов. Выбирайте конфигурацию, ткань и размер. Доставка по России.";
+
+  return {
+    title,
+    description,
+    alternates: { canonical: baseUrl },
+    openGraph: {
+      title,
+      description,
+      url: baseUrl,
+      type: "website",
+      siteName: "Modno Home",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 const HomeHero = dynamic(() =>
   import("@/components/sections/HomeHero").then((m) => m.HomeHero),

@@ -40,13 +40,6 @@ export const VideoModal: React.FC<VideoModalProps> = ({
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
-      setIsBuffering(true);
-      const video = videoRef.current;
-      if (video) {
-        video.currentTime = 0;
-        video.load();
-        video.play().catch(() => {});
-      }
     } else {
       document.body.style.overflow = "";
       const video = videoRef.current;
@@ -58,7 +51,18 @@ export const VideoModal: React.FC<VideoModalProps> = ({
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isOpen, videoSrc]);
+  }, [isOpen]);
+
+  // Start playback after modal is mounted and video element exists
+  useEffect(() => {
+    if (!mounted || !isOpen) return;
+    const video = videoRef.current;
+    if (!video) return;
+    setIsBuffering(true);
+    video.currentTime = 0;
+    video.load();
+    video.play().catch(() => {});
+  }, [mounted, isOpen, videoSrc]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -87,7 +91,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({
       </button>
 
       <div
-        className={`relative w-full max-w-[400px] mx-4 duration-200 ${open ? "animate-in zoom-in-95 slide-in-from-bottom-4" : hasAnimated ? "animate-out zoom-out-95 slide-out-to-bottom-4" : "opacity-0 scale-95"}`}
+        className={`relative w-full max-w-[400px] aspect-9/16 mx-4 duration-200 rounded-2xl overflow-hidden bg-black/50 ${open ? "animate-in zoom-in-95 slide-in-from-bottom-4" : hasAnimated ? "animate-out zoom-out-95 slide-out-to-bottom-4" : "opacity-0 scale-95"}`}
         onClick={(e) => e.stopPropagation()}
       >
         {isBuffering && (
@@ -97,8 +101,8 @@ export const VideoModal: React.FC<VideoModalProps> = ({
         )}
         <video
           ref={videoRef}
-          src={videoSrc}
-          className='w-full rounded-2xl shadow-2xl'
+          src={videoSrc || undefined}
+          className='w-full h-full object-cover rounded-2xl shadow-2xl'
           controls
           playsInline
           autoPlay

@@ -26,7 +26,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({
     typeof views === "number" ? `${views} тыс. просмотров` : views;
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   // IntersectionObserver — start preloading when card scrolls into view
@@ -40,28 +40,34 @@ export const VideoCard: React.FC<VideoCardProps> = ({
           observer.disconnect();
         }
       },
-      { rootMargin: "200px" }
+      { rootMargin: "200px" },
     );
 
     observer.observe(containerRef.current);
     return () => observer.disconnect();
   }, [video]);
 
-  // When visible, trigger video preload and set start time
+  // When visible: seek to 3s → show frame
   useEffect(() => {
-    if (!isVisible || !videoRef.current) return;
-    videoRef.current.preload = "auto";
-    videoRef.current.load();
-    videoRef.current.currentTime = 3;
+    const vid = videoRef.current;
+    if (!isVisible || !vid) return;
+
+    const handleSeeked = () => setVideoReady(true);
+
+    vid.addEventListener("seeked", handleSeeked, { once: true });
+    vid.addEventListener(
+      "loadeddata",
+      () => {
+        vid.currentTime = 3;
+      },
+      { once: true },
+    );
+
+    return () => vid.removeEventListener("seeked", handleSeeked);
   }, [isVisible]);
 
   const handleMouseEnter = useCallback(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (video.paused && video.currentTime < 3) {
-      video.currentTime = 3;
-    }
-    video.play().catch(() => {});
+    videoRef.current?.play().catch(() => {});
   }, []);
 
   const handleMouseLeave = useCallback(() => {
@@ -83,7 +89,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({
             src={image}
             alt={title}
             fill
-            className={`object-cover transition-opacity duration-300 ${videoLoaded ? "opacity-0" : "opacity-100"}`}
+            className={`object-cover transition-opacity duration-300 ${videoReady ? "opacity-0" : "opacity-100"}`}
             sizes='(max-width: 768px) 100vw, 33vw'
           />
         )}
@@ -94,16 +100,15 @@ export const VideoCard: React.FC<VideoCardProps> = ({
             <video
               ref={videoRef}
               src={video}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${videoReady ? "opacity-100" : "opacity-0"}`}
               muted
               playsInline
               loop
-              preload='metadata'
-              onCanPlayThrough={() => setVideoLoaded(true)}
+              preload='auto'
             />
-            {!videoLoaded && (
-              <div className='absolute inset-0 flex items-center justify-center bg-black/5'>
-                <div className='w-8 h-8 border-2 border-brand-black/20 border-t-brand-black rounded-full animate-spin' />
+            {!videoReady && (
+              <div className='absolute inset-0 flex items-center justify-center'>
+                <div className='w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin' />
               </div>
             )}
           </>
@@ -115,7 +120,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({
         {/* Centered Overlay Text (hidden on hover) */}
         <div className='absolute inset-0 flex items-center justify-center p-6 text-center transition-opacity duration-300 group-hover:opacity-0'>
           <p className='text-white text-[20px] md:text-base font-bold leading-tight drop-shadow-lg'>
-            {videoLoaded && overlayText}
+            {videoReady && overlayText}
           </p>
         </div>
 
