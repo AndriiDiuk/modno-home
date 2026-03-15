@@ -1,5 +1,6 @@
 import { ProductCard, SectionTitle } from "@/components/ui";
 import { toSlug } from "@/lib/toSlug";
+import Link from "next/link";
 import React from "react";
 
 interface Product {
@@ -37,16 +38,19 @@ export const OtherCardsSection: React.FC<OtherCardsProps> = ({
 
         <div className='grid grid-cols-2  lg:grid-cols-4 gap-2 sm:gap-6 md:gap-8 w-full'>
           {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              title={product.title}
-              category={product.category}
-              image={product.image}
-              price={product.price}
-              oldPrice={product.oldPrice}
+            <Link
               href={`/sofa/${toSlug(product.title)}`}
-              size='sm'
-            />
+              key={product.id}
+            >
+              <ProductCard
+                title={product.title}
+                category={product.category}
+                image={product.image}
+                price={product.price}
+                oldPrice={product.oldPrice}
+                size='sm'
+              />
+            </Link>
           ))}
         </div>
       </div>
