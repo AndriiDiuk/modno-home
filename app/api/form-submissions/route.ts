@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
     const subject = subjectParts.join(" — ");
 
     await resend.emails.send({
-      from: "Modno Home <onboarding@resend.dev>",
+      from: "Modno Home <info@send.modnohome.ru>",
       to: recipientEmail,
       subject,
       html: `

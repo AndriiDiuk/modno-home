@@ -11,7 +11,8 @@
       "Bash(pnpm tsx ./scripts/copy-videos.ts)",
       "Bash(dotenv -- pnpm tsx ./scripts/copy-videos.ts)",
       "Bash(node --env-file=.env --import tsx ./scripts/copy-videos.ts)",
-      "Bash(npx payload generate:types)"
+      "Bash(npx payload generate:types)",
+      "Bash(npx tsx:*)"
     ]
   }
 }
