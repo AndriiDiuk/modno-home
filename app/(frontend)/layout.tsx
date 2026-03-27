@@ -41,7 +41,7 @@ export default async function FrontendLayout({
   const scripts = seo.scripts || {};
 
   return (
-    <html lang='uk' className='h-full' suppressHydrationWarning>
+    <html lang='ru' className='h-full' suppressHydrationWarning>
       <head>
         {/* Google Analytics */}
         {scripts.googleAnalyticsId && (

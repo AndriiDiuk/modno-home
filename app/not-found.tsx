@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function RootNotFound() {
   return (
-    <html lang='uk'>
+    <html lang='ru'>
       <body className='font-sans antialiased flex flex-col min-h-screen'>
         <div className='flex flex-col items-center justify-center px-6 py-32 md:py-40 text-center grow'>
           <p className='text-brand-muted text-sm font-medium tracking-widest uppercase mb-4'>
