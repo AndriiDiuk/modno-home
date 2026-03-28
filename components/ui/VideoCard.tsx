@@ -89,17 +89,15 @@ export const VideoCard: React.FC<VideoCardProps> = ({
             alt={title}
             fill
             className={`object-cover transition-all duration-500 ${
-              isMobile
-                ? "opacity-100"
-                : videoReady ? "opacity-0" : "opacity-100 blur-md"
+              videoReady ? "opacity-0" : "opacity-100 md:blur-md"
             }`}
             sizes='(max-width: 768px) 100vw, 33vw'
           />
         )}
 
         {/* Desktop: shimmer overlay while loading */}
-        {!isMobile && !videoReady && (
-          <div className='absolute inset-0 overflow-hidden'>
+        {!videoReady && (
+          <div className='absolute inset-0 overflow-hidden hidden md:block'>
             <div className='absolute inset-0 bg-black/40' />
             <div className='absolute inset-0 -translate-x-full animate-[shimmer_1.8s_ease-in-out_infinite] bg-linear-to-r from-transparent via-white/10 to-transparent' />
           </div>
