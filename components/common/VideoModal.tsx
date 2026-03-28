@@ -53,15 +53,35 @@ export const VideoModal: React.FC<VideoModalProps> = ({
     };
   }, [isOpen]);
 
-  // Start playback after modal is mounted and video element exists
+  // Start playback after animation finishes and video is ready
   useEffect(() => {
     if (!mounted || !isOpen) return;
     const video = videoRef.current;
     if (!video) return;
-    setIsBuffering(true);
+
+    let cancelled = false;
+
     video.currentTime = 0;
     video.load();
-    video.play().catch(() => {});
+
+    // Wait for both: animation end (DURATION) + video data ready
+    const timer = setTimeout(() => {
+      const tryPlay = () => {
+        if (cancelled) return;
+        video.play().catch(() => {});
+      };
+
+      if (video.readyState >= 3) {
+        tryPlay();
+      } else {
+        video.addEventListener("canplay", tryPlay, { once: true });
+      }
+    }, DURATION);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
   }, [mounted, isOpen, videoSrc]);
 
   useEffect(() => {
@@ -77,7 +97,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({
 
   return (
     <div
-      className={`fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md duration-200 ${open ? "animate-in fade-in" : hasAnimated ? "animate-out fade-out" : "opacity-0"}`}
+      className={`fixed inset-0 z-[100] flex items-center justify-center bg-black/90`}
       onClick={onClose}
     >
       <button
@@ -91,7 +111,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({
       </button>
 
       <div
-        className={`relative w-full max-w-[400px] aspect-9/16 mx-4 duration-200 rounded-2xl overflow-hidden bg-black/50 ${open ? "animate-in zoom-in-95 slide-in-from-bottom-4" : hasAnimated ? "animate-out zoom-out-95 slide-out-to-bottom-4" : "opacity-0 scale-95"}`}
+        className={`relative w-full max-w-[400px] aspect-9/16 mx-4 rounded-2xl overflow-hidden bg-black/50`}
         onClick={(e) => e.stopPropagation()}
       >
         {isBuffering && (
@@ -105,7 +125,6 @@ export const VideoModal: React.FC<VideoModalProps> = ({
           className='w-full h-full object-cover rounded-2xl shadow-2xl'
           controls
           playsInline
-          autoPlay
           preload='auto'
           onCanPlay={() => setIsBuffering(false)}
         />

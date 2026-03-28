@@ -53,7 +53,7 @@ export const Modal: React.FC<ModalProps> = ({
 
   return (
     <div
-      className={`fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm duration-200 ${open ? "animate-in fade-in" : hasAnimated ? "animate-out fade-out" : "opacity-0"}`}
+      className={`fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 duration-200 ${open ? "animate-in fade-in" : hasAnimated ? "animate-out fade-out" : "opacity-0"}`}
     >
       <div className='absolute inset-0' onClick={onClose} />
       <div
