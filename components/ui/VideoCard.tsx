@@ -4,7 +4,7 @@ import Image from "next/image";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 // Тимчасово: вимкнути показ відео на картках (тільки картинки + модалка)
-const DISABLE_CARD_VIDEO = true;
+const DISABLE_CARD_VIDEO = false;
 
 interface VideoCardProps {
   image: string;
