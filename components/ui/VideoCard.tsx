@@ -88,8 +88,8 @@ export const VideoCard: React.FC<VideoCardProps> = ({
             src={image}
             alt={title}
             fill
-            className={`object-cover transition-all duration-500 ${
-              videoReady ? "opacity-0" : "opacity-100 md:blur-md"
+            className={`object-cover transition-all duration-500 opacity-100 ${
+              videoReady ? "md:opacity-0" : "md:blur-md"
             }`}
             sizes='(max-width: 768px) 100vw, 33vw'
           />
