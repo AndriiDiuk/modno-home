@@ -105,7 +105,7 @@ export const RealzView: React.FC<RealzViewProps> = ({
         close={() => setSelectedIndex(-1)}
         slides={slides}
         styles={{
-          container: { backgroundColor: "rgba(0, 0, 0, 0.6)", backdropFilter: "blur(12px)" },
+          container: { backgroundColor: "rgba(0, 0, 0, 0.9)" },
         }}
         render={{
           slide: ({ slide }) => (

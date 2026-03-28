@@ -40,7 +40,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({
           observer.disconnect();
         }
       },
-      { rootMargin: "200px" },
+      { rootMargin: "600px" },
     );
 
     observer.observe(containerRef.current);
@@ -67,10 +67,12 @@ export const VideoCard: React.FC<VideoCardProps> = ({
   }, [isVisible]);
 
   const handleMouseEnter = useCallback(() => {
+    if (!videoReady || window.matchMedia("(hover: none)").matches) return;
     videoRef.current?.play().catch(() => {});
-  }, []);
+  }, [videoReady]);
 
   const handleMouseLeave = useCallback(() => {
+    if (window.matchMedia("(hover: none)").matches) return;
     videoRef.current?.pause();
   }, []);
 
@@ -83,50 +85,51 @@ export const VideoCard: React.FC<VideoCardProps> = ({
         onMouseLeave={handleMouseLeave}
         className='relative aspect-[9/16] w-full rounded-[8px] overflow-hidden cursor-pointer shadow-sm'
       >
-        {/* Thumbnail image — shown until video loads */}
+        {/* Thumbnail image — blurred with dark overlay while loading */}
         {image && (
           <Image
             src={image}
             alt={title}
             fill
-            className={`object-cover transition-opacity duration-300 ${videoReady ? "opacity-0" : "opacity-100"}`}
+            className={`object-cover transition-all duration-500 ${videoReady ? "opacity-0 blur-0" : "opacity-100 blur-md"}`}
             sizes='(max-width: 768px) 100vw, 33vw'
           />
         )}
 
+        {/* Shimmer overlay while loading */}
+        {!videoReady && (
+          <div className='absolute inset-0 overflow-hidden'>
+            <div className='absolute inset-0 bg-black/40' />
+            <div className='absolute inset-0 -translate-x-full animate-[shimmer_1.8s_ease-in-out_infinite] bg-linear-to-r from-transparent via-white/10 to-transparent' />
+          </div>
+        )}
+
         {/* Video — preloaded when visible, plays on hover */}
         {video && isVisible && (
-          <>
-            <video
-              ref={videoRef}
-              src={video}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${videoReady ? "opacity-100" : "opacity-0"}`}
-              muted
-              playsInline
-              loop
-              preload='auto'
-            />
-            {!videoReady && (
-              <div className='absolute inset-0 flex items-center justify-center'>
-                <div className='w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin' />
-              </div>
-            )}
-          </>
+          <video
+            ref={videoRef}
+            src={video}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${videoReady ? "opacity-100" : "opacity-0"}`}
+            muted
+            playsInline
+            loop
+            preload='auto'
+          />
         )}
 
         {/* Dark overlay for text readability (hidden on hover) */}
-        <div className='absolute inset-0 bg-black/10 transition-opacity duration-300 group-hover:opacity-0' />
+        <div className={`absolute inset-0 bg-black/10 transition-opacity duration-300 ${videoReady ? "group-hover:opacity-0" : ""}`} />
 
         {/* Centered Overlay Text (hidden on hover) */}
-        <div className='absolute inset-0 flex items-center justify-center p-6 text-center transition-opacity duration-300 group-hover:opacity-0'>
+        <div className={`absolute inset-0 flex items-center justify-center p-6 text-center transition-opacity duration-300 ${videoReady ? "group-hover:opacity-0" : ""}`}>
           <p className='text-white text-[20px] md:text-base font-bold leading-tight drop-shadow-lg'>
             {videoReady && overlayText}
           </p>
         </div>
 
         {/* Mobile Info Overlay (hidden on hover) */}
-        <div className='absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent md:hidden transition-opacity duration-300 group-hover:opacity-0' />
-        <div className='absolute bottom-5 left-3 right-6 flex flex-col items-start text-white md:hidden max-w-[60%] transition-opacity duration-300 group-hover:opacity-0'>
+        <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent md:hidden transition-opacity duration-300 ${videoReady ? "group-hover:opacity-0" : ""}`} />
+        <div className={`absolute bottom-5 left-3 right-6 flex flex-col items-start text-white md:hidden max-w-[60%] transition-opacity duration-300 ${videoReady ? "group-hover:opacity-0" : ""}`}>
           <h3 className='text-[18px] font-bold leading-tight'>{title}</h3>
         </div>
       </div>

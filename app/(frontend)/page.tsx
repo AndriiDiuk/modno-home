@@ -104,7 +104,7 @@ export default async function HomePage() {
     title: v.title,
     overlayText: v.overlayText || "",
     views: v.views || 0,
-    image: "",
+    image: `/images/video-card/home/${i + 1}.webp`,
     video: v.videoUrl,
   }));
 

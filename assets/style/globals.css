@@ -237,6 +237,12 @@ body {
   width: 100%;
 }
 
+@keyframes shimmer {
+  100% {
+    transform: translateX(200%);
+  }
+}
+
 @keyframes pulse-border {
   0% {
     transform: scale(1);
