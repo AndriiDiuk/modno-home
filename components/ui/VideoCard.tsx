@@ -34,7 +34,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({
   const [isMobile] = useState(() =>
     typeof window !== "undefined"
       ? window.matchMedia("(hover: none) and (pointer: coarse)").matches
-      : false
+      : false,
   );
 
   // IntersectionObserver — only on desktop
@@ -62,7 +62,13 @@ export const VideoCard: React.FC<VideoCardProps> = ({
 
     const handleSeeked = () => setVideoReady(true);
     vid.addEventListener("seeked", handleSeeked, { once: true });
-    vid.addEventListener("loadeddata", () => { vid.currentTime = 3; }, { once: true });
+    vid.addEventListener(
+      "loadeddata",
+      () => {
+        vid.currentTime = 3;
+      },
+      { once: true },
+    );
 
     return () => vid.removeEventListener("seeked", handleSeeked);
   }, [isVisible]);
@@ -92,7 +98,8 @@ export const VideoCard: React.FC<VideoCardProps> = ({
             alt={title}
             fill
             className={`object-cover transition-all duration-500 opacity-100 ${
-              !DISABLE_CARD_VIDEO && (videoReady ? "md:opacity-0" : "md:blur-md")
+              !DISABLE_CARD_VIDEO &&
+              (videoReady ? "md:opacity-0" : "md:blur-md")
             }`}
             sizes='(max-width: 768px) 100vw, 33vw'
           />
@@ -120,10 +127,14 @@ export const VideoCard: React.FC<VideoCardProps> = ({
         )}
 
         {/* Dark overlay */}
-        <div className={`absolute inset-0 bg-black/10 transition-opacity duration-300 ${videoReady ? "group-hover:opacity-0" : ""}`} />
+        <div
+          className={`absolute inset-0 bg-black/10 transition-opacity duration-300 ${videoReady ? "group-hover:opacity-0" : ""}`}
+        />
 
         {/* Centered Overlay Text */}
-        <div className={`absolute inset-0 flex items-center justify-center p-6 text-center transition-opacity duration-300 ${videoReady ? "group-hover:opacity-0" : ""}`}>
+        <div
+          className={`absolute inset-0 flex items-center justify-center p-6 text-center transition-opacity duration-300 ${videoReady ? "group-hover:opacity-0" : ""}`}
+        >
           <p className='text-white text-[20px] md:text-base font-bold leading-tight drop-shadow-lg'>
             {(DISABLE_CARD_VIDEO || isMobile || videoReady) && overlayText}
           </p>
