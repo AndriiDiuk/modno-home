@@ -52,7 +52,9 @@ const ReviewSection = dynamic(() =>
   import("@/components/sections/ReviewSection").then((m) => m.ReviewSection),
 );
 const FabricSelection = dynamic(() =>
-  import("@/components/sections/FabricSelection").then((m) => m.FabricSelection),
+  import("@/components/sections/FabricSelection").then(
+    (m) => m.FabricSelection,
+  ),
 );
 const ContactUsSection = dynamic(() =>
   import("@/components/sections/ContactUsSection").then(
@@ -139,15 +141,17 @@ export default async function HomePage() {
           videos={videos}
         />
       )}
+      <ProductSections title={title} subtitle={subtitle} products={products} />
+
       <DownloadCatalog
         title={catalogTitle}
         subtitle={catalogSubtitle}
         buttonLabel={catalogButton}
         edition={catalogEdition}
       />
-      <ProductSections title={title} subtitle={subtitle} products={products} />
-      <CalculationSection socials={socials} />
       <FabricSelection title={fabricTitle} subtitle={fabricSubtitle} />
+      <CalculationSection socials={socials} />
+
       <ReviewSection title={reviewTitle} />
       <ContactUsSection telegramUrl={socials.telegram} vkUrl={socials.vk} />
     </div>

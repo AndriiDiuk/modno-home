@@ -3,6 +3,9 @@
 import Image from "next/image";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
+// Тимчасово: вимкнути показ відео на картках (тільки картинки + модалка)
+const DISABLE_CARD_VIDEO = true;
+
 interface VideoCardProps {
   image: string;
   video?: string;
@@ -89,14 +92,14 @@ export const VideoCard: React.FC<VideoCardProps> = ({
             alt={title}
             fill
             className={`object-cover transition-all duration-500 opacity-100 ${
-              videoReady ? "md:opacity-0" : "md:blur-md"
+              !DISABLE_CARD_VIDEO && (videoReady ? "md:opacity-0" : "md:blur-md")
             }`}
             sizes='(max-width: 768px) 100vw, 33vw'
           />
         )}
 
         {/* Desktop: shimmer overlay while loading */}
-        {!videoReady && (
+        {!DISABLE_CARD_VIDEO && !videoReady && (
           <div className='absolute inset-0 overflow-hidden hidden md:block'>
             <div className='absolute inset-0 bg-black/40' />
             <div className='absolute inset-0 -translate-x-full animate-[shimmer_1.8s_ease-in-out_infinite] bg-linear-to-r from-transparent via-white/10 to-transparent' />
@@ -104,7 +107,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({
         )}
 
         {/* Video — desktop only */}
-        {!isMobile && video && isVisible && (
+        {!DISABLE_CARD_VIDEO && !isMobile && video && isVisible && (
           <video
             ref={videoRef}
             src={video}
@@ -122,7 +125,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({
         {/* Centered Overlay Text */}
         <div className={`absolute inset-0 flex items-center justify-center p-6 text-center transition-opacity duration-300 ${videoReady ? "group-hover:opacity-0" : ""}`}>
           <p className='text-white text-[20px] md:text-base font-bold leading-tight drop-shadow-lg'>
-            {(isMobile || videoReady) && overlayText}
+            {(DISABLE_CARD_VIDEO || isMobile || videoReady) && overlayText}
           </p>
         </div>
 
