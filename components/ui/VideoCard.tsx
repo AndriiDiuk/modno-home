@@ -30,7 +30,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile] = useState(() =>
     typeof window !== "undefined"
-      ? window.matchMedia("(max-width: 767px)").matches
+      ? window.matchMedia("(hover: none) and (pointer: coarse)").matches
       : false
   );
 
