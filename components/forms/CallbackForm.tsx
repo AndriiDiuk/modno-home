@@ -10,6 +10,8 @@ interface CallbackFormProps {
   buttonLabel?: string;
   image?: React.ReactNode;
   onSuccess?: () => void;
+  uppercase?: boolean;
+  titleClassName?: string;
   sourcePage?: string;
   socials?: {
     vk?: string;
@@ -23,6 +25,8 @@ export const CallbackForm: React.FC<CallbackFormProps> = ({
   buttonLabel = "ЖДУ ЗВОНКА",
   image,
   onSuccess,
+  uppercase = false,
+  titleClassName = "",
   sourcePage,
   socials,
 }) => {
@@ -65,12 +69,14 @@ export const CallbackForm: React.FC<CallbackFormProps> = ({
   return (
     <form onSubmit={handleSubmit} className='flex flex-col items-center'>
       <h2
-        className={`text-xl md:text-2xl font-bold text-brand-black uppercase ${subtitle ? "mb-2" : "mb-8"} text-center max-w-[90%]`}
+        className={`text-xl md:text-2xl font-bold text-brand-black ${uppercase ? "uppercase" : ""} ${subtitle ? "mb-2" : "mb-8"} text-center ${titleClassName || "max-w-[90%]"}`}
       >
         {title}
       </h2>
       {subtitle && (
-        <p className='text-brand-black font-bold text-base uppercase mb-8 text-center'>
+        <p
+          className={`text-brand-gray text-base ${uppercase ? "uppercase" : ""} mb-8 text-center`}
+        >
           {subtitle}
         </p>
       )}

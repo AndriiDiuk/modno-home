@@ -96,22 +96,26 @@ export const DownloadCatalog: React.FC<DownloadCatalogProps> = ({
       {/* Modal for Catalog Download */}
       <Modal
         isOpen={isModalOpen}
-        onClose={() => { setIsModalOpen(false); setTimeout(() => setIsFormSubmitted(false), 250); }}
-        className='max-w-[1010px]'
+        onClose={() => {
+          setIsModalOpen(false);
+          setTimeout(() => setIsFormSubmitted(false), 250);
+        }}
+        className='max-w-252.5'
         closeButtonClassName='top-5 right-5'
       >
         <div className='absolute inset-3.5 border-2 border-[#E9E9E9] rounded-2xl pointer-events-none z-10' />
-        <div className='relative flex flex-col lg:flex-row gap-6 md:gap-10 items-center overflow-hidden lg:min-h-[400px]'>
+        <div className='relative flex flex-col lg:flex-row gap-6 md:gap-10 items-center overflow-hidden lg:min-h-100'>
           <div className={isFormSubmitted ? "w-full " : "w-full lg:w-1/2"}>
             <CallbackForm
               title='Чтобы получить каталог, заполните форму'
               subtitle=''
+              uppercase
               buttonLabel='Жду каталог'
               onSuccess={() => setIsFormSubmitted(true)}
               image={
                 !isFormSubmitted ? (
                   <div
-                    className='-mb-[100px] -left-[8%] relative z-0 block md:hidden'
+                    className='-mb-25 -left-[8%] relative z-0 block md:hidden'
                     style={{
                       width: "clamp(300px, 130vw, 600px)",
                       height: "clamp(250px, 110vw, 400px)",
@@ -131,7 +135,7 @@ export const DownloadCatalog: React.FC<DownloadCatalogProps> = ({
 
           {/* Right Side: Catalog Image */}
           {!isFormSubmitted && (
-            <div className='relative lg:absolute lg:right-[6%] lg:-bottom-[56%] w-full lg:w-1/2 lg:h-[740px]  lg:scale-[1.2] z-0'>
+            <div className='relative lg:absolute lg:right-[6%] lg:-bottom-[56%] w-full lg:w-1/2 lg:h-185  lg:scale-[1.2] z-0'>
               <Image
                 src='/images/catalog.webp'
                 alt='Каталог мебели'

@@ -159,7 +159,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
               {/* White Showroom Button */}
               <button
                 onClick={() =>
-                  openModal(showroomButtonLabel, undefined, "Главная")
+                  openModal("ЧТОБЫ ЗАПИСАТЬСЯ В ШОУРУМ НА УДОБНОЕ ВРЕМЯ", "ЗАПИСАТЬСЯ", "Главная", "max-w-[100%]")
                 }
                 className='w-full bg-white text-brand-black text-[14px] md:text-[17px] rounded-[8px] py-[10px] px-1 md:px-6 text-center border border-brand-border transition-all duration-300 hover:scale-[1.02] cursor-pointer'
               >
@@ -193,13 +193,16 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
       <Modal
         isOpen={isCatalogOpen}
         onClose={() => setIsCatalogOpen(false)}
-        className='max-w-[1010px]'
+        className='max-w-252.5'
+        closeButtonClassName='top-5 right-5'
       >
-        <div className='relative flex flex-col lg:flex-row gap-6 md:gap-10 items-center overflow-hidden lg:min-h-[400px]'>
+        <div className='absolute inset-3.5 border-2 border-[#E9E9E9] rounded-2xl pointer-events-none z-10' />
+        <div className='relative flex flex-col lg:flex-row gap-6 md:gap-10 items-center overflow-hidden lg:min-h-100'>
           <div className={isFormSubmitted ? "w-full" : "w-full lg:w-1/2"}>
             <CallbackForm
               title='Чтобы получить каталог, заполните форму'
               subtitle=''
+              uppercase
               buttonLabel='Жду каталог'
               onSuccess={() => setIsFormSubmitted(true)}
               image={

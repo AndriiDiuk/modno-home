@@ -7,7 +7,8 @@ interface ModalContextType {
   title?: string;
   buttonLabel?: string;
   sourcePage?: string;
-  openModal: (title?: string, buttonLabel?: string, sourcePage?: string) => void;
+  titleClassName?: string;
+  openModal: (title?: string, buttonLabel?: string, sourcePage?: string, titleClassName?: string) => void;
   closeModal: () => void;
 }
 
@@ -20,11 +21,13 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({
   const [title, setTitle] = useState<string | undefined>(undefined);
   const [buttonLabel, setButtonLabel] = useState<string | undefined>(undefined);
   const [sourcePage, setSourcePage] = useState<string | undefined>(undefined);
+  const [titleClassName, setTitleClassName] = useState<string | undefined>(undefined);
 
   const openModal = (
     modalTitle?: string | unknown,
     modalButtonLabel?: string,
     modalSourcePage?: string,
+    modalTitleClassName?: string,
   ) => {
     if (typeof modalTitle === "string") {
       setTitle(modalTitle);
@@ -33,6 +36,7 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({
     }
     setButtonLabel(modalButtonLabel);
     setSourcePage(modalSourcePage);
+    setTitleClassName(modalTitleClassName);
     setIsOpen(true);
   };
   const closeModal = () => {
@@ -41,12 +45,13 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({
       setTitle(undefined);
       setButtonLabel(undefined);
       setSourcePage(undefined);
+      setTitleClassName(undefined);
     }, 250);
   };
 
   return (
     <ModalContext.Provider
-      value={{ isOpen, title, buttonLabel, sourcePage, openModal, closeModal }}
+      value={{ isOpen, title, buttonLabel, sourcePage, titleClassName, openModal, closeModal }}
     >
       {children}
     </ModalContext.Provider>
