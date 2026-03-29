@@ -179,6 +179,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
                   "/images/view/3.webp",
                   "/images/view/4.webp",
                   "/images/view/5.webp",
+                  "/images/view/6.webp",
                 ]}
                 title={popularTitle}
                 subtitle={popularSubtitle}

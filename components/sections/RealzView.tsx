@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import "keen-slider/keen-slider.min.css";
+import { useKeenSlider } from "keen-slider/react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
-import { AppButton } from "../ui/AppButton";
 
 interface RealzViewProps {
   images: string[];
@@ -13,6 +14,8 @@ interface RealzViewProps {
   showTitle?: boolean;
   className?: string;
 }
+
+const AUTOPLAY_INTERVAL = 5000;
 
 export const RealzView: React.FC<RealzViewProps> = ({
   images,
@@ -23,10 +26,48 @@ export const RealzView: React.FC<RealzViewProps> = ({
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [showAll, setShowAll] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval>>(null);
 
   const slides = images.map((src) => ({ src }));
 
-  // Reset padding-right that lightbox adds (scrollbar-gutter handles it)
+  const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
+    loop: true,
+    slides: {
+      perView: 5,
+      spacing: 20,
+    },
+    breakpoints: {
+      "(max-width: 1024px)": {
+        slides: { perView: 3, spacing: 16 },
+      },
+    },
+  });
+
+  const resetTimer = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      instanceRef.current?.next();
+    }, AUTOPLAY_INTERVAL);
+  }, [instanceRef]);
+
+  useEffect(() => {
+    resetTimer();
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [resetTimer]);
+
+  const handlePrev = () => {
+    instanceRef.current?.prev();
+    resetTimer();
+  };
+
+  const handleNext = () => {
+    instanceRef.current?.next();
+    resetTimer();
+  };
+
+  // Reset padding-right that lightbox adds
   useEffect(() => {
     if (selectedIndex >= 0) {
       document.body.style.paddingRight = "0px";
@@ -49,23 +90,67 @@ export const RealzView: React.FC<RealzViewProps> = ({
           </div>
         )}
 
-        {/* Desktop Layout */}
-        <div className='hidden md:grid grid-cols-5 gap-5 w-full'>
-          {images.map((src, index) => (
-            <div
-              key={index}
-              className='relative w-full aspect-230/136 max-w-[230px] rounded-[8px] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity mx-auto'
-              onClick={() => setSelectedIndex(index)}
+        {/* Desktop Layout — keen-slider */}
+        <div className='hidden md:flex items-center gap-2 w-full'>
+          <button
+            onClick={handlePrev}
+            className='shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-black/10 text-brand-black hover:bg-black/20 transition-colors cursor-pointer'
+            aria-label='Previous'
+          >
+            <svg
+              width='14'
+              height='14'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+              strokeWidth='2.5'
+              strokeLinecap='round'
+              strokeLinejoin='round'
             >
-              <Image
-                src={src}
-                alt={`View ${index + 1}`}
-                fill
-                className='object-cover'
-                sizes='(max-width: 1200px) 25vw, 20vw'
-              />
-            </div>
-          ))}
+              <polyline points='15 18 9 12 15 6' />
+            </svg>
+          </button>
+
+          <div ref={sliderRef} className='keen-slider w-full'>
+            {images.map((src, index) => (
+              <div
+                key={index}
+                className='keen-slider__slide'
+              >
+                <div
+                  className='relative w-full aspect-230/136 rounded-[8px] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity'
+                  onClick={() => setSelectedIndex(index)}
+                >
+                  <Image
+                    src={src}
+                    alt={`View ${index + 1}`}
+                    fill
+                    className='object-cover'
+                    sizes='(max-width: 1200px) 25vw, 20vw'
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <button
+            onClick={handleNext}
+            className='shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-black/10 text-brand-black hover:bg-black/20 transition-colors cursor-pointer'
+            aria-label='Next'
+          >
+            <svg
+              width='14'
+              height='14'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+              strokeWidth='2.5'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+            >
+              <polyline points='9 18 15 12 9 6' />
+            </svg>
+          </button>
         </div>
 
         {/* Mobile Layout */}
@@ -89,12 +174,12 @@ export const RealzView: React.FC<RealzViewProps> = ({
           </div>
 
           {!showAll && images.length > 4 && (
-            <AppButton
-              label='СМОТРЕТЬ ЕЩЕ'
-              variant='secondary'
+            <button
               onClick={() => setShowAll(true)}
-              className='w-fit! px-12'
-            />
+              className='min-w-[242px] md:min-w-[320px] whitespace-nowrap inline-flex items-center justify-center rounded-[8px] leading-[1] transition-all duration-300 font-bold cursor-pointer bg-[#222222] text-white hover:bg-[#222222]/80 border-transparent px-12 py-4 text-[14px] w-fit active:scale-[0.98]'
+            >
+              СМОТРЕТЬ ЕЩЕ
+            </button>
           )}
         </div>
       </div>
@@ -109,7 +194,7 @@ export const RealzView: React.FC<RealzViewProps> = ({
         }}
         render={{
           slide: ({ slide }) => (
-            <div className="relative w-full h-full max-w-[90vw] max-h-[80vh] md:max-w-[50vw] md:max-h-[66vh] m-auto">
+            <div className='relative w-full h-full max-w-[90vw] max-h-[80vh] md:max-w-[50vw] md:max-h-[66vh] m-auto'>
               <Image
                 src={slide.src}
                 alt='Full view'
