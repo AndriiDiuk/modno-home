@@ -8,6 +8,7 @@ interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
   className?: string;
+  closeButtonClassName?: string;
 }
 
 const DURATION = 200;
@@ -17,6 +18,7 @@ export const Modal: React.FC<ModalProps> = ({
   onClose,
   children,
   className = "max-w-[500px]",
+  closeButtonClassName = "top-[30px] right-[30px]",
 }) => {
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
   const [mounted, setMounted] = useState(false);
@@ -61,7 +63,7 @@ export const Modal: React.FC<ModalProps> = ({
       >
         <button
           onClick={onClose}
-          className='absolute top-2 right-2 p-2 text-brand-black/40 hover:text-brand-black transition-colors z-10 cursor-pointer'
+          className={`absolute p-2 text-brand-black/40 hover:text-brand-black transition-colors z-10 cursor-pointer ${closeButtonClassName}`}
         >
           <svg
             width='24'

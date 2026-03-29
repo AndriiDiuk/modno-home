@@ -1,18 +1,18 @@
-import { VkSquareIcon, YoutubeIcon } from "@/assets/icons";
+import { TelegramSquareIcon, VkSquareIcon } from "@/assets/icons";
 import { SocialCard } from "@/components/ui/SocialCard";
 import React from "react";
 
 interface SuccessMessageProps {
   socials?: {
     vk?: string;
-    youtube?: string;
+    telegram?: string;
   };
 }
 
 export const SuccessMessage: React.FC<SuccessMessageProps> = ({
   socials = {
     vk: "",
-    youtube: "",
+    telegram: "",
   },
 }) => {
   return (
@@ -22,7 +22,7 @@ export const SuccessMessage: React.FC<SuccessMessageProps> = ({
         <h2 className='text-[40px] font-bold text-brand-black mb-4 uppercase tracking-wider'>
           СПАСИБО
         </h2>
-        <p className='text-[18px] text-brand-black font-bold leading-[1.2] max-w-[400px]'>
+        <p className='text-[18px] text-brand-black font-bold leading-[1.2] max-w-100'>
           Наш сайт работает быстро, <br /> скоро вам перезвоним
         </p>
       </div>
@@ -32,16 +32,16 @@ export const SuccessMessage: React.FC<SuccessMessageProps> = ({
         Следите за нами в соц. сетях, подписывайтесь
       </p>
 
-      <div className='flex flex-row justify-center gap-[72px] md:gap-[60px] w-full pb-7.5'>
+      <div className='flex flex-row justify-center gap-18 md:gap-15 w-full pb-7.5'>
         <SocialCard
-          icon={<VkSquareIcon className='w-[32px] h-[32px] text-brand-black' />}
+          icon={<VkSquareIcon className='w-8 h-8 text-brand-black' />}
           label='Мы Вконтакте'
           href={socials.vk || "#"}
         />
         <SocialCard
-          icon={<YoutubeIcon className='w-full h-full text-brand-black' />}
-          label='Мы на YouTube'
-          href={socials.youtube || "#"}
+          icon={<TelegramSquareIcon className='w-8 h-8 text-brand-black' />}
+          label='Мы в Telegram'
+          href={socials.telegram || "#"}
         />
       </div>
     </div>

@@ -8,7 +8,7 @@ import { useModal } from "../providers/ModalProvider";
 interface GlobalModalProps {
   socials?: {
     vk?: string;
-    youtube?: string;
+    telegram?: string;
   };
 }
 

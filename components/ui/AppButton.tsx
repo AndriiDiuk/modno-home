@@ -19,7 +19,7 @@ export const AppButton: React.FC<AppButtonProps> = ({
     primary:
       "bg-[#FFDE79] text-brand-black hover:bg-black hover:text-white border-transparent",
     secondary:
-      "bg-black text-white hover:bg-black/80 hover:text-white border-transparent",
+      "bg-[#222222] text-white hover:bg-[#222222]/80 hover:text-white border-transparent",
   };
 
   const sizes = {

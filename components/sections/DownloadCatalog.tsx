@@ -96,9 +96,11 @@ export const DownloadCatalog: React.FC<DownloadCatalogProps> = ({
       {/* Modal for Catalog Download */}
       <Modal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => { setIsModalOpen(false); setTimeout(() => setIsFormSubmitted(false), 250); }}
         className='max-w-[1010px]'
+        closeButtonClassName='top-5 right-5'
       >
+        <div className='absolute inset-3.5 border-2 border-[#E9E9E9] rounded-2xl pointer-events-none z-10' />
         <div className='relative flex flex-col lg:flex-row gap-6 md:gap-10 items-center overflow-hidden lg:min-h-[400px]'>
           <div className={isFormSubmitted ? "w-full " : "w-full lg:w-1/2"}>
             <CallbackForm
