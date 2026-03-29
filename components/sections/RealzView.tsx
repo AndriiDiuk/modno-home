@@ -26,7 +26,9 @@ export const RealzView: React.FC<RealzViewProps> = ({
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [showAll, setShowAll] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval>>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   const slides = images.map((src) => ({ src }));
 
@@ -43,12 +45,25 @@ export const RealzView: React.FC<RealzViewProps> = ({
     },
   });
 
+  // Only autoplay when visible
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   const resetTimer = useCallback(() => {
     if (timerRef.current) clearInterval(timerRef.current);
+    if (!isVisible) return;
     timerRef.current = setInterval(() => {
       instanceRef.current?.next();
     }, AUTOPLAY_INTERVAL);
-  }, [instanceRef]);
+  }, [instanceRef, isVisible]);
 
   useEffect(() => {
     resetTimer();
@@ -75,7 +90,7 @@ export const RealzView: React.FC<RealzViewProps> = ({
   }, [selectedIndex]);
 
   return (
-    <section className={`w-full ${className}`}>
+    <section ref={sectionRef} className={`w-full ${className}`}>
       <div className='content flex flex-col items-center'>
         {showTitle && (
           <div className='text-center mb-8 md:mb-[30px] leading-[1.1]'>
