@@ -59,7 +59,7 @@ export const FabricSelection: React.FC<FabricSelectionProps> = ({
   subtitle = "Больше 100 конфигураций и цветов",
 }) => {
   return (
-    <section className='w-full py-10 md:py-24 overflow-hidden bg-[#FCFCFC] '>
+    <section className='w-full pt-10 md:pb-0 md:pt-24 overflow-hidden bg-[#FCFCFC] '>
       <div className='content '>
         <div className='text-center mb-5 md:mb-10 lg:mb-0 '>
           <h2 className='text-[30px] md:text-[50px] font-bold text-brand-black leading-[1.1] uppercase mb-1 md:mb-3'>

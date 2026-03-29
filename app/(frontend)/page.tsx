@@ -150,7 +150,7 @@ export default async function HomePage() {
         edition={catalogEdition}
       />
       <FabricSelection title={fabricTitle} subtitle={fabricSubtitle} />
-      <CalculationSection socials={socials} />
+      {/* <CalculationSection socials={socials} /> */}
 
       <ReviewSection title={reviewTitle} />
       <ContactUsSection telegramUrl={socials.telegram} vkUrl={socials.vk} />

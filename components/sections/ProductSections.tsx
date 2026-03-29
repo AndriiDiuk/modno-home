@@ -38,7 +38,7 @@ export const ProductSections: React.FC<ProductSectionsProps> = ({
   const hasMore = products.length > 3;
 
   return (
-    <section className={`w-full py-16 md:py-24 ${className}`}>
+    <section className={`w-full py-16 md:pb-24 md:pt-12 ${className}`}>
       <div className='content flex flex-col items-center'>
         {/* Centered Title */}
         <SectionTitle
@@ -85,7 +85,7 @@ export const ProductSections: React.FC<ProductSectionsProps> = ({
           <div className='mt-10 md:hidden w-full flex justify-center'>
             <button
               onClick={() => setIsExpanded(true)}
-              className='w-full max-w-[340px] bg-brand-black text-white py-4 rounded-[12px] text-[16px] font-medium uppercase tracking-wider hover:opacity-90 transition-all cursor-pointer'
+              className='w-full max-w-85 bg-brand-black text-white py-4 rounded-xl text-[16px] font-medium uppercase tracking-wider hover:opacity-90 transition-all cursor-pointer'
             >
               СМОТРЕТЬ ЕЩЕ
             </button>
