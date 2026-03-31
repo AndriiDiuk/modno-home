@@ -33,16 +33,21 @@ export const ReviewSection: React.FC<ReviewSectionProps> = ({
   images,
 }) => {
   const reviews = images?.length
-    ? images.map((item, i) => ({
-        id: i + 1,
-        image: typeof item.image === "string" ? item.image : item.image?.url || "",
-      })).filter((r) => r.image)
+    ? images
+        .map((item, i) => ({
+          id: i + 1,
+          image:
+            typeof item.image === "object" && item.image?.url
+              ? item.image.url
+              : "",
+        }))
+        .filter((r) => r.image)
     : FALLBACK_REVIEWS;
 
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     loop: true,
     slides: {
-      perView: 1.4,
+      perView: 1.5,
       spacing: 0,
     },
     breakpoints: {

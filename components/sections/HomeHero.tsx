@@ -88,9 +88,10 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
   ];
   const sliderImages = popularImages?.length
     ? popularImages
-        .map((item) =>
-          typeof item.image === "string" ? item.image : item.image?.url || "",
-        )
+        .map((item) => {
+          if (typeof item.image === "object" && item.image?.url) return item.image.url;
+          return "";
+        })
         .filter(Boolean)
     : fallbackImages;
 

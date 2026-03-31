@@ -10,8 +10,11 @@ const nextConfig = {
         port: "3000",
         pathname: "/api/media/**",
       },
-      // Додай свої домени для продакшену (S3/CDN тощо)
-      // { protocol: "https", hostname: "assets.example.com", pathname: "/**" },
+      {
+        protocol: "https",
+        hostname: "storage.yandexcloud.net",
+        pathname: "/modno-home/**",
+      },
     ],
     unoptimized: process.env.NODE_ENV === "development",
   },

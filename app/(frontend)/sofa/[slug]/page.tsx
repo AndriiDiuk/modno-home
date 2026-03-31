@@ -64,6 +64,7 @@ async function getSofaData(slug: string) {
         isActive: { equals: true },
       },
       overrideAccess: true,
+      depth: 2,
       limit: 100,
     });
 
@@ -215,7 +216,7 @@ export default async function SofaPage({ params }: SofaPageProps) {
   const sofaData = sofa as unknown as Record<string, unknown>;
   const uploadedViews = ((sofaData.viewImages as { image: { url?: string } | string }[]) || [])
     .map((item) =>
-      typeof item.image === "string" ? item.image : item.image?.url || "",
+      typeof item.image === "object" && item.image?.url ? item.image.url : "",
     )
     .filter(Boolean);
   const viewsCount = (sofaData.viewsCount as number) || 0;
