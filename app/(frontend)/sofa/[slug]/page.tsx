@@ -1,7 +1,12 @@
 import { PhoneIcon, TelegramSquareIcon, VkSquareIcon } from "@/assets/icons";
 import { InfoSofa } from "@/components/sections";
 import { ColorSelector, HeroTitle } from "@/components/ui";
-import { fetchPayloadLocal, getBaseUrl, getCachedSettings } from "@/lib/payload";
+import {
+  fetchPayloadLocal,
+  getBaseUrl,
+  getCachedHome,
+  getCachedSettings,
+} from "@/lib/payload";
 import { toSlug } from "@/lib/toSlug";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
@@ -39,6 +44,11 @@ const ReviewSection = dynamic(() =>
 );
 const RealzView = dynamic(() =>
   import("@/components/sections/RealzView").then((m) => m.RealzView),
+);
+const FabricSelection = dynamic(() =>
+  import("@/components/sections/FabricSelection").then(
+    (m) => m.FabricSelection,
+  ),
 );
 
 interface SofaPageProps {
@@ -144,9 +154,7 @@ export async function generateMetadata({
   const baseUrl = getBaseUrl();
   const title = `${sofa.category || "Диван"} ${sofa.title}`;
   const description = `${sofa.category || "Диван"} ${sofa.title} — от ${Number(sofa.price).toLocaleString("ru-RU")} ₽. Производство модульных диванов.`;
-  const folder = (
-    (sofa as any).folderName || toSlug(sofa.title)
-  ).toLowerCase();
+  const folder = ((sofa as any).folderName || toSlug(sofa.title)).toLowerCase();
   const url = `${baseUrl}/sofa/${slug}`;
   const imageUrl = `${baseUrl}/sofas/${folder}/bg-hero.webp`;
 
@@ -175,10 +183,14 @@ export default async function SofaPage({ params }: SofaPageProps) {
   const [
     { currentSofa: sofa, otherSofas, relatedSofasTitle, relatedSofasSubtitle },
     settingsData,
-  ] = await Promise.all([getSofaData(slug), getCachedSettings()]);
+    homeData,
+  ] = await Promise.all([getSofaData(slug), getCachedSettings(), getCachedHome()]);
   const socials = (settingsData as any)?.header?.socials || {};
   const phone = (settingsData as any)?.header?.phone || "";
   const phoneClean = phone.replace(/[\s\-\(\)]/g, "");
+
+  const { fabricSection } = (homeData as any) || {};
+  const { title: fabricTitle, subtitle: fabricSubtitle } = fabricSection || {};
 
   if (!sofa) {
     notFound();
@@ -351,7 +363,7 @@ export default async function SofaPage({ params }: SofaPageProps) {
       />
 
       <CalculationSection socials={socials} />
-
+      <FabricSelection title={fabricTitle} subtitle={fabricSubtitle} />
       <DownloadCatalog />
 
       <OtherCardsSection

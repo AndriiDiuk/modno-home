@@ -30,7 +30,7 @@ export const ContactGroup: React.FC<ContactGroupProps> = ({
         label='Заказать звонок'
         variant='light'
         size='sm'
-        className='text-[14px] leading-none h-[34px]'
+        className='text-[14px] leading-none h-8.5'
         onClick={() => openModal()}
       />
     </div>

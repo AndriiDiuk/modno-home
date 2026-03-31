@@ -127,13 +127,14 @@ export const InfoSofa: React.FC<InfoSofaProps> = ({
       </div>
 
       {/* CTA Button */}
-      <div className='mb-2.5 mx-4.5'>
+      <div className='mb-2.5 mx-2 sm:mx-4.5'>
         <button
           onClick={() =>
             openModal(
-              `Узнать стоимость своего размера`,
+              `Узнать стоимость\nсвоего размера`,
               undefined,
               sofaName ? `Диван ${sofaName}` : undefined,
+              "whitespace-pre-line",
             )
           }
           className='animate-shine w-full bg-brand-yellow min-w-0 md:min-w-0 cursor-pointer text-center md:text-[17px] font-bold text-brand-black flex items-center justify-center px-12 py-3 rounded-lg'

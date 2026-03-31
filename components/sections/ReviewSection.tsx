@@ -33,7 +33,7 @@ export const ReviewSection: React.FC<ReviewSectionProps> = ({
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     loop: true,
     slides: {
-      perView: 1.3,
+      perView: 1.4,
       spacing: 0,
     },
     breakpoints: {
@@ -60,7 +60,7 @@ export const ReviewSection: React.FC<ReviewSectionProps> = ({
           className='keen-slider w-full overflow-visible! py-14 -my-14'
         >
           {REVIEWS.map((review) => (
-            <div key={review.id} className='keen-slider__slide p-2 md:p-[15px]'>
+            <div key={review.id} className='keen-slider__slide p-1 md:p-[15px]'>
               <div className='relative w-full h-[344px] md:h-[500px]'>
                 <Image
                   src={review.image}

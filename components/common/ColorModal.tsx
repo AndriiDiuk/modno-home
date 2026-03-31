@@ -206,7 +206,7 @@ export const ColorModal: React.FC<ColorModalProps> = ({ isOpen, onClose, sofaNam
 
         <div className='w-full max-w-[800px] text-center px-9 md:px-0'>
           <h3 className='text-[18px]  font-bold  uppercase'>
-            ЧТОБЫ УЗНАТЬ ПОДРОБНЕЕ ВАРИАНТЫ ТКАНИ И РАСЦВЕТКИ
+            ЧТОБЫ УЗНАТЬ ПОДРОБНЕЕ
           </h3>
           <p className='text-[16px]  mb-8'>Заполните форму ниже</p>
 

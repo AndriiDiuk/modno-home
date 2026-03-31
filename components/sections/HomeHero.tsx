@@ -79,17 +79,17 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
 
   return (
     <>
-      <section className='relative overflow-hidden pt-[94px] lg:pt-[174px] pb-[90px] bg-[#E9E9E7] '>
+      <section className='relative overflow-hidden pt-23.5 lg:pt-43.5 pb-22.5 bg-[#E9E9E7] '>
         {/* Background Images */}
         <Image
-          src='/images/bg-hero.png'
+          src='/images/bg-hero.webp'
           alt='Модульные диваны'
           fill
           className='hidden lg:block object-cover object-top z-0 w-full'
           priority
         />
         <Image
-          src='/images/bg-hero-mob.png'
+          src='/images/bg-hero-mob.webp'
           alt='Модульные диваны'
           fill
           className='lg:hidden object-cover sm:object-[center_14%] md:object-[center_18%] object-top z-0'
@@ -159,7 +159,12 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
               {/* White Showroom Button */}
               <button
                 onClick={() =>
-                  openModal("ЧТОБЫ ЗАПИСАТЬСЯ В ШОУРУМ НА УДОБНОЕ ВРЕМЯ", "ЗАПИСАТЬСЯ", "Главная", "max-w-[100%]")
+                  openModal(
+                    "ЧТОБЫ ЗАПИСАТЬСЯ В ШОУРУМ НА УДОБНОЕ ВРЕМЯ",
+                    "ЗАПИСАТЬСЯ",
+                    "Главная",
+                    "max-w-[100%]",
+                  )
                 }
                 className='w-full bg-white text-brand-black text-[14px] md:text-[17px] rounded-[8px] py-[10px] px-1 md:px-6 text-center border border-brand-border transition-all duration-300 hover:scale-[1.02] cursor-pointer'
               >

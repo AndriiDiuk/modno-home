@@ -131,12 +131,12 @@ export const VideoCard: React.FC<VideoCardProps> = ({
           className={`absolute inset-0 bg-black/10 transition-opacity duration-300 ${videoReady ? "group-hover:opacity-0" : ""}`}
         />
 
-        {/* Centered Overlay Text */}
+        {/* Centered Overlay Text — desktop only */}
         <div
-          className={`absolute inset-0 flex items-center justify-center p-6 text-center transition-opacity duration-300 ${videoReady ? "group-hover:opacity-0" : ""}`}
+          className={`absolute inset-0 hidden md:flex items-center justify-center p-6 text-center transition-opacity duration-300 ${videoReady ? "group-hover:opacity-0" : ""}`}
         >
-          <p className='text-white text-[20px] md:text-base font-bold leading-tight drop-shadow-lg'>
-            {(DISABLE_CARD_VIDEO || isMobile || videoReady) && overlayText}
+          <p className='text-white text-base font-bold leading-tight drop-shadow-lg'>
+            {(DISABLE_CARD_VIDEO || videoReady) && overlayText}
           </p>
         </div>
 
