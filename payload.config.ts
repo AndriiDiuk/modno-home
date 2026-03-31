@@ -52,7 +52,7 @@ export default buildConfig({
           secretAccessKey: process.env.S3_SECRET_KEY || "",
         },
         forcePathStyle: true,
-        region: "auto",
+        region: process.env.S3_REGION || "ru-central1",
         endpoint: process.env.S3_ENDPOINT || "",
         requestChecksumCalculation: "WHEN_REQUIRED",
       },

@@ -211,12 +211,17 @@ export default async function SofaPage({ params }: SofaPageProps) {
   const descriptionBold = hero.descriptionBold
     ? hero.descriptionBold.split(",").map((s: string) => s.trim())
     : [];
-  // Generate views image paths from viewsCount (files: 1.webp, 2.webp, ...)
-  const viewsCount = (sofa as any).viewsCount || 0;
-  const viewImages = Array.from(
-    { length: viewsCount },
-    (_, i) => `${basePath}/views/${i + 1}.webp`,
-  );
+  // Use uploaded viewImages if available, otherwise fallback to viewsCount
+  const sofaData = sofa as unknown as Record<string, unknown>;
+  const uploadedViews = ((sofaData.viewImages as { image: { url?: string } | string }[]) || [])
+    .map((item) =>
+      typeof item.image === "string" ? item.image : item.image?.url || "",
+    )
+    .filter(Boolean);
+  const viewsCount = (sofaData.viewsCount as number) || 0;
+  const viewImages = uploadedViews.length > 0
+    ? uploadedViews
+    : Array.from({ length: viewsCount }, (_, i) => `${basePath}/views/${i + 1}.webp`);
 
   // Showcase data
   const showcase = (sofa as any).showcase || {};

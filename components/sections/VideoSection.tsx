@@ -40,8 +40,8 @@ export const VideoSection: React.FC<VideoSectionProps> = ({
           <SectionTitle
             title={title}
             subtitle={subtitle}
-            className='text-center mb-[35px] md:mb-10'
-            subtitleClassName='text-[18px] md:text-[30px]'
+            className='text-center mb-8.75 md:mb-10'
+            subtitleClassName='text-[clamp(14px,calc(14px+(16)*((100vw-390px)/810)),30px)]'
           />
 
           {/* Video Grid - 5 columns on desktop, 4 on mobile/tablet */}

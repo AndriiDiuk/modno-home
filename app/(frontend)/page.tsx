@@ -121,7 +121,7 @@ export default async function HomePage() {
 
   const { fabricSection, reviewSection } = homeData || {};
   const { title: fabricTitle, subtitle: fabricSubtitle } = fabricSection || {};
-  const { title: reviewTitle } = reviewSection || {};
+  const { title: reviewTitle, images: reviewImages } = reviewSection || {};
 
   return (
     <div className='show-slow'>
@@ -152,7 +152,7 @@ export default async function HomePage() {
       <FabricSelection title={fabricTitle} subtitle={fabricSubtitle} />
       {/* <CalculationSection socials={socials} /> */}
 
-      <ReviewSection title={reviewTitle} />
+      <ReviewSection title={reviewTitle} images={reviewImages} />
       <ContactUsSection telegramUrl={socials.telegram} vkUrl={socials.vk} />
     </div>
   );

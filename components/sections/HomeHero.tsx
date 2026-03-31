@@ -31,6 +31,7 @@ interface HomeHeroProps {
   showroomButtonSublabel?: string;
   popularTitle?: string;
   popularSubtitle?: string;
+  popularImages?: { image: { url?: string } | string }[];
 }
 
 function highlightWords(text: string, bold: string[] = []) {
@@ -71,11 +72,27 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
   showroomButtonSublabel = "выбрать ткань, мягкость, модель",
   popularTitle = "Популярные конфигурации",
   popularSubtitle = "Прямые, угловые, большие, малые и т.д",
+  popularImages,
 }) => {
   const phoneClean = phone.replace(/[\s\-\(\)]/g, "");
   const { openModal } = useModal();
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+
+  const fallbackImages = [
+    "/images/view/1.webp",
+    "/images/view/2.webp",
+    "/images/view/3.webp",
+    "/images/view/4.webp",
+    "/images/view/5.webp",
+  ];
+  const sliderImages = popularImages?.length
+    ? popularImages
+        .map((item) =>
+          typeof item.image === "string" ? item.image : item.image?.url || "",
+        )
+        .filter(Boolean)
+    : fallbackImages;
 
   return (
     <>
@@ -127,15 +144,15 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
           </div>
 
           {/* Title Block */}
-          <div className='flex flex-col items-center w-full relative z-2 mb-[50px] md:mb-[56px] '>
-            <div className='text-center mb-[160px] sm:mb-[270px]'>
-              <h1 className='text-[32px] lg:text-[45px] text-brand-black leading-[1.1] font-bold'>
+          <div className='flex flex-col items-center w-full relative z-2 mb-12.5 md:mb-14 '>
+            <div className='text-center mb-40 sm:mb-67.5'>
+              <h1 className='text-[clamp(30px,calc(30px+(15)*((100vw-390px)/810)),45px)] text-brand-black leading-[1.1] font-bold'>
                 {highlightWords(title, titleBold)}
               </h1>
-              <p className='text-[26px] md:text-[32px] lg:text-[45px] text-brand-black leading-[1.1]'>
+              <p className='text-[clamp(20px,calc(20px+(25)*((100vw-390px)/810)),45px)] text-brand-black leading-[1.1]'>
                 {highlightWords(title2, title2Bold)}
               </p>
-              <p className='text-base sxm:text-[18px] sm:text-[22px] text-brand-black leading-[1.1] mt-3 max-w-[600px] mx-auto'>
+              <p className='text-[clamp(16px,calc(16px+(6)*((100vw-390px)/810)),22px)] text-brand-black leading-[1.1] mt-3 max-w-150 mx-auto'>
                 {highlightWords(description, descriptionBold)}
               </p>
             </div>
@@ -146,11 +163,11 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
             </div>
 
             {/* CTA Buttons */}
-            <div className='flex flex-col items-center gap-5 md:gap-[26px] w-full max-w-[256px] md:max-w-[377px]'>
+            <div className='flex flex-col items-center gap-5 md:gap-6.5 w-full max-w-[256px] md:max-w-94.25'>
               {/* Yellow Catalog Button */}
               <button
                 onClick={() => setIsCatalogOpen(true)}
-                className='animate-shine w-full text-[14px] md:text-[17px] bg-brand-yellow text-brand-black rounded-[8px] py-[10px] px-6 text-center transition-all duration-300 hover:scale-[1.02] cursor-pointer'
+                className='animate-shine w-full text-[14px] md:text-[17px] bg-brand-yellow text-brand-black rounded-lg py-2.5 px-6 text-center transition-all duration-300 hover:scale-[1.02] cursor-pointer'
               >
                 <span className='font-bold block'>{catalogButtonLabel}</span>
                 <span>{catalogButtonSublabel}</span>
@@ -178,14 +195,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
           <div className='relative flex flex-col items-center z-2 '>
             <div className='flex-1 w-full'>
               <RealzView
-                images={[
-                  "/images/view/1.webp",
-                  "/images/view/2.webp",
-                  "/images/view/3.webp",
-                  "/images/view/4.webp",
-                  "/images/view/5.webp",
-                  "/images/view/6.webp",
-                ]}
+                images={sliderImages}
                 title={popularTitle}
                 subtitle={popularSubtitle}
                 showTitle
@@ -214,7 +224,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
               image={
                 !isFormSubmitted ? (
                   <div
-                    className='-mb-[100px] -left-[8%] relative z-0 block md:hidden'
+                    className='-mb-25 -left-[8%] relative z-0 block md:hidden'
                     style={{
                       width: "clamp(300px, 130vw, 600px)",
                       height: "clamp(250px, 110vw, 400px)",
@@ -232,7 +242,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
             />
           </div>
           {!isFormSubmitted && (
-            <div className='relative lg:absolute lg:right-[6%] lg:-bottom-[56%] w-full lg:w-1/2 lg:h-[740px] lg:scale-[1.2] z-0'>
+            <div className='relative lg:absolute lg:right-[6%] lg:-bottom-[56%] w-full lg:w-1/2 lg:h-185 lg:scale-[1.2] z-0'>
               <Image
                 src='/images/catalog.webp'
                 alt='Каталог мебели'

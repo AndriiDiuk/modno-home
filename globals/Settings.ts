@@ -51,12 +51,24 @@ export const Settings: GlobalConfig = {
                       },
                     },
                     {
+                      name: "thumbnail1",
+                      type: "upload",
+                      relationTo: "media",
+                      label: "Обложка видео 1",
+                    },
+                    {
                       name: "video2",
                       type: "text",
                       label: "Ссылка на видео 2",
                       admin: {
                         description: "URL видео (например, с Supabase)",
                       },
+                    },
+                    {
+                      name: "thumbnail2",
+                      type: "upload",
+                      relationTo: "media",
+                      label: "Обложка видео 2",
                     },
                   ],
                 },

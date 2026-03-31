@@ -90,6 +90,23 @@ export const Home: GlobalConfig = {
                   label: "Подзаголовок популярных конфигураций",
                   defaultValue: "Прямые, угловые, большие, малые и т.д",
                 },
+                {
+                  name: "popularImages",
+                  type: "array",
+                  label: "Фото слайдера конфигураций",
+                  admin: {
+                    description: "Загрузите фото для слайдера популярных конфигураций",
+                  },
+                  fields: [
+                    {
+                      name: "image",
+                      type: "upload",
+                      relationTo: "media",
+                      required: true,
+                      label: "Фото",
+                    },
+                  ],
+                },
               ],
             },
           ],
@@ -263,6 +280,23 @@ export const Home: GlobalConfig = {
                   type: "text",
                   label: "Заголовок",
                   defaultValue: "Отзывы",
+                },
+                {
+                  name: "images",
+                  type: "array",
+                  label: "Фото отзывов",
+                  admin: {
+                    description: "Загрузите скриншоты отзывов для слайдера",
+                  },
+                  fields: [
+                    {
+                      name: "image",
+                      type: "upload",
+                      relationTo: "media",
+                      required: true,
+                      label: "Фото",
+                    },
+                  ],
                 },
               ],
             },

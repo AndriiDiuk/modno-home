@@ -13,7 +13,9 @@ interface HeaderProps {
       phone?: string;
       videos?: {
         video1?: string;
+        thumbnail1?: { url?: string } | string;
         video2?: string;
+        thumbnail2?: { url?: string } | string;
       };
       socials?: {
         telegram?: string;
@@ -58,13 +60,13 @@ export const Header: React.FC<HeaderProps> = ({ data }) => {
             <div className='hidden lg:flex gap-5'>
               <CircleCTA
                 text='Смотреть'
-                imageSrc='/images/stories/st_1.webp'
+                imageSrc={typeof videos.thumbnail1 === 'object' ? videos.thumbnail1?.url || '/images/stories/st_1.webp' : '/images/stories/st_1.webp'}
                 className='text-[14px] leading-none h-auto'
                 onClick={() => videos.video1 && setActiveVideo(videos.video1)}
               />
               <CircleCTA
                 text='Смотреть'
-                imageSrc='/images/stories/st_2.webp'
+                imageSrc={typeof videos.thumbnail2 === 'object' ? videos.thumbnail2?.url || '/images/stories/st_2.webp' : '/images/stories/st_2.webp'}
                 className='text-[14px] leading-none h-auto'
                 onClick={() => videos.video2 && setActiveVideo(videos.video2)}
                 delay='1s'

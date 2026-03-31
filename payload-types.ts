@@ -184,9 +184,18 @@ export interface Sofa {
    */
   folderName?: string | null;
   /**
-   * Сколько фото в папке views/ (файлы: 1.webp, 2.webp, ...)
+   * Используется только если не загружены фото ниже
    */
   viewsCount?: number | null;
+  /**
+   * Загрузите фото для слайдера. Если загружены — поле viewsCount игнорируется.
+   */
+  viewImages?:
+    | {
+        image: string | Media;
+        id?: string | null;
+      }[]
+    | null;
   imageFilename:
     | 'bad.webp'
     | 'bianco.webp'
@@ -433,6 +442,12 @@ export interface SofasSelect<T extends boolean = true> {
   category?: T;
   folderName?: T;
   viewsCount?: T;
+  viewImages?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
   imageFilename?: T;
   price?: T;
   oldPrice?: T;
@@ -559,6 +574,15 @@ export interface Home {
     showroomButtonSublabel?: string | null;
     popularTitle?: string | null;
     popularSubtitle?: string | null;
+    /**
+     * Загрузите фото для слайдера популярных конфигураций
+     */
+    popularImages?:
+      | {
+          image: string | Media;
+          id?: string | null;
+        }[]
+      | null;
   };
   sofasSection?: {
     title?: string | null;
@@ -599,6 +623,15 @@ export interface Home {
   };
   reviewSection?: {
     title?: string | null;
+    /**
+     * Загрузите скриншоты отзывов для слайдера
+     */
+    images?:
+      | {
+          image: string | Media;
+          id?: string | null;
+        }[]
+      | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -618,10 +651,12 @@ export interface Setting {
        * URL видео (например, с Supabase)
        */
       video1?: string | null;
+      thumbnail1?: (string | null) | Media;
       /**
        * URL видео (например, с Supabase)
        */
       video2?: string | null;
+      thumbnail2?: (string | null) | Media;
     };
     socials?: {
       telegram?: string | null;
@@ -697,6 +732,12 @@ export interface HomeSelect<T extends boolean = true> {
         showroomButtonSublabel?: T;
         popularTitle?: T;
         popularSubtitle?: T;
+        popularImages?:
+          | T
+          | {
+              image?: T;
+              id?: T;
+            };
       };
   sofasSection?:
     | T
@@ -738,6 +779,12 @@ export interface HomeSelect<T extends boolean = true> {
     | T
     | {
         title?: T;
+        images?:
+          | T
+          | {
+              image?: T;
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -758,7 +805,9 @@ export interface SettingsSelect<T extends boolean = true> {
           | T
           | {
               video1?: T;
+              thumbnail1?: T;
               video2?: T;
+              thumbnail2?: T;
             };
         socials?:
           | T

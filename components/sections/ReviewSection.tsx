@@ -6,7 +6,7 @@ import { useKeenSlider } from "keen-slider/react";
 import Image from "next/image";
 import React from "react";
 
-const REVIEWS = [
+const FALLBACK_REVIEWS = [
   { id: 1, image: "/images/reviews/1 282 1.webp" },
   { id: 2, image: "/images/reviews/1 282 2.webp" },
   { id: 3, image: "/images/reviews/1 282 3.webp" },
@@ -23,13 +23,22 @@ interface ReviewSectionProps {
   subtitle?: string;
   className?: string;
   hasBackground?: boolean;
+  images?: { image: { url?: string } | string }[];
 }
 
 export const ReviewSection: React.FC<ReviewSectionProps> = ({
   title = "Отзывы",
   className = "",
   hasBackground = true,
+  images,
 }) => {
+  const reviews = images?.length
+    ? images.map((item, i) => ({
+        id: i + 1,
+        image: typeof item.image === "string" ? item.image : item.image?.url || "",
+      })).filter((r) => r.image)
+    : FALLBACK_REVIEWS;
+
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     loop: true,
     slides: {
@@ -59,7 +68,7 @@ export const ReviewSection: React.FC<ReviewSectionProps> = ({
           ref={sliderRef}
           className='keen-slider w-full overflow-visible! py-14 -my-14'
         >
-          {REVIEWS.map((review) => (
+          {reviews.map((review) => (
             <div key={review.id} className='keen-slider__slide p-1 md:p-[15px]'>
               <div className='relative w-full h-[344px] md:h-[500px]'>
                 <Image

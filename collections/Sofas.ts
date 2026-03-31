@@ -47,12 +47,29 @@ export const Sofas: CollectionConfig = {
             {
               name: "viewsCount",
               type: "number",
-              label: "Количество фото в галерее (views/)",
+              label: "Количество фото в галерее (views/) — устаревшее",
               defaultValue: 0,
               admin: {
                 description:
-                  'Сколько фото в папке views/ (файлы: 1.webp, 2.webp, ...)',
+                  'Используется только если не загружены фото ниже',
               },
+            },
+            {
+              name: "viewImages",
+              type: "array",
+              label: "Фото галереи (слайдер)",
+              admin: {
+                description: "Загрузите фото для слайдера. Если загружены — поле viewsCount игнорируется.",
+              },
+              fields: [
+                {
+                  name: "image",
+                  type: "upload",
+                  relationTo: "media",
+                  required: true,
+                  label: "Фото",
+                },
+              ],
             },
             {
               name: "imageFilename",
@@ -369,7 +386,7 @@ export const Sofas: CollectionConfig = {
                   label: "Количество просмотров",
                   defaultValue: 0,
                 },
-{
+                {
                   name: "videoUrl",
                   type: "text",
                   label: "Ссылка на видео",
