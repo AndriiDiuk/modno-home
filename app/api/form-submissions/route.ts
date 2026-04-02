@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
       subject,
       html: `
         <h2>${baseSubject}</h2>
-        <p><strong>Телефон:</strong> ${phone}</p>
+        <p><strong>Телефон:</strong> +7 ${phone}</p>
         ${formTitle ? `<p><strong>Запрос:</strong> ${formTitle}</p>` : ""}
         ${sourcePage ? `<p><strong>Страница:</strong> ${sourcePage}</p>` : ""}
         <p><strong>Дата:</strong> ${new Date().toLocaleString("ru-RU", { timeZone: "Europe/Moscow" })}</p>
