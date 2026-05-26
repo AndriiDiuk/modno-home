@@ -109,9 +109,9 @@ export const Input: React.FC<InputProps> = ({
           } ${props.className || ""}`}
         />
       </div>
-      {isPhone && errorToShow && (
-        <p className='absolute top-full left-0 text-red-500 text-xs mt-0'>
-          {errorToShow}
+      {isPhone && (
+        <p className='absolute bottom-full left-0 text-red-500 text-xs mb-1 whitespace-nowrap'>
+          {errorToShow || ""}
         </p>
       )}
     </div>
