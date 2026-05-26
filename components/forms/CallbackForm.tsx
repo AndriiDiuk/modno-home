@@ -34,9 +34,25 @@ export const CallbackForm: React.FC<CallbackFormProps> = ({
   const [agreed, setAgreed] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [phoneError, setPhoneError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const digits = phone.replace(/\D/g, "");
+    if (digits.length === 0) {
+      setPhoneError("Введите номер телефона");
+      return;
+    }
+    if (digits[0] !== "9") {
+      setPhoneError("Первая цифра номера должна быть 9");
+      return;
+    }
+    if (digits.length < 10) {
+      setPhoneError("Введите полный номер телефона (10 цифр)");
+      return;
+    }
+    setPhoneError("");
     setIsLoading(true);
 
     try {
@@ -87,7 +103,11 @@ export const CallbackForm: React.FC<CallbackFormProps> = ({
           placeholder='Ваш телефон'
           isPhone={true}
           value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          onChange={(e) => {
+            setPhone(e.target.value);
+            setPhoneError("");
+          }}
+          phoneError={phoneError}
           required
         />
       </div>
