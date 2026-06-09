@@ -225,7 +225,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
               image={
                 !isFormSubmitted ? (
                   <div
-                    className='-mb-25 -left-[8%] relative z-0 block md:hidden'
+                    className='-mb-25 -left-[8%] relative z-0 block md:hidden pointer-events-none'
                     style={{
                       width: "clamp(300px, 130vw, 600px)",
                       height: "clamp(250px, 110vw, 400px)",

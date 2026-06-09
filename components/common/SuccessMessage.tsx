@@ -16,7 +16,7 @@ export const SuccessMessage: React.FC<SuccessMessageProps> = ({
   },
 }) => {
   return (
-    <div className='flex flex-col items-center w-174 max-w-full mx-auto'>
+    <div className='flex flex-col items-center w-full max-w-full mx-auto'>
       {/* Upper box */}
       <div className='w-full bg-brand-gray/10 rounded-[20px] py-12 md:py-16 px-6 md:px-10 flex flex-col items-center text-center mb-[32px]'>
         <h2 className='text-[40px] font-bold text-brand-black mb-4 uppercase tracking-wider'>
