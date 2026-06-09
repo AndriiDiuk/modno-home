@@ -209,11 +209,12 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
       {/* Catalog Download Modal */}
       <Modal
         isOpen={isCatalogOpen}
-        onClose={() => setIsCatalogOpen(false)}
-        className='max-w-252.5'
-        closeButtonClassName='top-5 right-5'
+        onClose={() => { setIsCatalogOpen(false); setTimeout(() => setIsFormSubmitted(false), 250); }}
+        className={isFormSubmitted ? "max-w-174" : "max-w-252.5"}
+        contentClassName={isFormSubmitted ? "px-2.5 py-2.5" : "p-8 md:p-10"}
+        closeButtonClassName='top-3 right-3'
       >
-        <div className='absolute inset-3.5 border-2 border-[#E9E9E9] rounded-2xl pointer-events-none z-10' />
+        {!isFormSubmitted && <div className='absolute inset-3.5 border-2 border-[#E9E9E9] rounded-2xl pointer-events-none z-10' />}
         <div className='relative flex flex-col lg:flex-row gap-6 md:gap-10 items-center overflow-hidden lg:min-h-100'>
           <div className={isFormSubmitted ? "w-full" : "w-full lg:w-1/2"}>
             <CallbackForm

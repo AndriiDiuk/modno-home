@@ -9,6 +9,7 @@ interface ModalProps {
   children: React.ReactNode;
   className?: string;
   closeButtonClassName?: string;
+  contentClassName?: string;
 }
 
 const DURATION = 200;
@@ -19,6 +20,7 @@ export const Modal: React.FC<ModalProps> = ({
   children,
   className = "max-w-[500px]",
   closeButtonClassName = "top-[30px] right-[30px]",
+  contentClassName = "p-8 md:p-10",
 }) => {
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
   const [mounted, setMounted] = useState(false);
@@ -59,11 +61,11 @@ export const Modal: React.FC<ModalProps> = ({
     >
       <div className='absolute inset-0' onClick={onClose} />
       <div
-        className={`relative bg-white rounded-[20px] w-full overflow-hidden shadow-2xl duration-200 ${open ? "animate-in zoom-in-95 slide-in-from-bottom-4" : hasAnimated ? "animate-out zoom-out-95 slide-out-to-bottom-4" : "opacity-0 scale-95"} ${className}`}
+        className={`relative bg-white rounded-[20px] md:rounded-[30px] w-full overflow-hidden shadow-2xl duration-200 ${open ? "animate-in zoom-in-95 slide-in-from-bottom-4" : hasAnimated ? "animate-out zoom-out-95 slide-out-to-bottom-4" : "opacity-0 scale-95"} ${className}`}
       >
         <button
           onClick={onClose}
-          className={`absolute p-2 text-brand-black/40 hover:text-brand-black transition-colors z-10 cursor-pointer ${closeButtonClassName}`}
+          className={`absolute p-2 text-brand-black hover:opacity-70 transition-opacity z-10 cursor-pointer ${closeButtonClassName}`}
         >
           <svg
             width='24'
@@ -79,7 +81,7 @@ export const Modal: React.FC<ModalProps> = ({
             <line x1='6' y1='6' x2='18' y2='18'></line>
           </svg>
         </button>
-        <div className='p-8 md:p-10'>{children}</div>
+        <div className={contentClassName}>{children}</div>
       </div>
     </div>
   );
