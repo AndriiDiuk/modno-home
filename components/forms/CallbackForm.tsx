@@ -108,7 +108,6 @@ export const CallbackForm: React.FC<CallbackFormProps> = ({
             setPhoneError("");
           }}
           phoneError={phoneError}
-          required
         />
       </div>
       <div className='mb-4'>
